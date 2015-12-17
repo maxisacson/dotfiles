@@ -1,0 +1,8 @@
+# Promt stuff
+#PS1=$'[${debian_chroot:+($debian_chroot)}\u@\h \w]\u0586 '
+PS1=$'\u256d(\[\e[1;33m\]\w\[\e[m\])\u2500\u2500(\[\e[1;35m\]\\t\[\e[0m\])\n\
+\u2570\u257c(${debian_chroot:+($debian_chroot)}\u@\h \
+`if [ \$? = 0 ]; then echo -e "\[\e[1;32m\]\u2714\[\e[0m\]"; else echo -e \
+"\[\e[1;31m\]\x28\xe2\x95\xaf\xc2\xb0\xe2\x96\xa1\xc2\xb0\x29\xe2\x95\xaf\xef\xb8\xb5\x20\xe2\x94\xbb\xe2\x94\x81\xe2\x94\xbb\[\e[0m\]"; fi`)\
+\u2387  '
+PS2=$'\u21aa '
