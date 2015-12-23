@@ -110,6 +110,10 @@ let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 " Autoclose preview window after YCM insertion
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
+" Only use arrow keys to browse YCM completion
+let g:ycm_key_list_select_completion = ['<Down>']
+let g:ycm_key_list_previous_completion = ['<Up>']
+
 " Fancy symbols for powerline
 " let g:Powerline_symbols = 'fancy'
 
