@@ -116,8 +116,13 @@ fi
 export BOOSTINCDIR="/usr/local/boost/1_59_0/include/"
 export BOOSTLIBDIR="/usr/local/boost/1_59_0/lib/"
 export MATLABDIR="/home/max/local/MATLAB/R2015b"
-export ROOTSYS="/usr/local/root-6.05.02"
+#export ROOTSYS="/usr/local/root-6.05.02"
+export ROOTSYS="/usr/local/root-6.06.00"
 source $ROOTSYS/bin/thisroot.sh
+export BIT=64 # Make LuaJIT run in 64bit mode
+export TORCHDIR="/home/max/torch/install"
+source $TORCHDIR/bin/torch-activate
+export VIDYO_AUDIO_FRAMEWORK="ALSA" # fix vidyo audio issues
 
 # LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=$BOOSTLIBDIR:$LD_LIBRARY_PATH
