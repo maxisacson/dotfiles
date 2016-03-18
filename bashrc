@@ -128,7 +128,7 @@ export VIDYO_AUDIO_FRAMEWORK="ALSA" # fix vidyo audio issues
 export LD_LIBRARY_PATH=$BOOSTLIBDIR:$LD_LIBRARY_PATH
 
 # PATH
-export PATH=$MATLABDIR/bin:$PATH
+export PATH=$MATLABDIR/bin:$PATH:/home/max/local/bin
 
 # aliases
 alias bestmount='sshfs -o follow_symlinks bestlapp.physics.uu.se:/home/misacson /home/max/remote/bestlapp'
@@ -149,4 +149,4 @@ rcSetupLocal ()
 }
 
 # custom prompt
-source .mypromptrc
+source ~/.mypromptrc

@@ -1,0 +1,14 @@
+startup_message off
+
+shelltitle "$ |bash"
+term screen-256color
+
+#termcapinfo xterm* 'hs:ts=\E]0;:fs=\007:ds=\E]0;\007'
+#defhstatus "screen ^E (^Et) | $USER@^EH"
+
+#caption always '%{= kg}[%L=%{+u b} %=%{-u W}%?%-Lw%?%45L>%{Y}(%n*%f %t)%?(%u)%?%{W}%+Lw%{+u b} %=%-1=%{-u g}]'
+
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B}%Y-%m-%d %{W}%c %{g}]'
+
+defflow off

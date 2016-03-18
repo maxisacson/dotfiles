@@ -38,6 +38,12 @@ Plugin 'rking/ag.vim'
 " nerdtree for file browsing
 Plugin 'scrooloose/nerdtree'
 
+" python-mode
+"Plugin 'klen/python-mode'
+
+" better python syntax highlighting                                                                           
+Plugin 'hdima/python-syntax'  
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -130,6 +136,10 @@ let g:airline#extensions#tabline#enabled = 1
 "     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 " endif
 
+" python-syntax config
+let python_highlight_all = 1
+let python_version_2 = 1
+
 " matcher
 if executable('matcher')
     let g:ctrlp_match_func = { 'match': 'GoodMatch' }
@@ -157,3 +167,7 @@ if executable('matcher')
 
     endfunction
 end
+
+" vim-macro to switch between header and source file in ATLAS software
+let g:path_separator = '/'
+so ~/.vim/altfile.vim
