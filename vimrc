@@ -39,7 +39,7 @@ Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdtree'
 
 " python-mode
-"Plugin 'klen/python-mode'
+Plugin 'klen/python-mode'
 
 " better python syntax highlighting                                                                           
 Plugin 'hdima/python-syntax'  
@@ -86,11 +86,17 @@ nnoremap <S-e> :tabn<CR>
 " Bind nerdtree to F5
 nnoremap <F5> :NERDTreeToggle<CR>
 
-" Split screen bindings
+" Split screen movement bindings
 nnoremap <C-Left> <C-w>h
 nnoremap <C-Right> <C-w>l
 nnoremap <C-Up> <C-w>k
 nnoremap <C-Down> <C-w>j
+
+" Split screen resize bindings
+nnoremap <C-a> <C-w>+
+nnoremap <C-z> <C-w>-
+nnoremap <C-c> <C-w>>
+nnoremap <C-x> <C-w><
 
 " Open file  under cursor in new tab
 nnoremap <F3> <c-w>gf
