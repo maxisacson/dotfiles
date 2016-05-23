@@ -11,6 +11,9 @@ Plugin 'VundleVim/Vundle.vim'
 " YouComleteMe
 Plugin 'Valloric/YouCompleteMe'
 
+" YCM-Generator
+Plugin 'rdnetto/YCM-Generator'
+
 " Ctrl-P fuzzy search
 Plugin 'kien/ctrlp.vim'
 
@@ -78,6 +81,9 @@ set backspace=2
 " Line numbering
 set number
 
+" Map , to <Leader>
+let mapleader=','
+
 " Tab management
 nnoremap <S-q> :tabp<CR>
 nnoremap <S-w> :tabnew<CR>
@@ -91,15 +97,22 @@ nnoremap <C-Left> <C-w>h
 nnoremap <C-Right> <C-w>l
 nnoremap <C-Up> <C-w>k
 nnoremap <C-Down> <C-w>j
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-k> <C-w>k
+nnoremap <C-j> <C-w>j
 
 " Split screen resize bindings
-nnoremap <C-a> <C-w>+
-nnoremap <C-z> <C-w>-
-nnoremap <C-c> <C-w>>
-nnoremap <C-x> <C-w><
+nnoremap <Leader>+ <C-w>+
+nnoremap <Leader>- <C-w>-
+nnoremap <Leader>z <C-w>>
+nnoremap <Leader>< <C-w><
 
 " Open file  under cursor in new tab
 nnoremap <F3> <c-w>gf
+
+" LaTeX compilation
+nnoremap <S-Tab> :!lualatex %<CR>
 
 " Color scheme
 set background=dark
@@ -144,7 +157,13 @@ let g:airline#extensions#tabline#enabled = 1
 
 " python-syntax config
 let python_highlight_all = 1
-let python_version_2 = 1
+"let python_version_2 = 1
+
+" PyMode config
+let g:pymode = 0
+"let g:pymode_rope_completion = 0
+"let g:pymode_rope_lookup_project = 0
+"let g:pymode_rope = 0
 
 " matcher
 if executable('matcher')
