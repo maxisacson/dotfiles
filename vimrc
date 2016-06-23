@@ -47,6 +47,9 @@ Plugin 'klen/python-mode'
 " better python syntax highlighting                                                                           
 Plugin 'hdima/python-syntax'  
 
+" nerdcomment for easy commenting
+Plugin 'scrooloose/nerdcommenter'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -164,6 +167,13 @@ let g:pymode = 0
 "let g:pymode_rope_completion = 0
 "let g:pymode_rope_lookup_project = 0
 "let g:pymode_rope = 0
+
+" nerdcommenter configuration
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
 
 " matcher
 if executable('matcher')
