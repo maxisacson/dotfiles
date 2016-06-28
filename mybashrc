@@ -29,6 +29,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias dud='du -h --max-depth 1'
 alias cpd='echo -en "$(pwd)" | xclip -selection primary'
+alias xco='xclip -selection primary -o'
 
 # RootCore local setup
 rcSetupLocal () 
