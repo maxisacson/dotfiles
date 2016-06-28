@@ -7,9 +7,9 @@ export MATLABDIR="/home/max/local/MATLAB/R2015b"
 #export ROOTSYS="/usr/local/root-6.05.02"
 export ROOTSYS="/usr/local/root-6.06.00"
 source $ROOTSYS/bin/thisroot.sh
-export BIT=64 # Make LuaJIT run in 64bit mode
-export TORCHDIR="/home/max/torch/install"
-source $TORCHDIR/bin/torch-activate
+#export BIT=64 # Make LuaJIT run in 64bit mode
+#export TORCHDIR="/home/max/torch/install"
+#source $TORCHDIR/bin/torch-activate
 export VIDYO_AUDIO_FRAMEWORK="ALSA" # fix vidyo audio issues
 
 # LD_LIBRARY_PATH
@@ -28,6 +28,7 @@ alias root='root -l'
 alias cp='cp -i'
 alias mv='mv -i'
 alias dud='du -h --max-depth 1'
+alias cpd='echo -en "$(pwd)" | xclip -selection primary'
 
 # RootCore local setup
 rcSetupLocal () 
@@ -35,6 +36,12 @@ rcSetupLocal ()
     export rcSetupSite=~/ATLAS/sw/releases;
     export PATHRESOLVER_ALLOWHTTPDOWNLOAD=1;
     source ~/ATLAS/sw/rcSetup/latest/rcSetup.sh $*
+}
+
+# Easy-to-use function to set the display number
+function set_disp {
+    [ -n "$1" ] && export DISPLAY="localhost:${1}.0" || export DISPLAY=":0"
+    echo "DISPLAY set to $DISPLAY"
 }
 
 # custom prompt
