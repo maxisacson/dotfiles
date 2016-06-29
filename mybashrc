@@ -11,6 +11,7 @@ source $ROOTSYS/bin/thisroot.sh
 #export TORCHDIR="/home/max/torch/install"
 #source $TORCHDIR/bin/torch-activate
 export VIDYO_AUDIO_FRAMEWORK="ALSA" # fix vidyo audio issues
+export PYTHONVENVROOT="$HOME/.virtual_python_environments"
 
 # LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=$BOOSTLIBDIR:$LD_LIBRARY_PATH
@@ -43,6 +44,20 @@ rcSetupLocal ()
 function set_disp {
     [ -n "$1" ] && export DISPLAY="localhost:${1}.0" || export DISPLAY=":0"
     echo "DISPLAY set to $DISPLAY"
+}
+
+# Helper function to set up virtual python environments
+function pyenv {
+    if [ -z "$1" ]; then
+        echo "Usage: pyenv <venv>"
+        echo ""
+        echo "Available venv's:"
+        for x in $PYTHONVENVROOT/*/; do
+            echo "    $(basename "$x")"
+        done
+    else
+        source "$PYTHONVENVROOT/${1}/bin/activate"
+    fi
 }
 
 # custom prompt
