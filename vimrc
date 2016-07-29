@@ -216,3 +216,11 @@ end
 " vim-macro to switch between header and source file in ATLAS software
 " let g:path_separator = '/'
 " so ~/.vim/altfile.vim
+
+" function to remove all trailing whitespace
+autocmd BufWrite * call DeleteTrailingWhiteSpace()
+function! DeleteTrailingWhiteSpace()
+    let a:cursor_pos = getpos(".")
+    %s/\s\+$//ge
+    call setpos(".", a:cursor_pos)
+endfunction
