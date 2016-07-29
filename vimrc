@@ -9,10 +9,10 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " YouComleteMe
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 
 " YCM-Generator
-Plugin 'rdnetto/YCM-Generator'
+" Plugin 'rdnetto/YCM-Generator'
 
 " Ctrl-P fuzzy search
 Plugin 'kien/ctrlp.vim'
@@ -24,7 +24,10 @@ Plugin 'burke/matcher'
 " Plugin 'Lokaltog/vim-powerline'
 
 " vim-airline
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+
+" vim-airline-themes
+Plugin 'vim-airline/vim-airline-themes'
 
 " extra syntax highlighting for C/C++
 Plugin 'justinmk/vim-syntax-extra'
@@ -211,5 +214,5 @@ if executable('matcher')
 end
 
 " vim-macro to switch between header and source file in ATLAS software
-let g:path_separator = '/'
-so ~/.vim/altfile.vim
+" let g:path_separator = '/'
+" so ~/.vim/altfile.vim
