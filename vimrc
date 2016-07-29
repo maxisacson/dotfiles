@@ -50,6 +50,9 @@ Plugin 'hdima/python-syntax'
 " nerdcomment for easy commenting
 Plugin 'scrooloose/nerdcommenter'
 
+" vim-easy-align for easy alignment
+Plugin 'junegunn/vim-easy-align'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -128,6 +131,10 @@ set secure
 " Highlight column
 set colorcolumn=110
 highlight ColorColumn ctermbg=Black
+
+" vim-easy-align key bindings
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 " include ROOT and boost in search path
 let &path.=$ROOTSYS."/include".",".$BOOSTINCDIR
