@@ -47,14 +47,17 @@ Plugin 'scrooloose/nerdtree'
 " python-mode
 Plugin 'klen/python-mode'
 
-" better python syntax highlighting                                                                           
-Plugin 'hdima/python-syntax'  
+" better python syntax highlighting
+Plugin 'hdima/python-syntax'
 
 " nerdcomment for easy commenting
 Plugin 'scrooloose/nerdcommenter'
 
 " vim-easy-align for easy alignment
 Plugin 'junegunn/vim-easy-align'
+
+" vim-surround
+Plugin 'tpope/vim-surround'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
