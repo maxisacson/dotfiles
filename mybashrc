@@ -68,12 +68,20 @@ function pyenv {
 # Function to start a tmux dev session
 function tmux-dev {
     [ ! -z "$1" ] && name="$1" || name="tmp"
+
+    if tmux has-session -t "dev-$name"; then
+        echo "Session 'dev-$name' already exist."
+        return 1
+    fi
+
     tmux new-session -s "dev-$name" -d -n dev vim
     tmux split-window -v
     tmux split-window -h
     tmux select-pane -t 0
     tmux resize-pane -D 10
     tmux attach-session -d
+
+    return 0
 }
 
 # custom prompt
