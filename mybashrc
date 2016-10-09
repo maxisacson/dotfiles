@@ -20,6 +20,7 @@ export LD_LIBRARY_PATH=$BOOSTLIBDIR:$LD_LIBRARY_PATH
 
 # PATH
 export PATH=$MATLABDIR/bin:$PATH:/home/max/local/bin
+[ "$HOSTNAME" = "enterprise" ] && export TERM="xterm-256color"
 
 # aliases
 alias bestmount='sshfs -o follow_symlinks bestlapp.physics.uu.se:/home/misacson /home/max/remote/bestlapp'
