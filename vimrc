@@ -65,6 +65,9 @@ Plugin 'tpope/vim-repeat'
 " markdown preview for vim
 Plugin 'suan/vim-instant-markdown'
 
+" vim-markdown
+Plugin 'tpope/vim-markdown'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
