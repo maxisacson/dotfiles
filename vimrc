@@ -68,6 +68,10 @@ Plugin 'suan/vim-instant-markdown'
 " vim-markdown
 Plugin 'tpope/vim-markdown'
 
+" better syntax highlighting for javascript
+Plugin 'pangloss/vim-javascript'
+" Plugin 'jelera/vim-javascript-syntax'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
