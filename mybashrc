@@ -87,5 +87,11 @@ function tmux-dev {
     return 0
 }
 
+# Function to start laverna
+function laverna {
+    cd "$HOME/git/laverna"
+    gulp
+}
+
 # custom prompt
 source ~/.mypromptrc
