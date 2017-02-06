@@ -70,9 +70,16 @@ function pyenv {
 
 # Function to start a tmux dev session
 function tmux-dev {
-    [ ! -z "$1" ] && name="$1" || name="tmp"
+    if [[ ! -z "$1" ]]; then
+        name="$1"
+    else
+        OLDIFS=$IFS
+        IFS=$'\n'
+        name="$(($(echo "$(tmux ls | sed -E -n 's/^dev-([0-9]).*/\1/p')" | sort -nr | head -n 1)+1))"
+        IFS=$OLDIFS
+    fi
 
-    if tmux has-session -t "dev-$name"; then
+    if tmux has-session -t "dev-$name" 2>/dev/null; then
         echo "Session 'dev-$name' already exist."
         return 1
     fi
