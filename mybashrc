@@ -1,3 +1,4 @@
+# vim: set filetype=sh :
 # Source this file in your user config, e.g. add 'source /path/to/here/mybashrc' in ~/.bashrc
 
 # env

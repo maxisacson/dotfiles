@@ -1,3 +1,4 @@
+# vim: set filetype=sh :
 # Promt stuff
 #PS1=$'[${debian_chroot:+($debian_chroot)}\u@\h \w]\u0586 '
 
