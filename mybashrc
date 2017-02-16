@@ -30,6 +30,10 @@ alias bestmux='ssh bestlapp -t tmux'
 alias bestcon='bestmux a -t'
 alias becon='bestcon'
 alias bacon='becon'
+
+alias abimount='sshfs -o follow_symlinks abisko.hpc2n.umu.se:/home/m/misacson /home/max/remote/abisko'
+alias abiumount='fusermount -u /home/max/remote/abisko'
+
 alias ls='ls --color=auto'
 alias matlab='matlab -nosplash -nodesktop'
 alias octave='octave --no-gui'
