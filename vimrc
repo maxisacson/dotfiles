@@ -72,6 +72,15 @@ Plugin 'tpope/vim-markdown'
 Plugin 'pangloss/vim-javascript'
 " Plugin 'jelera/vim-javascript-syntax'
 
+" julia syntax
+Plugin 'JuliaEditorSupport/julia-vim'
+
+" syntax for DAST shift reports
+Plugin 'https://gitlab.cern.ch/misacson/vim-dastshiftreport'
+
+" syntax for TRExFitter config files
+Plugin 'https://gitlab.cern.ch/misacson/vim-trexfitter'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
