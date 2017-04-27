@@ -76,10 +76,10 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'JuliaEditorSupport/julia-vim'
 
 " syntax for DAST shift reports
-Plugin 'https://gitlab.cern.ch/misacson/vim-dastshiftreport'
+Plugin 'https://gitlab.cern.ch/misacson/vim-dastshiftreport.git'
 
 " syntax for TRExFitter config files
-Plugin 'https://gitlab.cern.ch/misacson/vim-trexfitter'
+Plugin 'https://gitlab.cern.ch/misacson/vim-trexfitter.git'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
