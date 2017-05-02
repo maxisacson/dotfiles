@@ -81,6 +81,9 @@ Plugin 'https://gitlab.cern.ch/misacson/vim-dastshiftreport.git'
 " syntax for TRExFitter config files
 Plugin 'https://gitlab.cern.ch/misacson/vim-trexfitter.git'
 
+" syntastic syntax checker
+Plugin 'vim-syntastic/syntastic'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -209,6 +212,24 @@ let g:NERDCompactSexyComs = 1
 let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
+
+" syntastic configuration
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_error_symbol = ">>"
+let g:syntastic_style_error_symbol = "S>"
+let g:syntastic_warning_symbol = "??"
+let g:syntastic_style_warning_symbol = "S?"
+
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_cpp_checkers = ['clang_check', 'gcc', 'cppcheck']
 
 " matcher
 if executable('matcher')
