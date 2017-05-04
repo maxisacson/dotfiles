@@ -225,11 +225,23 @@ let g:syntastic_check_on_wq = 0
 
 let g:syntastic_error_symbol = ">>"
 let g:syntastic_style_error_symbol = "S>"
-let g:syntastic_warning_symbol = "??"
+let g:syntastic_warning_symbol = ">?"
 let g:syntastic_style_warning_symbol = "S?"
 
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_cpp_checkers = ['clang_check', 'gcc', 'cppcheck']
+let g:syntastic_aggregate_errors = 0
+let g:syntastic_cpp_checkers = ['gcc', 'clang_check', 'cppcheck']
+
+let g:syntastic_cpp_clang_check_args =
+            \ ["-std=c++11"]
+
+" Disable auto-checking
+let g:syntastic_mode_map = {
+            \ "mode": "passive",
+            \ "active_filetypes": [],
+            \ "passive_filetypes": [] }
+
+" bind ,e to run the syntastic checks
+nnoremap <Leader>e :SyntasticCheck<CR>
 
 " matcher
 if executable('matcher')
