@@ -118,6 +118,9 @@ set backspace=2
 " Line numbering
 set number
 
+" Show command
+set showcmd
+
 " Map , to <Leader>
 let mapleader=','
 
