@@ -31,7 +31,7 @@ alias bestcon='bestmux a -t'
 alias becon='bestcon'
 alias bacon='becon'
 
-alias abimount='sshfs -o follow_symlinks abisko-x.hpc2n.umu.se:/home/m/misacson /home/max/remote/abisko'
+alias abimount='sshfs -o follow_symlinks abisko.hpc2n.umu.se:/home/m/misacson /home/max/remote/abisko'
 alias abiumount='fusermount -u /home/max/remote/abisko'
 
 alias lxmount='sshfs -o follow_symlinks lxplus.cern.ch:/afs/cern.ch/user/m/misacson /home/max/remote/lxplus'
