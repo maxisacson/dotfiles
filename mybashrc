@@ -108,5 +108,19 @@ function laverna {
     gulp
 }
 
+# If we're NOT inside TMUX we update the display cache, else set DISPLAY to cached value
+function update_disp {
+    [ -z "$TMUX" ] && echo $DISPLAY > ~/.display.cache || export DISPLAY="$(cat ~/.display.cache)"
+}
+
+# Update the display, unless the current command is $PROMPT_COMMAND
+function preexec {
+    [ "$BASH_COMMAND" = "$PROMPT_COMMAND" ] && return
+    update_disp
+}
+
+# Execute preexec before every simple command
+trap 'preexec' DEBUG
+
 # custom prompt
-source ~/.mypromptrc
+# source ~/.mypromptrc
