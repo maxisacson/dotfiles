@@ -148,11 +148,11 @@ nnoremap <Leader>- <C-w>-
 nnoremap <Leader>z <C-w>>
 nnoremap <Leader>< <C-w><
 
-" Open file  under cursor in new tab
+" Open file under cursor in new tab
 nnoremap <F3> <c-w>gf
 
-" LaTeX compilation
-nnoremap <S-Tab> :!lualatex %<CR>
+" make <filename-no-ext>
+nnoremap <Leader>b :!make %:r<CR>
 
 " Color scheme
 set background=dark
