@@ -35,13 +35,13 @@ function __prompt_command {
 
     local chr="${debian_chroot:+($debian_chroot)}"
 
-    local tmp_pwd="${PWD/$HOME/\~}"
-    if [ ${#tmp_pwd} -ge 50 ]; then
-        tmp_pwd="...${tmp_pwd: -47}"
-    fi
+    # local tmp_pwd="${PWD/$HOME/\~}"
+    # if [ ${#tmp_pwd} -ge 50 ]; then
+    #     tmp_pwd="...${tmp_pwd: -47}"
+    # fi
 
     PS1=""
-    PS1+="╭ ${blu}${tmp_pwd}${res} ── ${hli}\\t${res} ─╼\n"
+    PS1+="╭ ${blu}\w${res} ── ${hli}\\t${res} ─╼\n"
     PS1+="╰╼ ${chr}\u@\h "
     if [ $EXIT != 0 ]; then
         PS1+="${red}•${res}"
