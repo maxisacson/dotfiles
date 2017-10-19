@@ -84,6 +84,9 @@ Plugin 'https://gitlab.cern.ch/misacson/vim-trexfitter.git'
 " syntastic syntax checker
 Plugin 'vim-syntastic/syntastic'
 
+" latex plugin
+Plugin 'lervag/vimtex'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
