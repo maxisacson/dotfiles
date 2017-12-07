@@ -20,7 +20,7 @@ export MATLABDIR="/home/max/.local/MATLAB/R2017b"
 export LD_LIBRARY_PATH=$BOOSTLIBDIR:$LD_LIBRARY_PATH
 
 # PATH
-export PATH=$HOME/local/SageMath:$MATLABDIR/bin:$PATH:/home/max/local/bin:/home/max/.local/bin
+export PATH=$HOME/.local/SageMath:$HOME/local/SageMath:$MATLABDIR/bin:$PATH:/home/max/local/bin:/home/max/.local/bin
 [ "$HOSTNAME" = "enterprise" ] && export TERM="xterm-256color"
 
 # aliases
