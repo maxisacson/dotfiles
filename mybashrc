@@ -38,6 +38,7 @@ alias lxmount='sshfs -o follow_symlinks lxplus.cern.ch:/afs/cern.ch/user/m/misac
 alias lxumount='fusermount -u /home/max/remote/lxplus'
 
 alias ls='ls --color=auto'
+alias matlabgui='$MATLABDIR/bin/matlab'
 alias matlab='matlab -nosplash -nodesktop'
 alias octave='octave --no-gui'
 alias root='root -l'
