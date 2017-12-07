@@ -19,6 +19,9 @@ export MATLABDIR="/home/max/.local/MATLAB/R2017b"
 # LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=$BOOSTLIBDIR:$LD_LIBRARY_PATH
 
+# Sage notebook path
+export DOT_SAGENB=$HOME/Dropbox/sage-notebooks/
+
 # PATH
 export PATH=$HOME/local/SageMath:$MATLABDIR/bin:$PATH:/home/max/local/bin:/home/max/.local/bin
 [ "$HOSTNAME" = "enterprise" ] && export TERM="xterm-256color"
