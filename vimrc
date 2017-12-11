@@ -268,6 +268,8 @@ let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
+" vimtex config
+let g:vimtex_compiler_latexmk = {'callback' : 0}
 
 " matcher
 if executable('matcher')
