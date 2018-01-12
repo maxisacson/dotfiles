@@ -179,6 +179,39 @@ highlight ColorColumn ctermbg=Black
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
+
+function PrettifyMath()
+    " remove whitespace around *, /, and ^
+    s/\s*\(\*\|\/\|\^\|(\|)\)\s*/\1/ge
+
+    " padd +, - and = with whitespace
+    s/\(+\|-\|=\)/ \1 /ge
+
+    " remove unnecessary trailing 0's
+    s/0\+$/0/ge
+
+    " remove unnecessary whitespace
+    s/\s\+/ /ge
+    s/^\s\+//ge
+    s/\(\d\+\)\s\+\(\d\+\)\+/\1\2/ge
+
+    " make sure negative numbers are written correctly
+    s/\(^\|=\s\)-\s/\1-/ge
+endfunction
+
+" Evaluate current line using bc and make it pretty
+nnoremap <Leader>= :call BcEvalLine()<CR>
+function BcEvalLine()
+    normal! yypkA=
+    normal! j
+    exec ".!bc -l"
+    normal! kJ
+    call PrettifyMath()
+endfunction
+
+" Evaluate current selection using bc
+vnoremap <Leader>= y'>p:'[,']-1s/\n/+/ge<CR>:s/+$//ge<CR>:.!bc -l<CR>I= <Esc>:'<,'>call PrettifyMath()<CR>j
+
 " include ROOT and boost in search path
 let &path.=$ROOTSYS."/include".",".$BOOSTINCDIR
 
