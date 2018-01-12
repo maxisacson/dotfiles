@@ -90,6 +90,9 @@ Plugin 'lervag/vimtex'
 " easymotion
 Plugin 'easymotion/vim-easymotion'
 
+" vim-css-colors
+" Plugin 'ap/vim-css-color'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
