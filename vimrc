@@ -200,17 +200,10 @@ function PrettifyMath()
 endfunction
 
 " Evaluate current line using bc and make it pretty
-nnoremap <Leader>= :call BcEvalLine()<CR>
-function BcEvalLine()
-    normal! yypkA=
-    normal! j
-    exec ".!bc -l"
-    normal! kJ
-    call PrettifyMath()
-endfunction
+nnoremap <Leader>= :s/=.*$//ge<CR>yypkA=<Esc>j:.!bc -l<CR>kJ:call PrettifyMath()<CR>
 
-" Evaluate current selection using bc
-vnoremap <Leader>= y'>p:'[,']-1s/\n/+/ge<CR>:s/+$//ge<CR>:.!bc -l<CR>I= <Esc>:'<,'>call PrettifyMath()<CR>j
+" Evaluate current selection using bc and make it pretty
+vnoremap <Leader>= y'>p:'[,']s/^.*=//ge<CR>:'[,']-1s/\n/+/ge<CR>:s/+$//ge<CR>:.!bc -l<CR>I= <Esc>:'<,'>call PrettifyMath()<CR>j
 
 " include ROOT and boost in search path
 let &path.=$ROOTSYS."/include".",".$BOOSTINCDIR
