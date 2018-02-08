@@ -300,6 +300,9 @@ map <Leader>k <Plug>(easymotion-k)
 " vimtex config
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 
+" bind clang-format
+map <Leader>fw :py3f /usr/share/vim/addons/syntax/clang-format.py<CR>
+
 " matcher
 if executable('matcher')
     let g:ctrlp_match_func = { 'match': 'GoodMatch' }
