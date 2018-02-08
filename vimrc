@@ -168,8 +168,8 @@ set background=dark
 colorscheme solarized
 
 " Read .vimrc from working directory
-set exrc
-set secure
+" set exrc
+" set secure
 
 " Highlight column
 set colorcolumn=110
