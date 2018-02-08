@@ -174,6 +174,8 @@ colorscheme solarized
 " Highlight column
 set colorcolumn=110
 highlight ColorColumn ctermbg=Black
+" highlight OverLength ctermbg=Black
+" match OverLength /\%81v.\+/
 
 " vim-easy-align key bindings
 xmap ga <Plug>(EasyAlign)
