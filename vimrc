@@ -93,6 +93,9 @@ Plugin 'easymotion/vim-easymotion'
 " vim-css-colors
 " Plugin 'ap/vim-css-color'
 
+" extra syntax for cpp-files
+Plugin 'maxisacson/vim-cpp-extra'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
