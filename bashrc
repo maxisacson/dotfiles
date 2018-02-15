@@ -23,7 +23,7 @@ export LD_LIBRARY_PATH=$BOOSTLIBDIR:$LD_LIBRARY_PATH
 export DOT_SAGENB=$HOME/Dropbox/sage-notebooks/
 
 # PATH
-export PATH=$HOME/.local/SageMath:$HOME/local/SageMath:$MATLABDIR/bin:$PATH:/home/max/local/bin:/home/max/.local/bin
+export PATH="$HOME/.local/llvm-5.0.1/bin:$HOME/.local/SageMath:$HOME/local/SageMath:$MATLABDIR/bin:$PATH:/home/max/local/bin:/home/max/.local/bin"
 [ "$HOSTNAME" = "enterprise" ] && export TERM="xterm-256color"
 
 # aliases
