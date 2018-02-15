@@ -306,7 +306,7 @@ map <Leader>k <Plug>(easymotion-k)
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 
 " bind clang-format
-map <Leader>fw :py3f /usr/share/vim/addons/syntax/clang-format.py<CR>
+map <Leader>fw :py3f /home/max/.local/llvm-5.0.1/share/clang/clang-format.py<CR>
 
 " matcher
 if executable('matcher')
