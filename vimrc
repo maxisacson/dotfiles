@@ -96,6 +96,9 @@ Plugin 'easymotion/vim-easymotion'
 " extra syntax for cpp-files
 Plugin 'maxisacson/vim-cpp-extra'
 
+" syntax for geant4 macro files
+Plugin 'maxisacson/vim-geant4-mac'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
