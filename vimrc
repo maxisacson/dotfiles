@@ -187,7 +187,6 @@ highlight ColorColumn ctermbg=Black
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-
 function PrettifyMath()
     " remove whitespace around *, /, and ^
     s/\s*\(\*\|\/\|\^\|(\|)\)\s*/\1/ge
@@ -212,6 +211,22 @@ nnoremap <Leader>= :s/=.*$//ge<CR>yypkA=<Esc>j:.!bc -l<CR>kJ:call PrettifyMath()
 
 " Evaluate current selection using bc and make it pretty
 vnoremap <Leader>= y'>p:'[,']s/^.*=//ge<CR>:'[,']-1s/\n/+/ge<CR>:s/+$//ge<CR>:.!bc -l<CR>I= <Esc>:'<,'>call PrettifyMath()<CR>j
+
+" Function to insert include guards in cpp headers
+function InsertCppIncludeGuard()
+    if !exists("b:current_syntax") || b:current_syntax != "cpp"
+        return
+    end
+
+    let guard = substitute(toupper(expand("%:t")), "\\.", "_", "g") . "_"
+
+    execute "normal! i#ifndef " . guard
+    execute "normal! o#define " . guard
+    execute "normal! Go#endif /* " . guard . " */"
+    normal! k3o
+    normal! k
+endfunction
+command CppGuard call InsertCppIncludeGuard()
 
 " include ROOT and boost in search path
 let &path.=$ROOTSYS."/include".",".$BOOSTINCDIR
