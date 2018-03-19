@@ -6,7 +6,8 @@ if [ "$HOSTNAME" = "phy-intrepid" ]; then
     export BOOSTINCDIR="/usr/local/boost/1_59_0/include/"
     export BOOSTLIBDIR="/usr/local/boost/1_59_0/lib/"
     #export ROOTSYS="/usr/local/root-6.05.02"
-    export ROOTSYS="/usr/local/root-6.06.00"
+    # export ROOTSYS="/usr/local/root-6.06.00"
+    export ROOTSYS="/home/max/.local/root-6.12.06"
     source $ROOTSYS/bin/thisroot.sh
     #export BIT=64 # Make LuaJIT run in 64bit mode
     #export TORCHDIR="/home/max/torch/install"
@@ -23,19 +24,21 @@ export LD_LIBRARY_PATH=$BOOSTLIBDIR:$LD_LIBRARY_PATH
 export DOT_SAGENB=$HOME/Dropbox/sage-notebooks/
 
 # PATH
-export PATH="$HOME/.local/llvm-5.0.1/bin:$HOME/.local/SageMath:$HOME/local/SageMath:$MATLABDIR/bin:$PATH:/home/max/local/bin:/home/max/.local/bin"
+[ "$HOSTNAME" = "phy-intrepid" ] && export PATH="$HOME/.local/llvm-5.0.1/bin:$HOME/.local/SageMath:$HOME/local/SageMath:$MATLABDIR/bin:$PATH:/home/max/local/bin:/home/max/.local/bin"
 [ "$HOSTNAME" = "enterprise" ] && export TERM="xterm-256color"
 
 # aliases
-alias bestmount='sshfs -o follow_symlinks bestlapp.physics.uu.se:/home/misacson /home/max/remote/bestlapp'
-alias bestumount='fusermount -u /home/max/remote/bestlapp'
-alias bestmux='ssh bestlapp -t tmux'
-alias bestcon='bestmux a -t'
-alias becon='bestcon'
-alias bacon='becon'
+if [[ $HOSTNAME = "phy-intrepid" ]] || [[ $HOSTNAME = "enterprise" ]]; then
+    alias bestmount='sshfs -o follow_symlinks bestlapp.physics.uu.se:/home/misacson /home/max/remote/bestlapp'
+    alias bestumount='fusermount -u /home/max/remote/bestlapp'
+    alias bestmux='ssh bestlapp -t tmux'
+    alias bestcon='bestmux a -t'
+    alias becon='bestcon'
+    alias bacon='becon'
 
-alias abimount='sshfs -o follow_symlinks abisko.hpc2n.umu.se:/home/m/misacson /home/max/remote/abisko'
-alias abiumount='fusermount -u /home/max/remote/abisko'
+    alias abimount='sshfs -o follow_symlinks abisko.hpc2n.umu.se:/home/m/misacson /home/max/remote/abisko'
+    alias abiumount='fusermount -u /home/max/remote/abisko'
+fi
 
 alias lxmount='sshfs -o follow_symlinks lxplus.cern.ch:/afs/cern.ch/user/m/misacson /home/max/remote/lxplus'
 alias lxumount='fusermount -u /home/max/remote/lxplus'
