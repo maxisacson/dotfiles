@@ -143,6 +143,8 @@ let mapleader=','
 nnoremap <S-q> :tabp<CR>
 nnoremap <S-w> :tabnew<CR>
 nnoremap <S-e> :tabn<CR>
+nnoremap <silent> <Leader><S-q> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+nnoremap <silent> <Leader><S-e> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
 
 " Bind nerdtree to F5
 nnoremap <F5> :NERDTreeToggle<CR>
