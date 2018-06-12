@@ -58,6 +58,7 @@ alias cpd='echo -en "$(pwd)" | xclip -selection primary'
 alias xco='xclip -selection primary -o'
 alias flw='tail -n+0 -f'
 alias cb='xclip -selection primary'
+alias nvim='$HOME/.local/opt/nvim/bin/nvim'
 
 # RootCore local setup
 rcSetupLocal ()
