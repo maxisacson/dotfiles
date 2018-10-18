@@ -23,8 +23,11 @@ export LD_LIBRARY_PATH=$BOOSTLIBDIR:$LD_LIBRARY_PATH
 # Sage notebook path
 export DOT_SAGENB=$HOME/Dropbox/sage-notebooks/
 
+# Go path
+export GOPATH=$HOME/go
+
 # PATH
-[ "$HOSTNAME" = "phy-intrepid" ] && export PATH="$HOME/.local/llvm-5.0.1/bin:$HOME/.local/SageMath:$HOME/local/SageMath:$MATLABDIR/bin:$PATH:/home/max/local/bin:/home/max/.local/bin"
+[ "$HOSTNAME" = "phy-intrepid" ] && export PATH="$HOME/.local/opt/go/bin:$HOME/.local/llvm-5.0.1/bin:$HOME/.local/SageMath:$HOME/local/SageMath:$MATLABDIR/bin:$PATH:/home/max/local/bin:/home/max/.local/bin"
 [ "$HOSTNAME" = "enterprise" ] && export PATH="$MATLABDIR/bin:$PATH"
 
 export TERM="xterm-256color"
