@@ -15,7 +15,7 @@ if [ "$HOSTNAME" = "phy-intrepid" ]; then
     export VIDYO_AUDIO_FRAMEWORK="ALSA" # fix vidyo audio issues
 fi
 export PYTHONVENVROOT="$HOME/.virtual_python_environments"
-export MATLABDIR="/home/max/.local/MATLAB/R2017b"
+export MATLABDIR="/home/max/.local/MATLAB/R2018b"
 
 # LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=$BOOSTLIBDIR:$LD_LIBRARY_PATH
