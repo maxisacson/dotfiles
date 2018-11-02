@@ -15,7 +15,8 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin 'rdnetto/YCM-Generator'
 
 " Ctrl-P fuzzy search
-Plugin 'kien/ctrlp.vim'
+" Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 " matcher for better Ctrl-P behaviour
 Plugin 'burke/matcher'
@@ -250,15 +251,6 @@ let g:ycm_key_list_previous_completion = ['<Up>']
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
-" The Silver Searcher
-" if executable('ag')
-"     " replace grep with ag
-"     set grepprg=ag\ --nogroup\ --nocolor
-"
-"     " use ag in CtrlP
-"     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-" endif
-
 " python-syntax config
 let python_highlight_all = 1
 "let python_version_2 = 1
@@ -328,33 +320,56 @@ let g:vimtex_compiler_latexmk = {'callback' : 0}
 " bind clang-format
 map <Leader>fw :py3f /home/max/.local/llvm-5.0.1/share/clang/clang-format.py<CR>
 
+" CtrlP config
+let g:ctrlp_map = '<C-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_custom_ignore = {
+            \ 'dir': '\v[\/]\.(git|hg|svn)$'
+            \ }
+let g:ctrlp_working_path_mode = 'ar'
+let g:ctrlp_use_caching = 0
+
+" The Silver Searcher for CtrlP
+" if executable('ag')
+"     " replace grep with ag
+"     set grepprg=ag\ --nogroup\ --nocolor
+"
+"     " use ag in CtrlP
+"     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+" else
+"     let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+"     let g:ctrlp_prompt_mappings = {
+"                 \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
+"                 \ }
+" endif
+
 " matcher
-if executable('matcher')
-    let g:ctrlp_match_func = { 'match': 'GoodMatch' }
-
-    function! GoodMatch(items, str, limit, mmode, ispath, crfile, regex)
-
-      " Create a cache file if not yet exists
-      let cachefile = ctrlp#utils#cachedir().'/matcher.cache'
-      if !( filereadable(cachefile) && a:items == readfile(cachefile) )
-        call writefile(a:items, cachefile)
-      endif
-      if !filereadable(cachefile)
-        return []
-      endif
-
-      " a:mmode is currently ignored. In the future, we should probably do
-      " something about that. the matcher behaves like "full-line".
-      let cmd = 'matcher --limit '.a:limit.' --manifest '.cachefile.' '
-      if !( exists('g:ctrlp_dotfiles') && g:ctrlp_dotfiles )
-        let cmd = cmd.'--no-dotfiles '
-      endif
-      let cmd = cmd.a:str
-
-      return split(system(cmd), "\n")
-
-    endfunction
-end
+" if executable('matcher')
+"     let g:ctrlp_match_func = { 'match': 'GoodMatch' }
+"
+"     function! GoodMatch(items, str, limit, mmode, ispath, crfile, regex)
+"
+"       " Create a cache file if not yet exists
+"       let cachefile = ctrlp#utils#cachedir().'/matcher.cache'
+"       if !( filereadable(cachefile) && a:items == readfile(cachefile) )
+"         call writefile(a:items, cachefile)
+"       endif
+"       if !filereadable(cachefile)
+"         return []
+"       endif
+"
+"       " a:mmode is currently ignored. In the future, we should probably do
+"       " something about that. the matcher behaves like "full-line".
+"       let cmd = 'matcher --limit '.a:limit.' --manifest '.cachefile.' '
+"       if !( exists('g:ctrlp_dotfiles') && g:ctrlp_dotfiles )
+"         let cmd = cmd.'--no-dotfiles '
+"       endif
+"       let cmd = cmd.a:str
+"
+"       return split(system(cmd), "\n")
+"
+"     endfunction
+" end
 
 " vim-macro to switch between header and source file in ATLAS software
 " let g:path_separator = '/'
