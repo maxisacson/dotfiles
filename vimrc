@@ -34,7 +34,10 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'justinmk/vim-syntax-extra'
 
 " Vim-solarized
-Plugin 'altercation/vim-colors-solarized'
+" Plugin 'altercation/vim-colors-solarized'
+
+" more vim themes
+Plugin 'flazz/vim-colorschemes'
 
 " vim-fugitive for git integration
 Plugin 'tpope/vim-fugitive'
