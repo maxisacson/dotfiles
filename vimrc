@@ -97,6 +97,9 @@ Plugin 'easymotion/vim-easymotion'
 " vim-css-colors
 " Plugin 'ap/vim-css-color'
 
+" vim-obsession for saving and restoring vim sessions
+Plugin 'tpope/vim-obsession'
+
 " extra syntax for cpp-files
 Plugin 'maxisacson/vim-cpp-extra'
 
@@ -133,6 +136,14 @@ set expandtab
 set smarttab
 set ls=2
 set backspace=2
+
+" Set incremental search
+set incsearch
+
+" Always keep 1 line above and below cursor,
+" and 5 columns to the right and left
+set scrolloff=1
+set sidescrolloff=5
 
 " Line numbering
 set number
