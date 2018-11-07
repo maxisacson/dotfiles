@@ -276,6 +276,18 @@ let g:pymode = 0
 "let g:pymode_rope_lookup_project = 0
 "let g:pymode_rope = 0
 
+" CursorLine configuration
+set cursorline
+hi clear CursorLine
+hi CursorLineNR ctermfg=9 ctermbg=0
+" we need to restore the cursorline for NERDTree
+augroup NERDCursor
+    autocmd!
+    autocmd BufEnter NERD_tree_* hi CursorLine ctermbg=0 guibg=Gray40
+    autocmd BufLeave NERD_tree_* hi clear CursorLine
+    autocmd BufAdd * hi clear CursorLine
+augroup END
+
 " nerdcommenter configuration
 let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1
