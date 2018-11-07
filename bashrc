@@ -64,6 +64,10 @@ alias cb='xclip -selection primary'
 alias nvim='$HOME/.local/opt/nvim/bin/nvim'
 alias sagenb='sage --notebook=jupyter'
 
+# Set nvim as default editor
+export VISUAL="$HOME/.local/opt/nvim/bin/nvim"
+export EDITOR="$VISUAL"
+
 # RootCore local setup
 rcSetupLocal ()
 {

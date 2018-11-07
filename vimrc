@@ -198,7 +198,8 @@ colorscheme solarized
 set colorcolumn=81
 highlight ColorColumn ctermbg=Black
 highlight OverLength ctermbg=Black
-match OverLength /\%111v.\+/
+" autocmd BufEnter * match OverLength /\%111v.\+/
+autocmd BufEnter * call matchadd('OverLength', '\%>111v.\+', -1)
 
 " vim-easy-align key bindings
 xmap ga <Plug>(EasyAlign)
