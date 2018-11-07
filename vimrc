@@ -151,6 +151,9 @@ set number
 " Show command
 set showcmd
 
+" Disable showmode since we're using airline
+set noshowmode
+
 " Map , to <Leader>
 let mapleader=','
 
