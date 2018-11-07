@@ -280,13 +280,22 @@ let g:pymode = 0
 set cursorline
 hi clear CursorLine
 hi CursorLineNR ctermfg=9 ctermbg=0
-" we need to restore the cursorline for NERDTree
+" we need to restore the cursorline for NERDTree and CtrlP
 augroup NERDCursor
     autocmd!
     autocmd BufEnter NERD_tree_* hi CursorLine ctermbg=0 guibg=Gray40
     autocmd BufLeave NERD_tree_* hi clear CursorLine
     autocmd BufAdd * hi clear CursorLine
 augroup END
+
+function! HighlightOn()
+    hi CursorLine ctermbg=0 guibg=Gray40
+endfunction
+
+function! HighlightOff()
+    hi clear CursorLine
+endfunction
+
 
 " nerdcommenter configuration
 let g:NERDSpaceDelims = 1
@@ -355,6 +364,7 @@ let g:ctrlp_custom_ignore = {
             \ }
 let g:ctrlp_working_path_mode = 'ar'
 let g:ctrlp_use_caching = 0
+let g:ctrlp_buffer_func = {'enter': 'HighlightOn', 'exit': 'HighlightOff', }
 
 " The Silver Searcher for CtrlP
 " if executable('ag')
