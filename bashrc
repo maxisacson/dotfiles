@@ -28,7 +28,7 @@ export GOPATH=$HOME/go
 
 # PATH
 [ "$HOSTNAME" = "phy-intrepid" ] && export PATH="$HOME/.local/opt/go/bin:$HOME/.local/llvm-5.0.1/bin:$HOME/.local/SageMath:$HOME/local/SageMath:$MATLABDIR/bin:$PATH:/home/max/local/bin:/home/max/.local/bin"
-[ "$HOSTNAME" = "enterprise" ] && export PATH="$MATLABDIR/bin:$PATH"
+[ "$HOSTNAME" = "enterprise" ] && export PATH="$HOME/.local/opt/tmux/bin:$MATLABDIR/bin:$PATH"
 
 export TERM="xterm-256color"
 
