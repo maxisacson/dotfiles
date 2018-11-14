@@ -26,6 +26,10 @@ export DOT_SAGENB=$HOME/Dropbox/sage-notebooks/
 # Go path
 export GOPATH=$HOME/go
 
+# neovim path
+nvimpath="$HOME/.local/opt/nvim"
+export PATH="$nvimpath/bin":$PATH
+
 # PATH
 [ "$HOSTNAME" = "phy-intrepid" ] && export PATH="$HOME/.local/opt/go/bin:$HOME/.local/llvm-5.0.1/bin:$HOME/.local/SageMath:$HOME/local/SageMath:$MATLABDIR/bin:$PATH:/home/max/local/bin:/home/max/.local/bin"
 [ "$HOSTNAME" = "enterprise" ] && export PATH="$HOME/.local/opt/tmux/bin:$MATLABDIR/bin:$PATH"
@@ -61,11 +65,10 @@ alias cpd='echo -en "$(pwd)" | xclip -selection primary'
 alias xco='xclip -selection primary -o'
 alias flw='tail -n+0 -f'
 alias cb='xclip -selection primary'
-alias nvim='$HOME/.local/opt/nvim/bin/nvim'
 alias sagenb='sage --notebook=jupyter'
 
 # Set nvim as default editor
-export VISUAL="$HOME/.local/opt/nvim/bin/nvim"
+export VISUAL="$nvimpath/bin/nvim"
 export EDITOR="$VISUAL"
 
 # RootCore local setup
