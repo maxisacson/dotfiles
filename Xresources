@@ -1,0 +1,25 @@
+#include "/home/max/git/solarized-xresources/Xresources.dark"
+
+XTerm.termName:           xterm-256color
+XTerm*utf8:               true
+XTerm*locale:             true
+XTerm*metaSendEscape:     true
+XTerm*faceName:           DejaVu\ Sans\ Mono\ for\ Powerline:size=11:style=Book:antialias=true
+XTerm*faceNameDoubleSize: DejaVu\ Sans\ Mono\ for\ Powerline:size=11:style=Book:antialias=true
+XTerm*faceSize:           11.0
+XTerm*geometry:           130x40
+XTerm*scaleHeight:        1.0
+
+URxvt.font:        xft:DejaVu\ Sans\ Mono\ for\ Powerline:size=11:style=Book:antialias=true
+URxvt.boldFont:    xft:DejaVu\ Sans\ Mono\ for\ Powerline:size=11:style=Book:antialias=true
+URxvt.scrollBar:   false
+URxvt.geometry:    130x40
+URxvt.letterSpace: -1
+
+Xft.dpi:       96
+Xft.antialias: true
+Xft.hinting:   true
+Xft.rgba:      rgb
+Xft.autohint:  false
+Xft.hintstyle: hintslight
+Xft.lcdfilter: lcddefault
