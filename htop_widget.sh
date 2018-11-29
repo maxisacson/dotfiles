@@ -1,12 +1,12 @@
 #!/bin/bash
 
-nscreens="$(xrandr | grep " connected" | wc -l)"
+primary="$(xrandr | sed -n 's/^.* connected primary \([0-9]\+x[0-9]\+\)[+-][0-9]\+[+-][0-9].*$/\1/p')"
+xoff=${primary%%x*}
 
-size="960x540"
-if [[ $nscreens == 2 ]]; then
-    geo="${size}-1680-0"
-elif [[ $nscreens == 1 ]]; then
-    geo="${size}-0-0"
-fi
+xsize=960
+ysize=540
+size="${xsize}x${ysize}"
+xoff=$((xoff-xsize))
+geo="${size}+$xoff-0"
 
 terminator -p Transparent -b --geometry=${geo} -x htop
