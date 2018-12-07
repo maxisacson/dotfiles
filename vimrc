@@ -369,6 +369,10 @@ let g:ctrlp_working_path_mode = 'ar'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_buffer_func = {'enter': 'HighlightOn', 'exit': 'HighlightOff', }
 
+" vim-instant-markdown config
+" disable autostart, preview enabled with :InstantMarkdownPreview
+let g:instant_markdown_autostart = 0
+
 " The Silver Searcher for CtrlP
 " if executable('ag')
 "     " replace grep with ag
