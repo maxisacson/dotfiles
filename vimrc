@@ -103,6 +103,9 @@ Plugin 'tpope/vim-obsession'
 " extra syntax for cpp-files
 Plugin 'maxisacson/vim-cpp-extra'
 
+" extra syntax for tex- and bib-files
+Plugin 'maxisacson/vim-latex-extra'
+
 " syntax for geant4 macro files
 Plugin 'maxisacson/vim-geant4-mac'
 
