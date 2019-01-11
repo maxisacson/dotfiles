@@ -157,6 +157,9 @@ set showcmd
 " Disable showmode since we're using airline
 set noshowmode
 
+" Always use ft=tex as default for .tex-files
+let g:tex_flavor = 'latex'
+
 " Map , to <Leader>
 let mapleader=','
 
