@@ -292,7 +292,7 @@ hi CursorLineNR ctermfg=9 ctermbg=0
 " we need to restore the cursorline for NERDTree and CtrlP
 augroup NERDCursor
     autocmd!
-    autocmd BufEnter NERD_tree_* hi CursorLine ctermbg=0 guibg=Gray40
+    autocmd VimEnter,BufEnter NERD_tree_* hi CursorLine ctermbg=0 guibg=Gray40
     autocmd BufLeave NERD_tree_* hi clear CursorLine
     autocmd BufAdd * hi clear CursorLine
 augroup END
