@@ -34,10 +34,10 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'justinmk/vim-syntax-extra'
 
 " Vim-solarized
-" Plugin 'altercation/vim-colors-solarized'
+Plugin 'altercation/vim-colors-solarized'
 
 " more vim themes
-Plugin 'flazz/vim-colorschemes'
+" Plugin 'flazz/vim-colorschemes'
 
 " vim-fugitive for git integration
 Plugin 'tpope/vim-fugitive'
@@ -198,6 +198,11 @@ nnoremap <Leader>b :!make %:r<CR>
 " Color scheme
 set background=dark
 colorscheme solarized
+
+" fix SpellBad highlight for the solarized theme
+if g:colors_name == "solarized"
+    hi SpellBad cterm=underline gui=undercurl guisp=Red
+endif
 
 " Read .vimrc from working directory
 " set exrc
