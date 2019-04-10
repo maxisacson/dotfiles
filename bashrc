@@ -30,6 +30,13 @@ export GOPATH=$HOME/go
 nvimpath="$HOME/.local/opt/nvim"
 export PATH="$nvimpath/bin":$PATH
 
+# cheat setup
+export CHEAT_PATH="/usr/share/cheat:/usr/local/share/cheat:$HOME/.local/lib/python3.7/site-packages/usr/share/cheat"
+export CHEAT_USER_DIR="$HOME/git/dotfiles/cheats"
+export CHEAT_COLORS=true
+export CHEAT_COLORSCHEME="dark"
+export CHEAT_HIGHLIGHT="white"
+
 # PATH
 [ "$HOSTNAME" = "phy-intrepid" ] && export PATH="$HOME/.local/opt/go/bin:$HOME/.local/llvm-5.0.1/bin:$HOME/.local/SageMath:$HOME/local/SageMath:$MATLABDIR/bin:$PATH:/home/max/local/bin:/home/max/.local/bin"
 [ "$HOSTNAME" = "enterprise" ] && export PATH="$HOME/.local/opt/tmux/bin:$MATLABDIR/bin:$PATH"
