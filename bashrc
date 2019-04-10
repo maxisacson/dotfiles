@@ -32,9 +32,9 @@ export PATH="$nvimpath/bin":$PATH
 
 # cheat setup
 export CHEAT_PATH="/usr/share/cheat:/usr/local/share/cheat:$HOME/.local/lib/python3.7/site-packages/usr/share/cheat"
-export CHEAT_USER_DIR="$HOME/git/dotfiles/cheats"
+export CHEAT_USER_DIR="$HOME/git/cheatfiles"
 export CHEAT_COLORS=true
-export CHEAT_COLORSCHEME="dark"
+export CHEAT_COLORSCHEME="light"
 export CHEAT_HIGHLIGHT="white"
 
 # PATH
