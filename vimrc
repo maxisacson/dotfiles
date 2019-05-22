@@ -109,6 +109,16 @@ Plugin 'maxisacson/vim-latex-extra'
 " syntax for geant4 macro files
 Plugin 'maxisacson/vim-geant4-mac'
 
+if has("nvim")
+    " remote plugin manager
+    Plugin 'roxma/nvim-yarp'
+
+    " autocompletion
+    Plugin 'ncm2/ncm2'
+    Plugin 'ncm2/ncm2-bufword'
+    Plugin 'ncm2/ncm2-path'
+endif
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -260,6 +270,9 @@ function! InsertCppIncludeGuard()
 endfunction
 command! CppGuard call InsertCppIncludeGuard()
 
+" python3 host program
+let g:python3_host_program = "/usr/bin/python3"
+
 " include ROOT and boost in search path
 let &path.=$ROOTSYS."/include".",".$BOOSTINCDIR
 
@@ -383,6 +396,16 @@ let g:ctrlp_buffer_func = {'enter': 'HighlightOn', 'exit': 'HighlightOff', }
 " vim-instant-markdown config
 " disable autostart, preview enabled with :InstantMarkdownPreview
 let g:instant_markdown_autostart = 0
+
+
+if has("nvim")
+    " ncm2 autocomplete settings
+    autocmd BufEnter * call ncm2#enable_for_buffer()
+    set completeopt=noinsert,menuone,noselect
+    inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+    inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+    inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+endif
 
 " The Silver Searcher for CtrlP
 " if executable('ag')
