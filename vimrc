@@ -401,24 +401,33 @@ let g:ctrlp_buffer_func = {'enter': 'HighlightOn', 'exit': 'HighlightOff', }
 " disable autostart, preview enabled with :InstantMarkdownPreview
 let g:instant_markdown_autostart = 0
 
+" if everything on the line up to the cursor is
+" whitespace insert a tab, else start autocomplete
+function! CleverTab()
+    if has("nvim")
+        if strpart(getline('.'), 0, col('.')-1) =~ '^\s*$'
+            return "\<Tab>"
+        else
+            return "\<c-r>=ncm2#manual_trigger()\<cr>"
+        endif
+    else
+        return "\<Tab>"
+    endif
+endfunction
+
 " autocomplete settings
 set shortmess+=c
 set completeopt=noinsert,menuone,noselect
-" inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 inoremap <expr> <CR> (pumvisible() ? "\<c-y>" : "\<CR>")
 inoremap <expr> <c-j> (pumvisible() ? "\<c-n>" : "\<c-j>")
 inoremap <expr> <c-k> (pumvisible() ? "\<c-p>" : "\<c-k>")
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <Tab> (pumvisible() ? "\<c-n>" : CleverTab())
+inoremap <expr> <S-Tab> (pumvisible() ? "\<c-p>" : "\<S-Tab>")
 if has("nvim")
     " ncm2 autocomplete settings
     autocmd BufEnter * call ncm2#enable_for_buffer()
     let g:ncm2#complete_delay = 180
     let g:ncm2#auto_popup = 0
-
-    " inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : <c-r>=ncm2#manual_trigger()<cr>
-    " inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<c-r>=ncm2#manual_trigger()\<cr>"
-    inoremap <Leader><Tab> <c-r>=ncm2#manual_trigger()<cr>
 
     " ncm2 for vimtex
     augroup my_cm_setup
@@ -433,9 +442,6 @@ if has("nvim")
                     \ 'complete_pattern': g:vimtex#re#ncm2,
                     \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
                     \ })
-                    " \ 'on_complete': ['ncm2#on_complete#delay', 180,
-                    "     \ 'ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-                    " \ })
     augroup END
 endif
 
