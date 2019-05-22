@@ -109,6 +109,10 @@ Plugin 'maxisacson/vim-latex-extra'
 " syntax for geant4 macro files
 Plugin 'maxisacson/vim-geant4-mac'
 
+" unimpaired keybindings
+Plugin 'tpope/vim-unimpaired'
+
+" nvim specific plugins
 if has("nvim")
     " remote plugin manager
     Plugin 'roxma/nvim-yarp'
@@ -398,13 +402,23 @@ let g:ctrlp_buffer_func = {'enter': 'HighlightOn', 'exit': 'HighlightOff', }
 let g:instant_markdown_autostart = 0
 
 " autocomplete settings
+set shortmess+=c
 set completeopt=noinsert,menuone,noselect
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>" : "\<CR>")
+inoremap <expr> <c-j> (pumvisible() ? "\<c-n>" : "\<c-j>")
+inoremap <expr> <c-k> (pumvisible() ? "\<c-p>" : "\<c-k>")
+" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 if has("nvim")
     " ncm2 autocomplete settings
     autocmd BufEnter * call ncm2#enable_for_buffer()
+    let g:ncm2#complete_delay = 180
+    let g:ncm2#auto_popup = 0
+
+    " inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : <c-r>=ncm2#manual_trigger()<cr>
+    " inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<c-r>=ncm2#manual_trigger()\<cr>"
+    inoremap <Leader><Tab> <c-r>=ncm2#manual_trigger()<cr>
 
     " ncm2 for vimtex
     augroup my_cm_setup
@@ -417,9 +431,11 @@ if has("nvim")
                     \ 'mark': 'tex',
                     \ 'word_pattern': '\w+',
                     \ 'complete_pattern': g:vimtex#re#ncm2,
-                    \ 'on_complete': ['ncm2#on_complete#delay', 180,
-                        \ 'ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+                    \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
                     \ })
+                    " \ 'on_complete': ['ncm2#on_complete#delay', 180,
+                    "     \ 'ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+                    " \ })
     augroup END
 endif
 
