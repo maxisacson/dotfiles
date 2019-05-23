@@ -275,7 +275,7 @@ endfunction
 command! CppGuard call InsertCppIncludeGuard()
 
 " python3 host program
-let g:python3_host_program = "/usr/bin/python3"
+let g:python3_host_program = system("which python3")
 
 " include ROOT and boost in search path
 let &path.=$ROOTSYS."/include".",".$BOOSTINCDIR
