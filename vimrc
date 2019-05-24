@@ -171,6 +171,9 @@ set showcmd
 " Disable showmode since we're using airline
 set noshowmode
 
+" Set default spell language
+set spelllang=en_gb
+
 " Always use ft=tex as default for .tex-files
 let g:tex_flavor = 'latex'
 
