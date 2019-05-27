@@ -112,6 +112,9 @@ Plugin 'maxisacson/vim-geant4-mac'
 " unimpaired keybindings
 Plugin 'tpope/vim-unimpaired'
 
+" buffergator for buffer management
+Plugin 'jeetsukumaran/vim-buffergator'
+
 " nvim specific plugins
 if has("nvim")
     " remote plugin manager
@@ -183,12 +186,25 @@ let g:tex_flavor = 'latex'
 " Map , to <Leader>
 let mapleader=','
 
+" Buffer management
+set hidden " allow buffers to be open in the background
+let g:buffergator_suppress_keymaps = 1
+nnoremap <leader><leader> <C-^>
+nnoremap <S-q> :bprev<CR>
+nnoremap <S-w> :enew<CR>
+nnoremap <S-e> :bnext<CR>
+nnoremap <leader>qq :b# <BAR> bd #<CR>
+nnoremap <leader>b :BuffergatorToggle<CR>
+nnoremap gb :BuffergatorMruCyclePrev<CR>
+nnoremap gB :BuffergatorMruCycleNext<CR>
+
 " Tab management
-nnoremap <S-q> :tabp<CR>
-nnoremap <S-w> :tabnew<CR>
-nnoremap <S-e> :tabn<CR>
-nnoremap <silent> <Leader><S-q> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
-nnoremap <silent> <Leader><S-e> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
+" nnoremap <S-q> :tabp<CR>
+" nnoremap <S-w> :tabnew<CR>
+" nnoremap <S-e> :tabn<CR>
+" nnoremap <silent> <Leader><S-q> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+" nnoremap <silent> <Leader><S-e> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
+nnoremap <leader>t :BuffergatorTabsToggle<CR>
 
 " Bind nerdtree to F5
 nnoremap <F5> :NERDTreeToggle<CR>
@@ -217,7 +233,7 @@ nnoremap <Leader>< <C-w><
 nnoremap <F3> <c-w>gf
 
 " make <filename-no-ext>
-nnoremap <Leader>b :!make %:r<CR>
+" nnoremap <Leader>b :!make %:r<CR>
 
 " Color scheme
 set background=dark
