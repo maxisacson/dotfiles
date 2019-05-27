@@ -147,12 +147,14 @@ filetype plugin indent on    " required
 syntax on
 
 " Set indenting stuff
-set ts=4
-set shiftwidth=4
-set expandtab
-set smarttab
-set ls=2
-set backspace=2
+set tabstop=4 " number of spaces in a <Tab>
+set shiftwidth=4 " number of spaces to use for autoindent. Should be == tabstop
+set expandtab " use spaces as <Tab>
+set smarttab " insert shiftwidth worth of whitespace at beginning of line
+set backspace=indent,eol,start " make <BS> well behaved
+
+" status line
+set laststatus=2 " 2 = always
 
 " Set incremental search
 set incsearch
@@ -203,7 +205,7 @@ nnoremap <C-j> <C-w>j
 " Split screen resize bindings
 nnoremap <Leader>+ <C-w>+
 nnoremap <Leader>- <C-w>-
-nnoremap <Leader>z <C-w>>
+nnoremap <Leader>> <C-w>>
 nnoremap <Leader>< <C-w><
 
 " Open file under cursor in new tab
