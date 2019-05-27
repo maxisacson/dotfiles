@@ -152,6 +152,7 @@ set shiftwidth=4 " number of spaces to use for autoindent. Should be == tabstop
 set expandtab " use spaces as <Tab>
 set smarttab " insert shiftwidth worth of whitespace at beginning of line
 set backspace=indent,eol,start " make <BS> well behaved
+set autoindent " make sure autoindent is turned on
 
 " status line
 set laststatus=2 " 2 = always
@@ -191,6 +192,10 @@ nnoremap <silent> <Leader><S-e> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR
 
 " Bind nerdtree to F5
 nnoremap <F5> :NERDTreeToggle<CR>
+
+" always split the screen to the right or below
+set splitright
+set splitbelow
 
 " Split screen movement bindings
 nnoremap <C-Left> <C-w>h
