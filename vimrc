@@ -43,7 +43,10 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'tpope/vim-fugitive'
 
 " ag.vim for nice search features
-Plugin 'rking/ag.vim'
+" Plugin 'rking/ag.vim' " deprecated
+
+" ack.vim for ag and ack integration
+Plugin 'mileszs/ack.vim'
 
 " nerdtree for file browsing
 Plugin 'scrooloose/nerdtree'
@@ -440,6 +443,29 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_working_path_mode = 'ar'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_buffer_func = {'enter': 'HighlightOn', 'exit': 'HighlightOff', }
+
+" ack.vim config
+cnoreabbrev Ack Ack!
+nnoremap <C-\> :Ack!<space>
+
+" The Silver Searcher for CtrlP and ack.vim
+if executable('ag')
+    " replace grep with ag
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    " replace ack with ag
+    let g:ackprg='ag --vimgrep'
+
+    " use ag in CtrlP
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    let g:ctrlp_use_caching = 0
+endif
+
+" use tab to move in quickfix
+nnoremap <Tab> :cnext<CR>
+nnoremap <S-Tab> :cprev<CR>
+nnoremap <leader>qc :cclose<CR>
+nnoremap <leader>qo :copen<CR>
 
 " vim-instant-markdown config
 " disable autostart, preview enabled with :InstantMarkdownPreview
