@@ -127,6 +127,9 @@ if has("nvim")
     Plugin 'ncm2/ncm2'
     Plugin 'ncm2/ncm2-bufword'
     Plugin 'ncm2/ncm2-path'
+
+    " gdb integration
+    " Plugin 'huawenyu/neogdb.vim'
 endif
 
 " All of your Plugins must be added before the following line
