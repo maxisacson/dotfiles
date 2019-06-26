@@ -446,6 +446,7 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_working_path_mode = 'ar'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_buffer_func = {'enter': 'HighlightOn', 'exit': 'HighlightOff', }
+let g:ctrlp_open_new_file = 'r' " open created file in current window
 
 " ack.vim config
 cnoreabbrev Ack Ack!
