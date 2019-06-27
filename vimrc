@@ -118,6 +118,9 @@ Plugin 'tpope/vim-unimpaired'
 " buffergator for buffer management
 Plugin 'jeetsukumaran/vim-buffergator'
 
+" gruvbox theme
+Plugin 'morhetz/gruvbox'
+
 " nvim specific plugins
 if has("nvim")
     " remote plugin manager
@@ -243,10 +246,13 @@ nnoremap <F3> <c-w>gf
 
 " Color scheme
 set background=dark
+" let g:gruvbox_italic=1
+" set termguicolors
+" colorscheme gruvbox
 colorscheme solarized
 
 " fix SpellBad highlight for the solarized theme
-if g:colors_name == "solarized"
+if exists("g:colors_name") && g:colors_name == "solarized"
     hi SpellBad cterm=underline gui=undercurl guisp=Red
 endif
 
@@ -317,17 +323,17 @@ endfunction
 let g:python3_host_program = PythonInterpreter()
 
 " include ROOT and boost in search path
-let &path.=$ROOTSYS."/include".",".$BOOSTINCDIR
+" let &path.=$ROOTSYS."/include".",".$BOOSTINCDIR
 
 " Semantic completion for YCM
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+" let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
 " Autoclose preview window after YCM insertion
-let g:ycm_autoclose_preview_window_after_insertion = 1
+" let g:ycm_autoclose_preview_window_after_insertion = 1
 
 " Only use arrow keys to browse YCM completion
-let g:ycm_key_list_select_completion = ['<Down>']
-let g:ycm_key_list_previous_completion = ['<Up>']
+" let g:ycm_key_list_select_completion = ['<Down>']
+" let g:ycm_key_list_previous_completion = ['<Up>']
 
 " Fancy symbols for powerline
 " let g:Powerline_symbols = 'fancy'
@@ -475,6 +481,9 @@ nnoremap <leader>qo :copen<CR>
 " disable autostart, preview enabled with :InstantMarkdownPreview
 let g:instant_markdown_autostart = 0
 
+" reload vimrc
+command! ReloadVimrc :so $MYVIMRC | echom "Reloaded " . $MYVIMRC | redraw
+
 " if everything on the line up to the cursor is
 " whitespace insert a tab, else start autocomplete
 function! CleverTab()
@@ -562,52 +571,6 @@ if has("nvim")
                     \ })
     augroup END
 endif
-
-" The Silver Searcher for CtrlP
-" if executable('ag')
-"     " replace grep with ag
-"     set grepprg=ag\ --nogroup\ --nocolor
-"
-"     " use ag in CtrlP
-"     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-" else
-"     let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-"     let g:ctrlp_prompt_mappings = {
-"                 \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
-"                 \ }
-" endif
-
-" matcher
-" if executable('matcher')
-"     let g:ctrlp_match_func = { 'match': 'GoodMatch' }
-"
-"     function! GoodMatch(items, str, limit, mmode, ispath, crfile, regex)
-"
-"       " Create a cache file if not yet exists
-"       let cachefile = ctrlp#utils#cachedir().'/matcher.cache'
-"       if !( filereadable(cachefile) && a:items == readfile(cachefile) )
-"         call writefile(a:items, cachefile)
-"       endif
-"       if !filereadable(cachefile)
-"         return []
-"       endif
-"
-"       " a:mmode is currently ignored. In the future, we should probably do
-"       " something about that. the matcher behaves like "full-line".
-"       let cmd = 'matcher --limit '.a:limit.' --manifest '.cachefile.' '
-"       if !( exists('g:ctrlp_dotfiles') && g:ctrlp_dotfiles )
-"         let cmd = cmd.'--no-dotfiles '
-"       endif
-"       let cmd = cmd.a:str
-"
-"       return split(system(cmd), "\n")
-"
-"     endfunction
-" end
-
-" vim-macro to switch between header and source file in ATLAS software
-" let g:path_separator = '/'
-" so ~/.vim/altfile.vim
 
 " function to remove all trailing whitespace
 autocmd BufWrite * call DeleteTrailingWhiteSpace()
