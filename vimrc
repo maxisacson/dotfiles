@@ -245,10 +245,10 @@ nnoremap <F3> <c-w>gf
 
 " Color scheme
 set background=dark
-" let g:gruvbox_italic=1
-" set termguicolors
-" colorscheme gruvbox
-colorscheme solarized
+let g:gruvbox_italic=1
+set termguicolors
+colorscheme gruvbox
+" colorscheme solarized
 
 " fix SpellBad highlight for the solarized theme
 if exists("g:colors_name") && g:colors_name == "solarized"
@@ -364,15 +364,16 @@ let g:pymode = 0
 
 " CursorLine configuration
 set cursorline
-hi clear CursorLine
-hi CursorLineNR ctermfg=9 ctermbg=0
-" we need to restore the cursorline for NERDTree and CtrlP
-augroup NERDCursor
-    autocmd!
-    autocmd VimEnter,BufEnter NERD_tree_* hi CursorLine ctermbg=0 guibg=Gray40
-    autocmd BufLeave NERD_tree_* hi clear CursorLine
-    autocmd BufAdd * hi clear CursorLine
-augroup END
+" uncomment this for a subtler cursorline
+" hi clear CursorLine
+" hi CursorLineNR ctermfg=9 ctermbg=0
+" " we need to restore the cursorline for NERDTree and CtrlP
+" augroup NERDCursor
+"     autocmd!
+"     autocmd VimEnter,BufEnter NERD_tree_* hi CursorLine ctermbg=0 guibg=Gray40
+"     autocmd BufLeave NERD_tree_* hi clear CursorLine
+"     autocmd BufAdd * hi clear CursorLine
+" augroup END
 
 function! HighlightOn()
     hi CursorLine ctermbg=0 guibg=Gray40
