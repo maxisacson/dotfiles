@@ -15,7 +15,6 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin 'rdnetto/YCM-Generator'
 
 " Ctrl-P fuzzy search
-" Plugin 'kien/ctrlp.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 
 " matcher for better Ctrl-P behaviour
@@ -453,6 +452,8 @@ let g:ctrlp_working_path_mode = 'ar'
 let g:ctrlp_use_caching = 0
 let g:ctrlp_buffer_func = {'enter': 'HighlightOn', 'exit': 'HighlightOff', }
 let g:ctrlp_open_new_file = 'r' " open created file in current window
+let g:ctrlp_extensions = ['line'] " CtrlPLine
+noremap <Leader>/ :CtrlPLine<cr>
 
 " ack.vim config
 cnoreabbrev Ack Ack!
