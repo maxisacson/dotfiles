@@ -9,4 +9,5 @@ size="${xsize}x${ysize}"
 xoff=$((xoff-xsize))
 geo="${size}+$xoff-0"
 
-terminator -p Transparent -b --geometry=${geo} -x htop
+# terminator -p Transparent -b --geometry=${geo} -x htop
+terminator -p gruvbox-dark-transparent -b --geometry=${geo} -x htop
