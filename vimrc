@@ -254,9 +254,13 @@ elseif s:colorscheme == 'solarized'
 endif
 exec 'colorscheme ' . s:colorscheme
 
-" fix SpellBad highlight for the solarized theme
-if exists("g:colors_name") && g:colors_name == "solarized"
-    hi SpellBad cterm=underline gui=undercurl guisp=Red
+" fix SpellBad highlight
+if exists("g:colors_name")
+    if g:colors_name == "solarized"
+        hi SpellBad cterm=underline gui=undercurl guisp=Red
+    elseif g:colors_name == "gruvbox"
+        hi SpellBad cterm=underline gui=underline
+    endif
 endif
 
 " Read .vimrc from working directory
