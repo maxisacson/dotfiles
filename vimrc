@@ -378,7 +378,8 @@ let g:pymode = 0
 " CursorLine configuration
 set cursorline
 if s:colorscheme == 'solarized'
-    " hi clear CursorLine
+    " hi clear CursorLine " if this is on, also add:
+                          " let g:ctrlp_buffer_func = {'enter': 'HighlightOn', 'exit': 'HighlightOff', }
     hi CursorLineNR ctermfg=9 ctermbg=0
 endif
 " " we need to restore the cursorline for NERDTree and CtrlP
@@ -465,7 +466,7 @@ let g:ctrlp_custom_ignore = {
             \ }
 let g:ctrlp_working_path_mode = 'ar'
 let g:ctrlp_use_caching = 0
-let g:ctrlp_buffer_func = {'enter': 'HighlightOn', 'exit': 'HighlightOff', }
+" let g:ctrlp_buffer_func = {'enter': 'HighlightOn', 'exit': 'HighlightOff', }
 let g:ctrlp_open_new_file = 'r' " open created file in current window
 let g:ctrlp_extensions = ['line'] " CtrlPLine
 noremap <Leader>/ :CtrlPLine<cr>
