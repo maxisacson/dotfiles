@@ -244,11 +244,15 @@ nnoremap <F3> <c-w>gf
 " nnoremap <Leader>b :!make %:r<CR>
 
 " Color scheme
+let s:colorscheme = 'gruvbox'
 set background=dark
-let g:gruvbox_italic=1
-set termguicolors
-colorscheme gruvbox
-" colorscheme solarized
+if s:colorscheme == 'gruvbox'
+    let g:gruvbox_italic=1
+    set termguicolors
+elseif s:colorscheme == 'solarized'
+    set notermguicolors
+endif
+exec 'colorscheme ' . s:colorscheme
 
 " fix SpellBad highlight for the solarized theme
 if exists("g:colors_name") && g:colors_name == "solarized"
@@ -262,8 +266,17 @@ endif
 " Highlight column
 set colorcolumn=81
 highlight ColorColumn ctermbg=Black
-highlight OverLength ctermbg=Black
-" autocmd BufEnter * match OverLength /\%111v.\+/
+" Highlight extra long lines
+highlight OverLength cterm=reverse gui=reverse
+" or uncomment this for some more intricate stuff
+" if exists("g:colors_name") && g:colors_name == "gruvbox"
+"     let s:gruvboxcolor = 'GruvboxBg2'
+"     exec 'hi OverLength cterm=undercurl gui=standout ' .
+"                 \'ctermbg=' . synIDattr(hlID(s:gruvboxcolor), 'fg', 'cterm') . ' ' .
+"                 \'guibg=' . synIDattr(hlID(s:gruvboxcolor), 'fg', 'gui')
+" else
+"     highlight OverLength ctermbg=Black
+" endif
 autocmd BufEnter * call matchadd('OverLength', '\%>111v.\+', -1)
 
 " vim-easy-align key bindings
@@ -364,9 +377,10 @@ let g:pymode = 0
 
 " CursorLine configuration
 set cursorline
-" uncomment this for a subtler cursorline
-" hi clear CursorLine
-" hi CursorLineNR ctermfg=9 ctermbg=0
+if s:colorscheme == 'solarized'
+    " hi clear CursorLine
+    hi CursorLineNR ctermfg=9 ctermbg=0
+endif
 " " we need to restore the cursorline for NERDTree and CtrlP
 " augroup NERDCursor
 "     autocmd!
