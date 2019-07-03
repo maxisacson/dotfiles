@@ -41,7 +41,7 @@ export CHEAT_HIGHLIGHT="white"
 [ "$HOSTNAME" = "phy-intrepid" ] && export PATH="$HOME/.local/opt/go/bin:$HOME/.local/llvm-5.0.1/bin:$HOME/.local/SageMath:$HOME/local/SageMath:$MATLABDIR/bin:$PATH:/home/max/local/bin:/home/max/.local/bin"
 [ "$HOSTNAME" = "enterprise" ] && export PATH="$HOME/.local/opt/tmux/bin:$MATLABDIR/bin:$PATH"
 
-export TERM="xterm-256color"
+# export TERM="xterm-256color"
 
 # aliases
 if [[ $HOSTNAME = "phy-intrepid" ]] || [[ $HOSTNAME = "enterprise" ]]; then
