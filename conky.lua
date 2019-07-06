@@ -105,10 +105,10 @@ ${execi 300 jq -r ".name" ~/.cache/weather.json}, \
 ${execi 300 jq -r ".sys.country" ~/.cache/weather.json}${font}${color}
 ${font DejaVu Sans Mono:size=11:style=bold}\
 ${execi 300 jq ".main.temp" ~/.cache/weather.json | awk '{print int($1+0.5)}'}°C${font}${color}  \
-${font DejaVu Sans Mono:size=10}${color9}↗${color2}\
-${execi 300 jq ".list[0].temp.max" ~/.cache/forecast.json | awk '{print int($1+0.5)}'}°${color}\
 ${font DejaVu Sans Mono:size=10}${color6}↘${color2}\
-${execi 300 jq ".list[0].temp.min" ~/.cache/forecast.json | awk '{print int($1+0.5)}'}°${color}${font}
+${execi 300 jq ".list[0].temp.min" ~/.cache/forecast.json | awk '{print int($1+0.5)}'}°${color}${font}\
+${font DejaVu Sans Mono:size=10}${color9}↗${color2}\
+${execi 300 jq ".list[0].temp.max" ~/.cache/forecast.json | awk '{print int($1+0.5)}'}°${color}
 ${font DejaVu Sans Mono:size=12}${color2}\
 ${execi 300 jq -r ".weather[0].description" ~/.cache/weather.json}${font}${color}
 ]]
