@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Conky
+Exec=/home/max/git/dotfiles/conky.sh
+Icon=conky.svg
+Terminal=false
+Type=Application
+StartupNotify=false
+Keywords=conky;
+Categories=Utility

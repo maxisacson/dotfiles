@@ -1,3 +1,4 @@
+" source from ~/.config/nvim/init.vim
 so ~/.vimrc
 
 " Disable guicursor

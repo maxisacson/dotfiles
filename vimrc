@@ -530,7 +530,7 @@ inoremap <silent> <expr> <S-Tab> (pumvisible() ? "\<c-p>" : "\<S-Tab>")
 if has("nvim")
     " ncm2 autocomplete settings
     autocmd BufEnter * call ncm2#enable_for_buffer()
-    " let g:ncm2#complete_delay = 180
+    let g:ncm2#complete_delay = 180
     let g:ncm2#auto_popup = 0
 
     " ncm2 for vimtex
