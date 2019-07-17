@@ -21,7 +21,7 @@ export MATLABDIR="/home/max/.local/MATLAB/R2018b"
 export LD_LIBRARY_PATH=$BOOSTLIBDIR:$LD_LIBRARY_PATH
 
 # Sage notebook path
-export DOT_SAGENB=$HOME/Dropbox/sage-notebooks/
+export DOT_SAGENB=$HOME/notebooks/sage
 
 # Go path
 export GOPATH=$HOME/go
