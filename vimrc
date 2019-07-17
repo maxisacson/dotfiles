@@ -18,7 +18,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 
 " matcher for better Ctrl-P behaviour
-Plugin 'burke/matcher'
+" Plugin 'burke/matcher'
 
 " vim-poweline
 " Plugin 'Lokaltog/vim-powerline'
@@ -69,7 +69,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 
 " markdown preview for vim
-Plugin 'suan/vim-instant-markdown'
+" Plugin 'suan/vim-instant-markdown'
 
 " vim-markdown
 Plugin 'tpope/vim-markdown'
@@ -100,7 +100,7 @@ Plugin 'easymotion/vim-easymotion'
 " Plugin 'ap/vim-css-color'
 
 " vim-obsession for saving and restoring vim sessions
-Plugin 'tpope/vim-obsession'
+" Plugin 'tpope/vim-obsession'
 
 " extra syntax for cpp-files
 Plugin 'maxisacson/vim-cpp-extra'
@@ -112,7 +112,7 @@ Plugin 'maxisacson/vim-latex-extra'
 Plugin 'maxisacson/vim-geant4-mac'
 
 " unimpaired keybindings
-Plugin 'tpope/vim-unimpaired'
+" Plugin 'tpope/vim-unimpaired'
 
 " buffergator for buffer management
 Plugin 'jeetsukumaran/vim-buffergator'
