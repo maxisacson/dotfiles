@@ -51,7 +51,7 @@ Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/nerdtree'
 
 " python-mode
-Plugin 'klen/python-mode'
+" Plugin 'klen/python-mode'
 
 " better python syntax highlighting
 Plugin 'hdima/python-syntax'
