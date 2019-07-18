@@ -214,8 +214,8 @@ nnoremap gB :BuffergatorMruCycleNext<CR>
 " nnoremap <silent> <Leader><S-e> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
 nnoremap <leader>t :BuffergatorTabsToggle<CR>
 
-" Bind nerdtree to F5
-nnoremap <F5> :NERDTreeToggle<CR>
+" Bind nerdtree to <leader>n
+nnoremap <leader>n :NERDTreeToggle<CR>
 
 " always split the screen to the right or below
 set splitright
