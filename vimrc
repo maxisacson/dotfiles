@@ -281,7 +281,11 @@ highlight OverLength cterm=reverse gui=reverse
 " else
 "     highlight OverLength ctermbg=Black
 " endif
-autocmd BufEnter * call matchadd('OverLength', '\%>111v.\+', -1)
+augroup OverLengthGroup
+    autocmd!
+    autocmd BufEnter * if !exists("w:olm") | let w:olm = matchadd('OverLength', '\%>111v.\+', -1) | endif
+augroup END
+
 
 " vim-easy-align key bindings
 xmap ga <Plug>(EasyAlign)
@@ -529,7 +533,10 @@ inoremap <silent> <expr> <Tab> (pumvisible() ? "\<c-n>" : CleverTab())
 inoremap <silent> <expr> <S-Tab> (pumvisible() ? "\<c-p>" : "\<S-Tab>")
 if has("nvim")
     " ncm2 autocomplete settings
-    autocmd BufEnter * call ncm2#enable_for_buffer()
+    augroup ncm2_enable
+        autocmd!
+        autocmd BufEnter * call ncm2#enable_for_buffer()
+    augroup END
     let g:ncm2#complete_delay = 180
     let g:ncm2#auto_popup = 0
 
@@ -594,7 +601,11 @@ if has("nvim")
 endif
 
 " function to remove all trailing whitespace
-autocmd BufWrite * call DeleteTrailingWhiteSpace()
+augroup NoTrailingWhitespace
+    autocmd!
+    autocmd BufWrite * call DeleteTrailingWhiteSpace()
+augroup END
+
 function! DeleteTrailingWhiteSpace()
     let a:cursor_pos = getpos(".")
     %s/\s\+$//ge
