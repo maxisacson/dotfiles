@@ -258,8 +258,6 @@ exec 'colorscheme ' . s:colorscheme
 if exists("g:colors_name")
     if g:colors_name == "solarized"
         hi SpellBad cterm=underline gui=undercurl guisp=Red
-    elseif g:colors_name == "gruvbox"
-        hi SpellBad cterm=underline gui=underline
     endif
 endif
 
@@ -271,7 +269,12 @@ endif
 set colorcolumn=81
 highlight ColorColumn ctermbg=Black
 " Highlight extra long lines
-highlight OverLength cterm=reverse gui=reverse
+" highlight OverLength cterm=reverse gui=reverse
+if exists("g:colors_name") && g:colors_name == "gruvbox"
+    highlight OverLength cterm=undercurl gui=undercurl guisp=#fabd2f
+else
+    highlight OverLength cterm=underline gui=undercurl guisp=Orange
+endif
 " or uncomment this for some more intricate stuff
 " if exists("g:colors_name") && g:colors_name == "gruvbox"
 "     let s:gruvboxcolor = 'GruvboxBg2'
