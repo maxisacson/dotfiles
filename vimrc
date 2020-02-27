@@ -610,7 +610,7 @@ augroup NoTrailingWhitespace
 augroup END
 
 function! DeleteTrailingWhiteSpace()
-    let a:cursor_pos = getpos(".")
+    let cursor_pos = getpos(".")
     %s/\s\+$//ge
-    call setpos(".", a:cursor_pos)
+    call setpos(".", cursor_pos)
 endfunction
