@@ -265,8 +265,12 @@ endif
 " set exrc
 " set secure
 
+" Format options
+set textwidth=80
+set formatoptions-=t
+
 " Highlight column
-set colorcolumn=81
+set colorcolumn=+1
 highlight ColorColumn ctermbg=Black
 " Highlight extra long lines
 " highlight OverLength cterm=reverse gui=reverse
