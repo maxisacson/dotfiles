@@ -446,7 +446,7 @@ let g:syntastic_sh_checkers = ['checkbashisms', 'sh']
 let g:syntastic_cpp_checkers = ['gcc', 'clang_check', 'cppcheck']
 
 let g:syntastic_cpp_clang_check_args =
-            \ ["-std=c++11"]
+            \ ["-std=c++17"]
 
 " Disable auto-checking
 let g:syntastic_mode_map = {
