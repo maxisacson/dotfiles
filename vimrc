@@ -88,7 +88,7 @@ Plugin 'https://gitlab.cern.ch/misacson/vim-dastshiftreport.git'
 Plugin 'https://gitlab.cern.ch/misacson/vim-trexfitter.git'
 
 " syntastic syntax checker
-Plugin 'vim-syntastic/syntastic'
+" Plugin 'vim-syntastic/syntastic'
 
 " latex plugin
 Plugin 'lervag/vimtex'
@@ -122,6 +122,9 @@ Plugin 'morhetz/gruvbox'
 
 " clang-format intergration for vim
 Plugin 'rhysd/vim-clang-format'
+
+" ALE asynchronos link engine
+Plugin 'dense-analysis/ale'
 
 " nvim specific plugins
 if has("nvim")
@@ -425,37 +428,58 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 
+" ALE configuration
+let g:ale_echo_msg_format='%code: %%s [%linter%] (%severity%)'
+let g:ale_linters_explicit=1
+let g:ale_c_parse_compile_commands=1
+let g:ale_c_build_dirs_names=['build', 'bin', 'release']
+" let g:ale_linters = {'cpp': 'all'}
+let g:ale_linters={'cpp': ['clangtidy']}
+let g:ale_cpp_clangtidy_checks=['-*',
+            \ 'clang-analyzer-*',
+            \ 'modernize-*',
+            \ 'readability-*',
+            \ 'performance-*',
+            \ 'cppcoreguidelines-*',
+            \ 'bugprone-*',
+            \ 'cert-*',
+            \ 'hicpp-*',
+            \ '-cppcoreguidelines-pro-bounds-constant-array-index',
+            \ '-cppcoreguidelines-pro-bounds-array-to-pointer-decay',
+            \ '-readability-braces-around-statements',
+            \ '-hicpp-braces-around-statements',
+            \ '-hicpp-no-array-decay']
+
 " syntastic configuration
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_error_symbol = ">>"
-let g:syntastic_style_error_symbol = "S>"
-let g:syntastic_warning_symbol = ">?"
-let g:syntastic_style_warning_symbol = "S?"
-let g:syntastic_aggregate_errors = 1
-
-let g:syntastic_sh_checkers = ['checkbashisms', 'sh']
-
-let g:syntastic_cpp_checkers = ['gcc', 'clang_check', 'cppcheck']
-
-let g:syntastic_cpp_clang_check_args =
-            \ ["-std=c++17"]
-
-" Disable auto-checking
-let g:syntastic_mode_map = {
-            \ "mode": "passive",
-            \ "active_filetypes": [],
-            \ "passive_filetypes": [] }
-
-" bind ,e to run the syntastic checks
-nnoremap <Leader>e :SyntasticCheck<CR>
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+"
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+" let g:syntastic_aggregate_errors = 1
+"
+" let g:syntastic_error_symbol = ">>"
+" let g:syntastic_style_error_symbol = "S>"
+" let g:syntastic_warning_symbol = ">?"
+" let g:syntastic_style_warning_symbol = "S?"
+" let g:syntastic_aggregate_errors = 1
+"
+" let g:syntastic_sh_checkers = ['checkbashisms', 'sh']
+" let g:syntastic_cpp_checkers = ['gcc', 'clang_check', 'cppcheck']
+" let g:syntastic_cpp_clang_check_args = ["-std=c++17"]
+" let g:syntastic_filetype_map = { "cpp": "h" }
+"
+" " Disable auto-checking
+" let g:syntastic_mode_map = {
+"             \ "mode": "passive",
+"             \ "active_filetypes": [],
+"             \ "passive_filetypes": [] }
+"
+" " bind ,e to run the syntastic checks
+" nnoremap <Leader>sc :SyntasticCheck<CR>
 
 " easymotion config
 " Disable default mappings
@@ -518,11 +542,24 @@ if executable('ag')
     let g:ctrlp_use_caching = 0
 endif
 
-" use tab to move in quickfix
+" use tab to move in quickfix list
 nnoremap <Tab> :cnext<CR>
 nnoremap <S-Tab> :cprev<CR>
+nnoremap <leader>qf :cfirst<CR>
+nnoremap <leader>ql :clast<CR>
 nnoremap <leader>qc :cclose<CR>
 nnoremap <leader>qo :copen<CR>
+
+" mappings for location list
+nnoremap <leader>ln :lnext<CR>
+nnoremap <leader>lp :lprev<CR>
+nnoremap <leader>] :lnext<CR>
+nnoremap <leader>[ :lprev<CR>
+nnoremap <leader>lf :lfirst<CR>
+nnoremap <leader>ll :llast<CR>
+nnoremap <leader>lc :lclose<CR>
+nnoremap <leader>lo :lopen<CR>
+
 
 " vim-instant-markdown config
 " disable autostart, preview enabled with :InstantMarkdownPreview
