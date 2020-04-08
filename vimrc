@@ -120,6 +120,9 @@ Plugin 'jeetsukumaran/vim-buffergator'
 " gruvbox theme
 Plugin 'morhetz/gruvbox'
 
+" clang-format intergration for vim
+Plugin 'rhysd/vim-clang-format'
+
 " nvim specific plugins
 if has("nvim")
     " remote plugin manager
@@ -164,6 +167,7 @@ set expandtab " use spaces as <Tab>
 set smarttab " insert shiftwidth worth of whitespace at beginning of line
 set backspace=indent,eol,start " make <BS> well behaved
 set autoindent " make sure autoindent is turned on
+set cinoptions=l1,g0.75s,h0.25s,N-s
 
 " status line
 set laststatus=2 " 2 = always
@@ -470,8 +474,19 @@ map <Leader>k <Plug>(easymotion-k)
 " vimtex config
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 
-" bind clang-format
-map <Leader>fw :py3f /home/max/.local/llvm-5.0.1/share/clang/clang-format.py<CR>
+" vim-clang-format config
+autocmd FileType c,cpp,objc nnoremap <buffer><Leader>f :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,objc vnoremap <buffer><Leader>f :ClangFormat<CR>
+let g:clang_format#code_style = 'google'
+let g:clang_format#style_options = {
+            \ "AlignConsecutiveAssignments": "true",
+            \ "AllowShortFunctionsOnASingleLine": "Inline",
+            \ "BreakConstructorInitializers": "AfterColon",
+            \ "IndentWidth": 4,
+            \ "SpaceAfterTemplateKeyword": "false",
+            \ "TabWidth": 4,
+            \ "UseTab": "Never"}
+
 
 " CtrlP config
 let g:ctrlp_map = '<C-p>'
