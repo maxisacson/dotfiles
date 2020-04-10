@@ -431,13 +431,15 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 
 " ALE configuration
-let g:ale_echo_msg_format='%code: %%s [%linter%] (%severity%)'
-let g:ale_linters_explicit=1
-let g:ale_c_parse_compile_commands=1
-let g:ale_c_build_dirs_names=['build', 'bin', 'release']
+let g:ale_echo_msg_format = '%code: %%s [%linter%] (%severity%)'
+let g:ale_linters_explicit = 1
+let g:ale_c_parse_compile_commands = 1
+let g:ale_c_build_dirs_names = ['build', 'bin', 'release']
 " let g:ale_linters = {'cpp': 'all'}
-let g:ale_linters={'cpp': ['clangtidy']}
-let g:ale_cpp_clangtidy_checks=['-*',
+let g:ale_linters = {'cpp': ['clangtidy']}
+" let g:ale_cpp_clangtidy_extra_options='-isystem'
+" let g:ale_cpp_clangtidy_extra_options = '-extra-arg-before=-xc++'
+let g:ale_cpp_clangtidy_checks = ['-*',
             \ 'clang-analyzer-*',
             \ 'modernize-*',
             \ 'readability-*',
@@ -451,6 +453,16 @@ let g:ale_cpp_clangtidy_checks=['-*',
             \ '-readability-braces-around-statements',
             \ '-hicpp-braces-around-statements',
             \ '-hicpp-no-array-decay']
+let g:ale_pattern_options = {
+            \ '\.h\(pp\)\?$': {
+                \ 'ale_cpp_clangtidy_extra_options':
+                    \ '-extra-arg-before=-xc++-header'}
+            \ }
+
+nmap <leader>al <Plug>(ale_lint)
+nmap <leader>an <Plug>(ale_next)
+nmap <leader>ap <Plug>(ale_previous)
+nmap <leader>at <Plug>(ale_toggle)
 
 " syntastic configuration
 " set statusline+=%#warningmsg#
