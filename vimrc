@@ -126,6 +126,9 @@ Plugin 'rhysd/vim-clang-format'
 " ALE asynchronos link engine
 Plugin 'dense-analysis/ale'
 
+" vim-cmake
+Plugin 'vhdirk/vim-cmake'
+
 " nvim specific plugins
 if has("nvim")
     " remote plugin manager
@@ -299,7 +302,6 @@ augroup OverLengthGroup
     autocmd!
     autocmd BufEnter * if !exists("w:olm") | let w:olm = matchadd('OverLength', '\%>111v.\+', -1) | endif
 augroup END
-
 
 " vim-easy-align key bindings
 xmap ga <Plug>(EasyAlign)
@@ -542,19 +544,33 @@ if executable('ag')
     let g:ctrlp_use_caching = 0
 endif
 
-" use tab to move in quickfix list
-nnoremap <Tab> :cnext<CR>
-nnoremap <S-Tab> :cprev<CR>
+function! SmartTab(shifttab)
+    let isquickfix = !empty(filter(getwininfo(), "v:val.quickfix && !v:val.loclist"))
+    let isloclist = !empty(filter(getwininfo(), "v:val.loclist"))
+    if isquickfix
+        return a:shifttab ? ":cprev\<CR>" : ":cnext\<CR>"
+    elseif isloclist
+        return a:shifttab ? ":lprev\<CR>" : ":lnext\<CR>"
+    else
+        return a:shifttab ? "\<S-Tab>" : "\<Tab>"
+    endif
+endfunction
+
+" use tab and shift-tab to move in quickfix and location lists
+nnoremap <silent> <expr> <Tab> SmartTab(0)
+nnoremap <silent> <expr> <S-Tab> SmartTab(1)
+
+" mappings for quickfix list apart from tab
+nnoremap <leader>qn :cnext<CR>
+nnoremap <leader>qp :cprev<CR>
 nnoremap <leader>qf :cfirst<CR>
 nnoremap <leader>ql :clast<CR>
 nnoremap <leader>qc :cclose<CR>
 nnoremap <leader>qo :copen<CR>
 
-" mappings for location list
+" mappings for location list apart from tab
 nnoremap <leader>ln :lnext<CR>
 nnoremap <leader>lp :lprev<CR>
-nnoremap <leader>] :lnext<CR>
-nnoremap <leader>[ :lprev<CR>
 nnoremap <leader>lf :lfirst<CR>
 nnoremap <leader>ll :llast<CR>
 nnoremap <leader>lc :lclose<CR>
