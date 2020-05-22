@@ -163,92 +163,21 @@ filetype plugin indent on    " required
 " execute pathogen#infect()
 " filetype plugin indent on
 
-" Standard config
-syntax on
+" common settings
+so ~/git/dotfiles/vimrc.common
 
-" Set indenting stuff
-set tabstop=4 " number of spaces in a <Tab>
-set shiftwidth=4 " number of spaces to use for autoindent. Should be == tabstop
-set expandtab " use spaces as <Tab>
-set smarttab " insert shiftwidth worth of whitespace at beginning of line
-set backspace=indent,eol,start " make <BS> well behaved
-set autoindent " make sure autoindent is turned on
-set cinoptions=l1,g0.75s,h0.25s,N-s
-
-" status line
-set laststatus=2 " 2 = always
-
-" Set incremental search
-set incsearch
-
-" Always keep 1 line above and below cursor,
-" and 5 columns to the right and left
-set scrolloff=1
-set sidescrolloff=5
-
-" Line numbering
-set number
-
-" Show command
-set showcmd
-
-" Disable showmode since we're using airline
-set noshowmode
-
-" Set default spell language
-set spelllang=en_gb
-
-" Always use ft=tex as default for .tex-files
-let g:tex_flavor = 'latex'
-
-" Map , to <Leader>
-let mapleader=','
-
-" Buffer management
-set hidden " allow buffers to be open in the background
+" Buffergator config
 let g:buffergator_suppress_keymaps = 1
-nnoremap <leader><leader> <C-^>
-nnoremap <S-q> :bprev<CR>
-nnoremap <S-w> :enew<CR>
-nnoremap <S-e> :bnext<CR>
-nnoremap <silent> <leader>qq :b# <BAR> bd #<CR>
 nnoremap <leader>b :BuffergatorToggle<CR>
 nnoremap gb :BuffergatorMruCyclePrev<CR>
 nnoremap gB :BuffergatorMruCycleNext<CR>
-
-" Tab management
-" nnoremap <S-q> :tabp<CR>
-" nnoremap <S-w> :tabnew<CR>
-" nnoremap <S-e> :tabn<CR>
-" nnoremap <silent> <Leader><S-q> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
-" nnoremap <silent> <Leader><S-e> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
 nnoremap <leader>t :BuffergatorTabsToggle<CR>
 
 " Bind nerdtree to <leader>n
 nnoremap <leader>n :NERDTreeToggle<CR>
 
-" always split the screen to the right or below
-set splitright
-set splitbelow
-
-" Split screen movement bindings
-nnoremap <C-Left> <C-w>h
-nnoremap <C-Right> <C-w>l
-nnoremap <C-Up> <C-w>k
-nnoremap <C-Down> <C-w>j
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
-nnoremap <C-k> <C-w>k
-nnoremap <C-j> <C-w>j
-
-" Split screen resize bindings
-nnoremap <Leader>+ <C-w>+
-nnoremap <Leader>- <C-w>-
-nnoremap <Leader>> <C-w>>
-nnoremap <Leader>< <C-w><
-
 " Open file under cursor in new tab
-nnoremap <F3> <c-w>gf
+" nnoremap <F3> <c-w>gf
 
 " make <filename-no-ext>
 " nnoremap <Leader>b :!make %:r<CR>
@@ -275,13 +204,6 @@ endif
 " set exrc
 " set secure
 
-" Format options
-set textwidth=80
-set formatoptions-=t
-
-" Highlight column
-set colorcolumn=+1
-highlight ColorColumn ctermbg=Black
 " Highlight extra long lines
 " highlight OverLength cterm=reverse gui=reverse
 if exists("g:colors_name") && g:colors_name == "gruvbox"
@@ -374,6 +296,9 @@ let g:python3_host_program = PythonInterpreter()
 " Fancy symbols for powerline
 " let g:Powerline_symbols = 'fancy'
 
+" Disable showmode since we're using airline
+set noshowmode
+
 " vim-airline configuration
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -414,13 +339,13 @@ endif
 "     autocmd BufAdd * hi clear CursorLine
 " augroup END
 
-function! HighlightOn()
-    hi CursorLine ctermbg=0 guibg=Gray40
-endfunction
-
-function! HighlightOff()
-    hi clear CursorLine
-endfunction
+" function! HighlightOn()
+"     hi CursorLine ctermbg=0 guibg=Gray40
+" endfunction
+"
+" function! HighlightOff()
+"     hi clear CursorLine
+" endfunction
 
 
 " nerdcommenter configuration
@@ -500,7 +425,7 @@ nmap <leader>at <Plug>(ale_toggle)
 let g:EasyMotion_do_mapping = 0
 
 " `<Leader>s{char}{char}{label}`
-nmap <Leader>s <Plug>(easymotion-overwin-f2)
+" nmap <Leader>s <Plug>(easymotion-overwin-f2)
 
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
@@ -572,29 +497,9 @@ endfunction
 nnoremap <silent> <expr> <Tab> SmartTab(0)
 nnoremap <silent> <expr> <S-Tab> SmartTab(1)
 
-" mappings for quickfix list apart from tab
-nnoremap <leader>qn :cnext<CR>
-nnoremap <leader>qp :cprev<CR>
-nnoremap <leader>qf :cfirst<CR>
-nnoremap <leader>ql :clast<CR>
-nnoremap <leader>qc :cclose<CR>
-nnoremap <leader>qo :copen<CR>
-
-" mappings for location list apart from tab
-nnoremap <leader>ln :lnext<CR>
-nnoremap <leader>lp :lprev<CR>
-nnoremap <leader>lf :lfirst<CR>
-nnoremap <leader>ll :llast<CR>
-nnoremap <leader>lc :lclose<CR>
-nnoremap <leader>lo :lopen<CR>
-
-
 " vim-instant-markdown config
 " disable autostart, preview enabled with :InstantMarkdownPreview
 let g:instant_markdown_autostart = 0
-
-" reload vimrc
-command! ReloadVimrc :so $MYVIMRC | echom "Reloaded " . $MYVIMRC | redraw
 
 " if everything on the line up to the cursor is
 " whitespace insert a tab, else start autocomplete
