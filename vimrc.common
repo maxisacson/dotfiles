@@ -45,7 +45,7 @@ let mapleader=','
 set splitright
 set splitbelow
 
-" Split screen movement bindings
+" Window movement bindings
 nnoremap <C-Left> <C-w>h
 nnoremap <C-Right> <C-w>l
 nnoremap <C-Up> <C-w>k
@@ -54,8 +54,12 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 nnoremap <C-k> <C-w>k
 nnoremap <C-j> <C-w>j
+" convenience mapping for CTRL_W
+nnoremap ` <C-w>
+nnoremap § <C-w>
 
-" Split screen resize bindings
+
+" Window resize bindings
 nnoremap <Leader>+ <C-w>+
 nnoremap <Leader>- <C-w>-
 nnoremap <Leader>> <C-w>>
@@ -63,7 +67,7 @@ nnoremap <Leader>< <C-w><
 
 " Buffer management
 set hidden " allow buffers to be open in the background
-nnoremap <leader><leader> <C-^>
+nnoremap <Leader><Leader> <C-^>
 nnoremap <Leader>w :bprev<CR>
 nnoremap <Leader>e :bnext<CR>
 nnoremap <silent> <leader>qq :b# <BAR> bd #<CR>

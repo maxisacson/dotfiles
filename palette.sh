@@ -1,4 +1,4 @@
-width=$(tput cols)
+cols=$(tput cols)
 half_cols=$((cols/2))
 for i in {0..7}; do
     printf "\033[0;3${i}m%2d\033[0m" $i

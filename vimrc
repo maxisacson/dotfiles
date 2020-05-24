@@ -166,15 +166,21 @@ filetype plugin indent on    " required
 " common settings
 so ~/git/dotfiles/vimrc.common
 
+" Color scheme
+so ~/git/dotfiles/vimrc.colorscheme
+
+" termdebug settings
+so ~/git/dotfiles/vimrc.termdebug
+
 " Buffergator config
 let g:buffergator_suppress_keymaps = 1
-nnoremap <leader>b :BuffergatorToggle<CR>
+nnoremap <leader>bb :BuffergatorToggle<CR>
 nnoremap gb :BuffergatorMruCyclePrev<CR>
 nnoremap gB :BuffergatorMruCycleNext<CR>
-nnoremap <leader>t :BuffergatorTabsToggle<CR>
+nnoremap <leader>bt :BuffergatorTabsToggle<CR>
 
 " Bind nerdtree to <leader>n
-nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>nt :NERDTreeToggle<CR>
 
 " Open file under cursor in new tab
 " nnoremap <F3> <c-w>gf
@@ -182,48 +188,9 @@ nnoremap <leader>n :NERDTreeToggle<CR>
 " make <filename-no-ext>
 " nnoremap <Leader>b :!make %:r<CR>
 
-" Color scheme
-let s:colorscheme = 'gruvbox'
-set background=dark
-if s:colorscheme == 'gruvbox'
-    let g:gruvbox_italic=1
-    set termguicolors
-elseif s:colorscheme == 'solarized'
-    set notermguicolors
-endif
-exec 'colorscheme ' . s:colorscheme
-
-" fix SpellBad highlight
-if exists("g:colors_name")
-    if g:colors_name == "solarized"
-        hi SpellBad cterm=underline gui=undercurl guisp=Red
-    endif
-endif
-
 " Read .vimrc from working directory
 " set exrc
 " set secure
-
-" Highlight extra long lines
-" highlight OverLength cterm=reverse gui=reverse
-if exists("g:colors_name") && g:colors_name == "gruvbox"
-    highlight OverLength cterm=undercurl gui=undercurl guisp=#fabd2f
-else
-    highlight OverLength cterm=underline gui=undercurl guisp=Orange
-endif
-" or uncomment this for some more intricate stuff
-" if exists("g:colors_name") && g:colors_name == "gruvbox"
-"     let s:gruvboxcolor = 'GruvboxBg2'
-"     exec 'hi OverLength cterm=undercurl gui=standout ' .
-"                 \'ctermbg=' . synIDattr(hlID(s:gruvboxcolor), 'fg', 'cterm') . ' ' .
-"                 \'guibg=' . synIDattr(hlID(s:gruvboxcolor), 'fg', 'gui')
-" else
-"     highlight OverLength ctermbg=Black
-" endif
-augroup OverLengthGroup
-    autocmd!
-    autocmd BufEnter * if !exists("w:olm") | let w:olm = matchadd('OverLength', '\%>111v.\+', -1) | endif
-augroup END
 
 " vim-easy-align key bindings
 xmap ga <Plug>(EasyAlign)
@@ -323,30 +290,6 @@ let g:pymode = 0
 "let g:pymode_rope_completion = 0
 "let g:pymode_rope_lookup_project = 0
 "let g:pymode_rope = 0
-
-" CursorLine configuration
-set cursorline
-if s:colorscheme == 'solarized'
-    " hi clear CursorLine " if this is on, also add:
-                          " let g:ctrlp_buffer_func = {'enter': 'HighlightOn', 'exit': 'HighlightOff', }
-    hi CursorLineNR ctermfg=9 ctermbg=0
-endif
-" " we need to restore the cursorline for NERDTree and CtrlP
-" augroup NERDCursor
-"     autocmd!
-"     autocmd VimEnter,BufEnter NERD_tree_* hi CursorLine ctermbg=0 guibg=Gray40
-"     autocmd BufLeave NERD_tree_* hi clear CursorLine
-"     autocmd BufAdd * hi clear CursorLine
-" augroup END
-
-" function! HighlightOn()
-"     hi CursorLine ctermbg=0 guibg=Gray40
-" endfunction
-"
-" function! HighlightOff()
-"     hi clear CursorLine
-" endfunction
-
 
 " nerdcommenter configuration
 let g:NERDSpaceDelims = 1
