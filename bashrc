@@ -38,6 +38,7 @@ export CHEAT_COLORSCHEME="light"
 export CHEAT_HIGHLIGHT="white"
 
 # PATH
+export PATH="$HOME/.local/opt/bin:$PATH"
 [ "$HOSTNAME" = "phy-intrepid" ] && export PATH="$HOME/.local/opt/go/bin:$HOME/.local/llvm-5.0.1/bin:$HOME/.local/SageMath:$HOME/local/SageMath:$MATLABDIR/bin:$PATH:/home/max/local/bin:/home/max/.local/bin"
 [ "$HOSTNAME" = "enterprise" ] && export PATH="$HOME/.local/opt/tmux/bin:$MATLABDIR/bin:$PATH"
 
