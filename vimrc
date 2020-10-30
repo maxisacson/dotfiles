@@ -1,3 +1,11 @@
+" Get the path to the current vimrc-file
+" (1) Expand path to current script
+" (2) Resolve symbolic links
+" (3) Get the directory
+"                        (3)      (2)     (1)
+let s:currentpath = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+echom 'Reading config from ' . s:currentpath . '/' . expand('<sfile>:t')
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -163,14 +171,14 @@ filetype plugin indent on    " required
 " execute pathogen#infect()
 " filetype plugin indent on
 
-" common settings
-so ~/git/dotfiles/vimrc.common
+function! SourceFile(file)
+    exec 'source ' . a:file
+    " echom 'Sourced ' . a:file
+endfunction
 
-" Color scheme
-so ~/git/dotfiles/vimrc.colorscheme
-
-" termdebug settings
-so ~/git/dotfiles/vimrc.termdebug
+call SourceFile(s:currentpath . '/vimrc.common')
+call SourceFile(s:currentpath . '/vimrc.colorscheme')
+call SourceFile(s:currentpath . '/vimrc.termdebug')
 
 " Buffergator config
 let g:buffergator_suppress_keymaps = 1
