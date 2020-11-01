@@ -11,9 +11,10 @@ function append_to_file {
 
 function create_dir {
     local d="$1"
-    local cmd="mkdir -p \"$d\""
-    if [[ ! -d $(eval D=$d && echo $D) ]]; then
+    local cmd="mkdir -p $d"
+    if [[ ! -d $d ]]; then
         echo $cmd
+	eval $cmd
     else
         echo "$d exists"
     fi
@@ -61,8 +62,16 @@ if [[ $(yes_or_no "Configure .tmux.conf?") == "y" ]]; then
     append_to_file "source $here/tmux.conf" "~/.tmux.conf"
 fi
 
+if [[ ! -d $HOME/.vim/bundle/Vundle ]]; then
+    if [[ $(yes_or_no "Configure Vundle?") == "y" ]]; then
+        cmd="git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
+	echo "$cmd"
+	eval "$cmd"
+    fi
+fi
+
 if [[ $(yes_or_no "Configure init.vim?") == "y" ]]; then
-    create_dir "~/.config/nvim"
+    create_dir "$HOME/.config/nvim"
     append_to_file "so $here/vimrc" "~/.config/nvim/init.vim"
     append_to_file "set guicursor=" "~/.config/nvim/init.vim"
 fi
