@@ -2,4 +2,12 @@
 # Source this file in ~/.profile
 
 # PATH
-export PATH="$HOME/.local/opt/bin:$PATH"
+PATH="$HOME/.local/opt/bin:$PATH"
+
+if [ -d "$HOME/.local/opt/lineage/platform-tools" ] ; then
+    PATH="$HOME/.local/opt/lineage/platform-tools:$PATH"
+fi
+
+if [ -d "$HOME/.local/opt/android-studio/bin" ] ; then
+    PATH="$HOME/.local/opt/android-studio/bin:$PATH"
+fi
