@@ -58,6 +58,13 @@ if [[ $(yes_or_no "Configure .bashrc?") == "y" ]]; then
     fi
 fi
 
+if [[ -z $(which tmux) ]]; then
+    echo "tmux appears not to be installed."
+    if [[ $(yes_or_no "Install tmux?") == "y" ]]; then
+        sudo apt-get install tmux
+    fi
+fi
+
 if [[ $(yes_or_no "Configure .tmux.conf?") == "y" ]]; then
     append_to_file "source $here/tmux.conf" "~/.tmux.conf"
 fi

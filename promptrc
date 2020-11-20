@@ -1,52 +1,72 @@
 # vim: set filetype=sh :
-# Promt stuff
 #PS1=$'[${debian_chroot:+($debian_chroot)}\u@\h \w]\u0586 '
 
-# function save_status {
-#     echo "$?" > /tmp/last_status
-# }
-#
-# function get_status {
-#     cat /tmp/last_status
-# }
-
-function venv_info {
-    if [[ -n "$VIRTUAL_ENV" ]]; then
-        local venv="${VIRTUAL_ENV##*/}"
-    else
-        local venv=""
-    fi
-    [[ -n "$venv" ]] && echo "$venv " || echo ""
-}
-
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-
-PS2=$'├╼ '
+PS2=$'> '
 
 PROMPT_COMMAND=__prompt_command
 
 function __prompt_command {
     local EXIT="$?"
 
-    local red="\[\e[0;31m\]"
-    local blu="\[\e[0;34m\]"
-    local hli="\[\e[0;33m\]"
-    local res="\[\e[0m\]"
+    # local FG_DEFAULT="\[\e[0;39m\]"
+    # local BG_DEFAULT="\[\e[0;49m\]"
+
+    local BOLD="\[\e[1m\]"
+
+    # local FG_BLACK="\[\e[30m\]"
+    local FG_RED="\[\e[31m\]"
+    # local FG_GREEN="\[\e[32m\]"
+    local FG_YELLOW="\[\e[33m\]"
+    # local FG_BLUE="\[\e[34m\]"
+    # local FG_MAGENTA="\[\e[35m\]"
+    # local FG_CYAN="\[\e[36m\]"
+    # local FG_LIGHTGRAY="\[\e[37m\]"
+
+    # local FG_DARKGRAY="\[\e[90m\]"
+    # local FG_LIGHTRED="\[\e[91m\]"
+    # local FG_LIGHTGREEN="\[\e[92m\]"
+    # local FG_LIGHTYELLOW="\[\e[93m\]"
+    local FG_LIGHTBLUE="\[\e[94m\]"
+    # local FG_LIGHTMAGENTA="\[\e[95m\]"
+    # local FG_LIGHTCYAN="\[\e[96m\]"
+    # local FG_WHITE="\[\e[97m\]"
+
+    # local BG_BLACK="\[\e[40m\]"
+    # local BG_RED="\[\e[41m\]"
+    # local BG_GREEN="\[\e[42m\]"
+    # local BG_YELLOW="\[\e[43m\]"
+    # local BG_BLUE="\[\e[44m\]"
+    # local BG_MAGENTA="\[\e[45m\]"
+    # local BG_CYAN="\[\e[46m\]"
+    # local BG_LIGHTGRAY="\[\e[47m\]"
+
+    # local BG_DARKGRAY="\[\e[100m\]"
+    # local BG_LIGHTRED="\[\e[101m\]"
+    # local BG_LIGHTGREEN="\[\e[102m\]"
+    # local BG_LIGHTYELLOW="\[\e[103m\]"
+    # local BG_LIGHTBLUE="\[\e[104m\]"
+    # local BG_LIGHTMAGENTA="\[\e[105m\]"
+    # local BG_LIGHTCYAN="\[\e[106m\]"
+    # local BG_WHITE="\[\e[107m\]"
+
+    local RESET="\[\e[0m\]"
 
     local chr="${debian_chroot:+($debian_chroot)}"
-
-    # local tmp_pwd="${PWD/$HOME/\~}"
-    # if [ ${#tmp_pwd} -ge 50 ]; then
-    #     tmp_pwd="...${tmp_pwd: -47}"
-    # fi
+    local git_str="$(__git_ps1)"
 
     PS1=""
-    PS1+="╭ ${blu}\w${res} ── ${hli}\\t${res} ─╼\n"
-    PS1+="╰╼ ${chr}\u@\h "
+    PS1+="${FG_YELLOW}\w${RESET}"
+    if [[ -n $git_str ]]; then
+        git_str=${git_str# (}
+        git_str=${git_str%)}
+        PS1+=" ${FG_LIGHTBLUE}${git_str} ${RESET}"
+    fi
+    PS1+="\n"
+    PS1+="${chr}\u@\h"
     if [ $EXIT != 0 ]; then
-        PS1+="${red}•${res}"
+        PS1+="${BOLD}${FG_RED}•${RESET}"
     else
-        PS1+="•"
+        PS1+=" "
     fi
     PS1+="$ "
 }

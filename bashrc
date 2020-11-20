@@ -23,7 +23,7 @@ alias flw='tail -n+0 -f'
 alias cb='xclip -selection primary'
 
 # Set nvim as default editor
-export VISUAL="$HOME/.local/opt/nvim/bin/nvim"
+export VISUAL="nvim"
 export EDITOR="$VISUAL"
 
 # If we're NOT inside TMUX we update the display cache, else set DISPLAY to cached value

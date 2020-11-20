@@ -4,6 +4,10 @@
 # PATH
 PATH="$HOME/.local/opt/bin:$PATH"
 
+if [ -d "$HOME/.local/opt/neovim/bin" ]; then
+    PATH="$HOME/.local/opt/neovim/bin:$PATH"
+fi
+
 if [ -d "$HOME/.local/opt/lineage/platform-tools" ] ; then
     PATH="$HOME/.local/opt/lineage/platform-tools:$PATH"
 fi
