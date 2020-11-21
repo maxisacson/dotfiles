@@ -60,6 +60,8 @@ function __prompt_command {
         git_str=${git_str# (}
         git_str=${git_str%)}
         PS1+=" ${FG_LIGHTBLUE}${git_str} ${RESET}"
+    else
+        PS1+=" ${FG_LIGHTBLUE}${RESET}"
     fi
     PS1+="\n"
     PS1+="${chr}\u@\h"
