@@ -59,9 +59,16 @@ if [[ $(yes_or_no "Configure .bashrc?") == "y" ]]; then
 fi
 
 if [[ -z $(which tmux) ]]; then
-    echo "tmux appears not to be installed."
     if [[ $(yes_or_no "Install tmux?") == "y" ]]; then
         sudo apt-get install tmux
+    fi
+fi
+
+if [[ ! -d $HOME/.tmux/plugins/tpm ]]; then
+    if [[ $(yes_or_no "Install Tmux Plugin Manager?") == "y" ]]; then
+        cmd="git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm"
+        echo "$cmd"
+        eval "$cmd"
     fi
 fi
 
@@ -72,8 +79,8 @@ fi
 if [[ ! -d $HOME/.vim/bundle/Vundle ]]; then
     if [[ $(yes_or_no "Configure Vundle?") == "y" ]]; then
         cmd="git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
-	echo "$cmd"
-	eval "$cmd"
+        echo "$cmd"
+        eval "$cmd"
     fi
 fi
 
