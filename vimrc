@@ -6,170 +6,145 @@
 let s:currentpath = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 echom 'Reading config from ' . s:currentpath . '/' . expand('<sfile>:t')
 
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+set nocompatible
+call plug#begin('~/.vim/bundle')
 
 " YouComleteMe
-" Plugin 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 
 " YCM-Generator
-" Plugin 'rdnetto/YCM-Generator'
+" Plug 'rdnetto/YCM-Generator'
 
 " Ctrl-P fuzzy search
-Plugin 'ctrlpvim/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " matcher for better Ctrl-P behaviour
-" Plugin 'burke/matcher'
+" Plug 'burke/matcher'
 
 " vim-poweline
-" Plugin 'Lokaltog/vim-powerline'
+" Plug 'Lokaltog/vim-powerline'
 
 " vim-airline
-Plugin 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline'
 
 " vim-airline-themes
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline-themes'
 
 " extra syntax highlighting for C/C++
-Plugin 'justinmk/vim-syntax-extra'
+Plug 'justinmk/vim-syntax-extra'
 
 " Vim-solarized
-Plugin 'altercation/vim-colors-solarized'
+Plug 'altercation/vim-colors-solarized'
 
 " more vim themes
-" Plugin 'flazz/vim-colorschemes'
+" Plug 'flazz/vim-colorschemes'
 
 " vim-fugitive for git integration
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
 " ag.vim for nice search features
-" Plugin 'rking/ag.vim' " deprecated
+" Plug 'rking/ag.vim' " deprecated
 
 " ack.vim for ag and ack integration
-Plugin 'mileszs/ack.vim'
+Plug 'mileszs/ack.vim'
 
 " nerdtree for file browsing
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 
 " python-mode
-" Plugin 'klen/python-mode'
+" Plug 'klen/python-mode'
 
 " better python syntax highlighting
-Plugin 'hdima/python-syntax'
+Plug 'hdima/python-syntax'
 
 " nerdcomment for easy commenting
-Plugin 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
 
 " vim-easy-align for easy alignment
-Plugin 'junegunn/vim-easy-align'
+Plug 'junegunn/vim-easy-align'
 
 " vim-surround
-Plugin 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 
 " vim-repeat
-Plugin 'tpope/vim-repeat'
+Plug 'tpope/vim-repeat'
 
 " markdown preview for vim
-" Plugin 'suan/vim-instant-markdown'
+" Plug 'suan/vim-instant-markdown'
 
 " vim-markdown
-Plugin 'tpope/vim-markdown'
+Plug 'tpope/vim-markdown'
 
 " better syntax highlighting for javascript
-Plugin 'pangloss/vim-javascript'
-" Plugin 'jelera/vim-javascript-syntax'
+Plug 'pangloss/vim-javascript'
+" Plug 'jelera/vim-javascript-syntax'
 
 " julia syntax
-Plugin 'JuliaEditorSupport/julia-vim'
+Plug 'JuliaEditorSupport/julia-vim'
 
 " syntax for DAST shift reports
-Plugin 'https://gitlab.cern.ch/misacson/vim-dastshiftreport.git'
+Plug 'https://gitlab.cern.ch/misacson/vim-dastshiftreport.git'
 
 " syntax for TRExFitter config files
-Plugin 'https://gitlab.cern.ch/misacson/vim-trexfitter.git'
+Plug 'https://gitlab.cern.ch/misacson/vim-trexfitter.git'
 
 " syntastic syntax checker
-" Plugin 'vim-syntastic/syntastic'
+" Plug 'vim-syntastic/syntastic'
 
 " latex plugin
-Plugin 'lervag/vimtex'
+Plug 'lervag/vimtex'
 
 " easymotion
-Plugin 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion'
 
 " vim-css-colors
-" Plugin 'ap/vim-css-color'
+" Plug 'ap/vim-css-color'
 
 " vim-obsession for saving and restoring vim sessions
-" Plugin 'tpope/vim-obsession'
+" Plug 'tpope/vim-obsession'
 
 " extra syntax for cpp-files
-Plugin 'maxisacson/vim-cpp-extra'
+Plug 'maxisacson/vim-cpp-extra'
 
 " extra syntax for tex- and bib-files
-Plugin 'maxisacson/vim-latex-extra'
+Plug 'maxisacson/vim-latex-extra'
 
 " syntax for geant4 macro files
-Plugin 'maxisacson/vim-geant4-mac'
+Plug 'maxisacson/vim-geant4-mac'
 
 " unimpaired keybindings
-" Plugin 'tpope/vim-unimpaired'
+" Plug 'tpope/vim-unimpaired'
 
 " buffergator for buffer management
-Plugin 'jeetsukumaran/vim-buffergator'
+Plug 'jeetsukumaran/vim-buffergator'
 
 " gruvbox theme
-Plugin 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
 
 " clang-format intergration for vim
-Plugin 'rhysd/vim-clang-format'
+Plug 'rhysd/vim-clang-format'
 
 " ALE asynchronos link engine
-Plugin 'dense-analysis/ale'
+Plug 'dense-analysis/ale'
 
 " vim-cmake
-Plugin 'vhdirk/vim-cmake'
+Plug 'vhdirk/vim-cmake'
 
 " nvim specific plugins
 if has("nvim")
     " remote plugin manager
-    Plugin 'roxma/nvim-yarp'
+    Plug 'roxma/nvim-yarp'
 
     " autocompletion
-    Plugin 'ncm2/ncm2'
-    Plugin 'ncm2/ncm2-bufword'
-    Plugin 'ncm2/ncm2-path'
+    Plug 'ncm2/ncm2'
+    Plug 'ncm2/ncm2-bufword'
+    Plug 'ncm2/ncm2-path'
 
     " gdb integration
-    " Plugin 'huawenyu/neogdb.vim'
+    " Plug 'huawenyu/neogdb.vim'
 endif
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
-
-" Pathogen
-" execute pathogen#infect()
-" filetype plugin indent on
+call plug#end()
 
 function! SourceFile(file)
     exec 'source ' . a:file
