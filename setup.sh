@@ -76,9 +76,17 @@ if [[ $(yes_or_no "Configure .tmux.conf?") == "y" ]]; then
     append_to_file "source $here/tmux.conf" "~/.tmux.conf"
 fi
 
-if [[ ! -d $HOME/.vim/bundle/Vundle ]]; then
-    if [[ $(yes_or_no "Configure Vundle?") == "y" ]]; then
-        cmd="git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim"
+if [[ ! -e $HOME/.vim/autoload/plug.vim ]]; then
+    if [[ $(yes_or_no "Configure vim-plug (for vim)?") == "y" ]]; then
+        cmd="curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+        echo "$cmd"
+        eval "$cmd"
+    fi
+fi
+
+if [[ ! -e "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim ]]; then
+    if [[ $(yes_or_no "Configure vim-plug (for neovim)?") == "y" ]]; then
+        cmd="sh -c 'curl -fLo \"${XDG_DATA_HOME:-$HOME/.local/share}\"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'"
         echo "$cmd"
         eval "$cmd"
     fi
