@@ -99,22 +99,7 @@ function! PythonInterpreter()
 endfunction
 let g:python3_host_program = PythonInterpreter()
 
-" include ROOT and boost in search path
-" let &path.=$ROOTSYS."/include".",".$BOOSTINCDIR
-
-" Semantic completion for YCM
-" let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-
-" Autoclose preview window after YCM insertion
-" let g:ycm_autoclose_preview_window_after_insertion = 1
-
-" Only use arrow keys to browse YCM completion
-" let g:ycm_key_list_select_completion = ['<Down>']
-" let g:ycm_key_list_previous_completion = ['<Up>']
-
-" Fancy symbols for powerline
-" let g:Powerline_symbols = 'fancy'
-
+" airline config
 call SourceFile(s:currentpath . '/vimrc.airline')
 
 " python-syntax config
@@ -134,72 +119,7 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 
-" ALE configuration
-let g:ale_echo_msg_format = '%code: %%s [%linter%] (%severity%)'
-let g:ale_linters_explicit = 1
-let g:ale_c_parse_compile_commands = 1
-let g:ale_c_build_dirs_names = ['build', 'bin', 'release']
-" let g:ale_linters = {'cpp': 'all'}
-let g:ale_linters = {'cpp': ['clangtidy']}
-" let g:ale_cpp_clangtidy_extra_options='-isystem'
-" let g:ale_cpp_clangtidy_extra_options = '-extra-arg-before=-xc++'
-let g:ale_cpp_clangtidy_checks = ['-*',
-            \ 'clang-analyzer-*',
-            \ 'modernize-*',
-            \ 'readability-*',
-            \ 'performance-*',
-            \ 'cppcoreguidelines-*',
-            \ 'bugprone-*',
-            \ 'cert-*',
-            \ 'hicpp-*',
-            \ '-cppcoreguidelines-pro-bounds-constant-array-index',
-            \ '-cppcoreguidelines-pro-bounds-array-to-pointer-decay',
-            \ '-readability-braces-around-statements',
-            \ '-hicpp-braces-around-statements',
-            \ '-hicpp-no-array-decay',
-            \ '-readability-uppercase-literal-suffix',
-            \ '-modernize-use-trailing-return-type']
-let g:ale_pattern_options = {
-            \ '\.h\(pp\)\?$': {
-                \ 'ale_cpp_clangtidy_extra_options':
-                    \ '-extra-arg-before=-xc++-header'}
-            \ }
-
-nmap <leader>al <Plug>(ale_lint)
-nmap <leader>an <Plug>(ale_next)
-nmap <leader>ap <Plug>(ale_previous)
-nmap <leader>at <Plug>(ale_toggle)
-
-" syntastic configuration
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-"
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 0
-" let g:syntastic_aggregate_errors = 1
-"
-" let g:syntastic_error_symbol = ">>"
-" let g:syntastic_style_error_symbol = "S>"
-" let g:syntastic_warning_symbol = ">?"
-" let g:syntastic_style_warning_symbol = "S?"
-" let g:syntastic_aggregate_errors = 1
-"
-" let g:syntastic_sh_checkers = ['checkbashisms', 'sh']
-" let g:syntastic_cpp_checkers = ['gcc', 'clang_check', 'cppcheck']
-" let g:syntastic_cpp_clang_check_args = ["-std=c++17"]
-" let g:syntastic_filetype_map = { "cpp": "h" }
-"
-" " Disable auto-checking
-" let g:syntastic_mode_map = {
-"             \ "mode": "passive",
-"             \ "active_filetypes": [],
-"             \ "passive_filetypes": [] }
-"
-" " bind ,e to run the syntastic checks
-" nnoremap <Leader>sc :SyntasticCheck<CR>
+call SourceFile(s:currentpath . '/vimrc.ale')
 
 " easymotion config
 " Disable default mappings
@@ -284,96 +204,9 @@ nnoremap <silent> <expr> <S-Tab> SmartTab(1)
 " disable autostart, preview enabled with :InstantMarkdownPreview
 let g:instant_markdown_autostart = 0
 
-" if everything on the line up to the cursor is
-" whitespace insert a tab, else start autocomplete
-function! CleverTab()
-    if has("nvim")
-        if strpart(getline('.'), 0, col('.')-1) =~ '^\s*$'
-            return "\<Tab>"
-        else
-            return "\<c-r>=ncm2#manual_trigger()\<cr>"
-        endif
-    else
-        return "\<Tab>"
-    endif
-endfunction
-
-" autocomplete settings
-set shortmess+=c
-set completeopt=noinsert,menuone,noselect
-inoremap <silent> <expr> <CR> (pumvisible() ? "\<c-y>" : "\<CR>")
-inoremap <silent> <expr> <c-j> (pumvisible() ? "\<c-n>" : "\<c-j>")
-inoremap <silent> <expr> <c-k> (pumvisible() ? "\<c-p>" : "\<c-k>")
-inoremap <silent> <expr> <Tab> (pumvisible() ? "\<c-n>" : CleverTab())
-inoremap <silent> <expr> <S-Tab> (pumvisible() ? "\<c-p>" : "\<S-Tab>")
-if has("nvim")
-    " ncm2 autocomplete settings
-    augroup ncm2_enable
-        autocmd!
-        autocmd BufEnter * call ncm2#enable_for_buffer()
-    augroup END
-    let g:ncm2#complete_delay = 180
-    let g:ncm2#auto_popup = 0
-
-    " ncm2 for vimtex
-    augroup my_cm_setup
-        autocmd!
-        autocmd BufEnter * call ncm2#enable_for_buffer()
-        autocmd Filetype tex call ncm2#register_source({
-                    \ 'name' : 'vimtex-cmds',
-                    \ 'priority': 8,
-                    \ 'complete_length': -1,
-                    \ 'scope': ['tex'],
-                    \ 'matcher': {'name': 'prefix', 'key': 'word'},
-                    \ 'word_pattern': '\w+',
-                    \ 'complete_pattern': g:vimtex#re#ncm2#cmds,
-                    \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-                    \ })
-        autocmd Filetype tex call ncm2#register_source({
-                    \ 'name' : 'vimtex-labels',
-                    \ 'priority': 8,
-                    \ 'complete_length': -1,
-                    \ 'scope': ['tex'],
-                    \ 'matcher': {'name': 'combine',
-                    \             'matchers': [
-                    \               {'name': 'substr', 'key': 'word'},
-                    \               {'name': 'substr', 'key': 'menu'},
-                    \             ]},
-                    \ 'word_pattern': '\w+',
-                    \ 'complete_pattern': g:vimtex#re#ncm2#labels,
-                    \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-                    \ })
-        autocmd Filetype tex call ncm2#register_source({
-                    \ 'name' : 'vimtex-files',
-                    \ 'priority': 8,
-                    \ 'complete_length': -1,
-                    \ 'scope': ['tex'],
-                    \ 'matcher': {'name': 'combine',
-                    \             'matchers': [
-                    \               {'name': 'abbrfuzzy', 'key': 'word'},
-                    \               {'name': 'abbrfuzzy', 'key': 'abbr'},
-                    \             ]},
-                    \ 'word_pattern': '\w+',
-                    \ 'complete_pattern': g:vimtex#re#ncm2#files,
-                    \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-                    \ })
-        autocmd Filetype tex call ncm2#register_source({
-                    \ 'name' : 'bibtex',
-                    \ 'priority': 8,
-                    \ 'complete_length': -1,
-                    \ 'scope': ['tex'],
-                    \ 'matcher': {'name': 'combine',
-                    \             'matchers': [
-                    \               {'name': 'prefix', 'key': 'word'},
-                    \               {'name': 'abbrfuzzy', 'key': 'abbr'},
-                    \               {'name': 'abbrfuzzy', 'key': 'menu'},
-                    \             ]},
-                    \ 'word_pattern': '\w+',
-                    \ 'complete_pattern': g:vimtex#re#ncm2#bibtex,
-                    \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-                    \ })
-    augroup END
-endif
+" if has("nvim")
+"     call SourceFile(s:currentpath . '/vimrc.ncm2')
+" endif
 
 " function to remove all trailing whitespace
 augroup NoTrailingWhitespace

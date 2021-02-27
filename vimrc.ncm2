@@ -1,0 +1,89 @@
+" if everything on the line up to the cursor is
+" whitespace insert a tab, else start autocomplete
+function! CleverTab()
+    if has("nvim")
+        if strpart(getline('.'), 0, col('.')-1) =~ '^\s*$'
+            return "\<Tab>"
+        else
+            return "\<c-r>=ncm2#manual_trigger()\<cr>"
+        endif
+    else
+        return "\<Tab>"
+    endif
+endfunction
+
+" autocomplete settings
+set shortmess+=c
+set completeopt=noinsert,menuone,noselect
+inoremap <silent> <expr> <CR> (pumvisible() ? "\<c-y>" : "\<CR>")
+inoremap <silent> <expr> <c-j> (pumvisible() ? "\<c-n>" : "\<c-j>")
+inoremap <silent> <expr> <c-k> (pumvisible() ? "\<c-p>" : "\<c-k>")
+inoremap <silent> <expr> <Tab> (pumvisible() ? "\<c-n>" : CleverTab())
+inoremap <silent> <expr> <S-Tab> (pumvisible() ? "\<c-p>" : "\<S-Tab>")
+
+" ncm2 autocomplete settings
+augroup ncm2_enable
+    autocmd!
+    autocmd BufEnter * call ncm2#enable_for_buffer()
+augroup END
+let g:ncm2#complete_delay = 180
+let g:ncm2#auto_popup = 0
+let g:ncm2#manual_complete_length = 1
+
+augroup my_cm_setup
+    autocmd!
+    autocmd BufEnter * call ncm2#enable_for_buffer()
+    autocmd Filetype tex call ncm2#register_source({
+                \ 'name' : 'vimtex-cmds',
+                \ 'priority': 8,
+                \ 'complete_length': -1,
+                \ 'scope': ['tex'],
+                \ 'matcher': {'name': 'prefix', 'key': 'word'},
+                \ 'word_pattern': '\w+',
+                \ 'complete_pattern': g:vimtex#re#ncm2#cmds,
+                \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+                \ })
+    autocmd Filetype tex call ncm2#register_source({
+                \ 'name' : 'vimtex-labels',
+                \ 'priority': 8,
+                \ 'complete_length': -1,
+                \ 'scope': ['tex'],
+                \ 'matcher': {'name': 'combine',
+                \             'matchers': [
+                \               {'name': 'substr', 'key': 'word'},
+                \               {'name': 'substr', 'key': 'menu'},
+                \             ]},
+                \ 'word_pattern': '\w+',
+                \ 'complete_pattern': g:vimtex#re#ncm2#labels,
+                \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+                \ })
+    autocmd Filetype tex call ncm2#register_source({
+                \ 'name' : 'vimtex-files',
+                \ 'priority': 8,
+                \ 'complete_length': -1,
+                \ 'scope': ['tex'],
+                \ 'matcher': {'name': 'combine',
+                \             'matchers': [
+                \               {'name': 'abbrfuzzy', 'key': 'word'},
+                \               {'name': 'abbrfuzzy', 'key': 'abbr'},
+                \             ]},
+                \ 'word_pattern': '\w+',
+                \ 'complete_pattern': g:vimtex#re#ncm2#files,
+                \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+                \ })
+    autocmd Filetype tex call ncm2#register_source({
+                \ 'name' : 'bibtex',
+                \ 'priority': 8,
+                \ 'complete_length': -1,
+                \ 'scope': ['tex'],
+                \ 'matcher': {'name': 'combine',
+                \             'matchers': [
+                \               {'name': 'prefix', 'key': 'word'},
+                \               {'name': 'abbrfuzzy', 'key': 'abbr'},
+                \               {'name': 'abbrfuzzy', 'key': 'menu'},
+                \             ]},
+                \ 'word_pattern': '\w+',
+                \ 'complete_pattern': g:vimtex#re#ncm2#bibtex,
+                \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+                \ })
+augroup END
