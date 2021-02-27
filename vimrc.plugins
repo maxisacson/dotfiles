@@ -137,6 +137,9 @@ if has("nvim")
 
     " gdb integration
     " Plug 'huawenyu/neogdb.vim'
+
+    " LSP configurations for neovim
+    Plug 'neovim/nvim-lspconfig'
 endif
 
 call plug#end()

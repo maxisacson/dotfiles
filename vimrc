@@ -10,13 +10,19 @@ set nocompatible
 
 function! SourceFile(file)
     exec 'source ' . a:file
-    " echom 'Sourced ' . a:file
+endfunction
+
+function! LuaFile(file)
+    exec 'luafile ' . a:file
 endfunction
 
 call SourceFile(s:currentpath . '/vimrc.plugins')
 call SourceFile(s:currentpath . '/vimrc.common')
 call SourceFile(s:currentpath . '/vimrc.colorscheme')
 call SourceFile(s:currentpath . '/vimrc.termdebug')
+if has("nvim")
+    call LuaFile(s:currentpath . '/vimrc.lsp')
+endif
 
 " Buffergator config
 let g:buffergator_suppress_keymaps = 1
