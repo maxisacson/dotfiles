@@ -150,7 +150,9 @@ let g:ale_cpp_clangtidy_checks = ['-*',
             \ '-cppcoreguidelines-pro-bounds-array-to-pointer-decay',
             \ '-readability-braces-around-statements',
             \ '-hicpp-braces-around-statements',
-            \ '-hicpp-no-array-decay']
+            \ '-hicpp-no-array-decay',
+            \ '-readability-uppercase-literal-suffix',
+            \ '-modernize-use-trailing-return-type']
 let g:ale_pattern_options = {
             \ '\.h\(pp\)\?$': {
                 \ 'ale_cpp_clangtidy_extra_options':
