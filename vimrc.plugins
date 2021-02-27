@@ -131,15 +131,19 @@ if has("nvim")
     Plug 'roxma/nvim-yarp'
 
     " autocompletion
-    Plug 'ncm2/ncm2'
-    Plug 'ncm2/ncm2-bufword'
-    Plug 'ncm2/ncm2-path'
+    " Plug 'ncm2/ncm2'
+    " Plug 'ncm2/ncm2-bufword'
+    " Plug 'ncm2/ncm2-path'
 
     " gdb integration
     " Plug 'huawenyu/neogdb.vim'
 
     " LSP configurations for neovim
     Plug 'neovim/nvim-lspconfig'
+
+    " completion-nvim
+    Plug 'nvim-lua/completion-nvim'
+    Plug 'steelsojka/completion-buffers'
 endif
 
 call plug#end()

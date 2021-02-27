@@ -1,26 +1,3 @@
-" if everything on the line up to the cursor is
-" whitespace insert a tab, else start autocomplete
-function! CleverTab()
-    if has("nvim")
-        if strpart(getline('.'), 0, col('.')-1) =~ '^\s*$'
-            return "\<Tab>"
-        else
-            return "\<c-r>=ncm2#manual_trigger()\<cr>"
-        endif
-    else
-        return "\<Tab>"
-    endif
-endfunction
-
-" autocomplete settings
-set shortmess+=c
-set completeopt=noinsert,menuone,noselect
-inoremap <silent> <expr> <CR> (pumvisible() ? "\<c-y>" : "\<CR>")
-inoremap <silent> <expr> <c-j> (pumvisible() ? "\<c-n>" : "\<c-j>")
-inoremap <silent> <expr> <c-k> (pumvisible() ? "\<c-p>" : "\<c-k>")
-inoremap <silent> <expr> <Tab> (pumvisible() ? "\<c-n>" : CleverTab())
-inoremap <silent> <expr> <S-Tab> (pumvisible() ? "\<c-p>" : "\<S-Tab>")
-
 " ncm2 autocomplete settings
 augroup ncm2_enable
     autocmd!
