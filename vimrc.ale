@@ -1,5 +1,6 @@
 " ALE configuration
 let g:ale_enabled = 1
+let g:ale_disable_lsp = 1
 let g:ale_echo_msg_format = '%code: %%s [%linter%] (%severity%)'
 let g:ale_linters_explicit = 1
 let g:ale_c_parse_compile_commands = 1
@@ -19,9 +20,12 @@ let g:ale_cpp_clangtidy_checks = ['-*',
             \ 'hicpp-*',
             \ '-cppcoreguidelines-pro-bounds-constant-array-index',
             \ '-cppcoreguidelines-pro-bounds-array-to-pointer-decay',
+            \ '-cppcoreguidelines-avoid-magic-numbers',
             \ '-readability-braces-around-statements',
+            \ '-readability-magic-numbers',
             \ '-hicpp-braces-around-statements',
             \ '-hicpp-no-array-decay',
+            \ '-hicpp-uppercase-literal-suffix',
             \ '-readability-uppercase-literal-suffix',
             \ '-modernize-use-trailing-return-type']
 let g:ale_pattern_options = {
