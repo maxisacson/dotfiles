@@ -57,18 +57,6 @@ local on_attach = function(client, bufnr)
     end
 end
 
--- Use a loop to conveniently both setup defined servers
--- and map buffer local keybindings when the language server attaches
--- local servers = { "pyright", "rust_analyzer", "tsserver"}
--- for _, lsp in ipairs(servers) do
---   nvim_lsp[lsp].setup { on_attach = on_attach }
--- end
---
-nvim_lsp["clangd"].setup {
-    on_attach = on_attach,
-    cmd = {"clangd", "--background-index", "--compile-commands-dir=build"}
-}
-
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
         signs = false,
@@ -79,3 +67,14 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
         -- }
     }
 )
+
+-- Use a loop to conveniently both setup defined servers
+-- and map buffer local keybindings when the language server attaches
+local servers = { "pyls", "cmake" }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup { on_attach = on_attach }
+end
+nvim_lsp["clangd"].setup {
+    on_attach = on_attach,
+    cmd = {"clangd", "--background-index", "--compile-commands-dir=build"}
+}

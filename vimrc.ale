@@ -34,6 +34,8 @@ let g:ale_pattern_options = {
                     \ '-extra-arg-before=-xc++-header'}
             \ }
 
+let g:airline#extensions#ale#enabled = 1
+
 nmap <leader>al <Plug>(ale_lint)
 nmap <leader>an <Plug>(ale_next)
 nmap <leader>ap <Plug>(ale_previous)

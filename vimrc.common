@@ -83,6 +83,9 @@ nnoremap <silent> <leader>qq :b# <BAR> bd #<CR>
 set colorcolumn=+1
 highlight ColorColumn ctermbg=Black
 
+" Always show sign column
+set signcolumn=yes
+
 " mappings for quickfix list apart from tab
 nnoremap <leader>qn :cnext<CR>
 nnoremap <leader>qp :cprev<CR>
