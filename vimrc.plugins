@@ -142,8 +142,11 @@ if has("nvim")
     Plug 'neovim/nvim-lspconfig'
 
     " completion-nvim
-    Plug 'nvim-lua/completion-nvim'
-    Plug 'steelsojka/completion-buffers'
+    " Plug 'nvim-lua/completion-nvim'
+    " Plug 'steelsojka/completion-buffers'
+
+    " nvim-compe
+    Plug 'hrsh7th/nvim-compe'
 endif
 
 call plug#end()

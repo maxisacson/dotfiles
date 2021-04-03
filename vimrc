@@ -207,33 +207,7 @@ nnoremap <silent> <expr> <S-Tab> SmartTab(1)
 let g:instant_markdown_autostart = 0
 
 " autocomplete settings
-set shortmess+=c
-set completeopt=noinsert,menuone,noselect
-inoremap <silent> <expr> <CR> (pumvisible() ? '\<C-y>' : '\<CR>')
-inoremap <silent> <expr> <Tab> (pumvisible() ? '\<C-n>' : '\<Tab>')
-inoremap <silent> <expr> <S-Tab> (pumvisible() ? '\<C-p>' : '\<S-Tab>')
-
-if has("nvim")
-    " call SourceFile(s:currentpath . '/vimrc.ncm2')
-
-    " completion-nvim config
-    autocmd BufEnter * lua require'completion'.on_attach()
-    imap <Tab> <Plug>(completion_smart_tab)
-    imap <S-Tab> <Plug>(completion_smart_s_tab)
-    let g:completion_enable_auto_popup = 0
-	let g:completion_chain_complete_list = {
-	    \'cpp' : [
-	    \    {'complete_items': ['lsp', 'snippet', 'path']},
-	    \    {'mode': '<c-p>'},
-	    \    {'mode': '<c-n>'}
-	    \],
-	    \'default' : [
-	    \    {'complete_items': ['lsp', 'snippet', 'path', 'buffers']},
-	    \    {'mode': '<c-p>'},
-	    \    {'mode': '<c-n>'}
-	    \]
-	    \}
-endif
+call SourceFile(s:currentpath . '/vimrc.autocomplete')
 
 " function to remove all trailing whitespace
 augroup NoTrailingWhitespace
