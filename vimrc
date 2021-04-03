@@ -149,10 +149,12 @@ let g:clang_format#style_options = {
             \ "IndentWidth": 4,
             \ "SpaceAfterTemplateKeyword": "false",
             \ "TabWidth": 4,
-            \ "UseTab": "Never"}
+            \ "UseTab": "Never",
+            \ "SortIncludes": "false"}
 
 " FZF config
-noremap <C-Space> :Files<CR>
+" noremap <C-Space> :Files<CR>
+noremap <C-Space> :GFiles<CR>
 
 " CtrlP config
 let g:ctrlp_map = '<C-p>'
@@ -220,6 +222,11 @@ if has("nvim")
     imap <S-Tab> <Plug>(completion_smart_s_tab)
     let g:completion_enable_auto_popup = 0
 	let g:completion_chain_complete_list = {
+	    \'cpp' : [
+	    \    {'complete_items': ['lsp', 'snippet', 'path']},
+	    \    {'mode': '<c-p>'},
+	    \    {'mode': '<c-n>'}
+	    \],
 	    \'default' : [
 	    \    {'complete_items': ['lsp', 'snippet', 'path', 'buffers']},
 	    \    {'mode': '<c-p>'},
