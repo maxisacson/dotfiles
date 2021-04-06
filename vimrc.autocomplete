@@ -1,5 +1,6 @@
 set shortmess+=c
-set completeopt=noinsert,menuone,noselect
+" set completeopt=noinsert,menuone,noselect
+set completeopt=menuone,noselect
 " inoremap <silent> <expr> <CR> (pumvisible() ? '\<C-y>' : '\<CR>')
 " inoremap <silent> <expr> <Tab> (pumvisible() ? '\<C-n>' : '\<Tab>')
 " inoremap <silent> <expr> <S-Tab> (pumvisible() ? '\<C-p>' : '\<S-Tab>')
