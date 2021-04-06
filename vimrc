@@ -153,8 +153,7 @@ let g:clang_format#style_options = {
             \ "SortIncludes": "false"}
 
 " FZF config
-" noremap <C-Space> :Files<CR>
-noremap <C-Space> :GFiles<CR>
+call SourceFile(s:currentpath . '/vimrc.fzf')
 
 " CtrlP config
 let g:ctrlp_map = '<C-p>'
