@@ -6,30 +6,10 @@ set completeopt=menuone,noselect
 " inoremap <silent> <expr> <S-Tab> (pumvisible() ? '\<C-p>' : '\<S-Tab>')
 
 if has("nvim")
-    " call SourceFile(s:currentpath . '/vimrc.ncm2')
-
-    " completion-nvim config
-    " autocmd BufEnter * lua require'completion'.on_attach()
-    " imap <Tab> <Plug>(completion_smart_tab)
-    " imap <S-Tab> <Plug>(completion_smart_s_tab)
-    " let g:completion_enable_auto_popup = 0
-    " let g:completion_chain_complete_list = {
-    "     \'cpp' : [
-    "     \    {'complete_items': ['lsp', 'snippet', 'path']},
-    "     \    {'mode': '<c-p>'},
-    "     \    {'mode': '<c-n>'}
-    "     \],
-    "     \'default' : [
-    "     \    {'complete_items': ['lsp', 'snippet', 'path', 'buffers']},
-    "     \    {'mode': '<c-p>'},
-    "     \    {'mode': '<c-n>'}
-    "     \]
-    "     \}
-
     " nvim-compe config
     let g:compe = {}
     let g:compe.enabled = v:true
-    let g:compe.autocomplete = v:false
+    let g:compe.autocomplete = v:true
     let g:compe.debug = v:false
     let g:compe.min_length = 1
     let g:compe.preselect = 'disable'

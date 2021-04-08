@@ -22,6 +22,7 @@ call SourceFile(s:currentpath . '/vimrc.colorscheme')
 call SourceFile(s:currentpath . '/vimrc.termdebug')
 if has("nvim")
     call LuaFile(s:currentpath . '/vimrc.lsp')
+    call LuaFile(s:currentpath . '/vimrc.ts')
 endif
 
 " Buffergator config
