@@ -150,6 +150,9 @@ if has("nvim")
 
     " treesitter
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+    " better support for lsp colors
+    Plug 'folke/lsp-colors.nvim'
 endif
 
 call plug#end()

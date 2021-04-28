@@ -76,17 +76,17 @@ vnoremap <Leader>= y'>p:'[,']s/^.*=//ge<CR>:'[,']-1s/\n/+/ge<CR>:s/+$//ge<CR>:.!
 
 " Function to insert include guards in cpp headers
 function! InsertCppIncludeGuard()
-    if !exists("b:current_syntax") || b:current_syntax != "cpp"
-        return
-    end
-
     let guard = substitute(toupper(expand("%:t")), "\\.", "_", "g") . "_"
 
-    execute "normal! i#ifndef " . guard
+    let cursor_pos = getpos(".")
+
+    execute "normal! ggO#ifndef " . guard
     execute "normal! o#define " . guard
+    normal! o
     execute "normal! Go#endif /* " . guard . " */"
-    normal! k3o
-    normal! k
+    normal! O
+    call setpos(".", cursor_pos)
+    normal! 3j
 endfunction
 command! CppGuard call InsertCppIncludeGuard()
 
