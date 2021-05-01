@@ -1,13 +1,18 @@
+if g:vimrc_fix_normalfloat_hilink_to_pmenu
+    augroup FixNormalFloatPmenuHiLink
+        autocmd!
+        autocmd BufEnter * if g:vimrc_fix_normalfloat_hilink_to_pmenu | hi link NormalFloat Pmenu | endif
+    augroup END
+endif
 
-let s:colorscheme = 'gruvbox'
 set background=dark
-if s:colorscheme == 'gruvbox'
+if g:vimrc_colorscheme == 'gruvbox'
     let g:gruvbox_italic=1
     set termguicolors
-elseif s:colorscheme == 'solarized'
+elseif g:vimrc_colorscheme == 'solarized'
     set notermguicolors
 endif
-exec 'colorscheme ' . s:colorscheme
+exec 'colorscheme ' . g:vimrc_colorscheme
 
 " fix SpellBad highlight
 if exists("g:colors_name")
@@ -39,7 +44,7 @@ augroup END
 
 " CursorLine configuration
 set cursorline
-if s:colorscheme == 'solarized'
+if g:vimrc_colorscheme == 'solarized'
     " hi clear CursorLine " if this is on, also add:
                           " let g:ctrlp_buffer_func = {'enter': 'HighlightOn', 'exit': 'HighlightOff', }
     hi CursorLineNR ctermfg=9 ctermbg=0

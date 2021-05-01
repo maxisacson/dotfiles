@@ -15,11 +15,13 @@ Plug 'ctrlpvim/ctrlp.vim'
 " vim-poweline
 " Plug 'Lokaltog/vim-powerline'
 
-" vim-airline
-Plug 'vim-airline/vim-airline'
+if g:vimrc_enable_airline
+    " vim-airline
+    Plug 'vim-airline/vim-airline'
 
-" vim-airline-themes
-Plug 'vim-airline/vim-airline-themes'
+    " vim-airline-themes
+    Plug 'vim-airline/vim-airline-themes'
+endif
 
 " extra syntax highlighting for C/C++
 Plug 'justinmk/vim-syntax-extra'
@@ -39,8 +41,10 @@ Plug 'tpope/vim-fugitive'
 " ack.vim for ag and ack integration
 Plug 'mileszs/ack.vim'
 
-" nerdtree for file browsing
-Plug 'scrooloose/nerdtree'
+if g:vimrc_enable_nerdtree
+    " nerdtree for file browsing
+    Plug 'scrooloose/nerdtree'
+endif
 
 " python-mode
 " Plug 'klen/python-mode'
@@ -74,10 +78,10 @@ Plug 'pangloss/vim-javascript'
 Plug 'JuliaEditorSupport/julia-vim'
 
 " syntax for DAST shift reports
-Plug 'https://gitlab.cern.ch/misacson/vim-dastshiftreport.git'
+" Plug 'https://gitlab.cern.ch/misacson/vim-dastshiftreport.git'
 
 " syntax for TRExFitter config files
-Plug 'https://gitlab.cern.ch/misacson/vim-trexfitter.git'
+" Plug 'https://gitlab.cern.ch/misacson/vim-trexfitter.git'
 
 " syntastic syntax checker
 " Plug 'vim-syntastic/syntastic'
@@ -109,14 +113,16 @@ Plug 'maxisacson/vim-geant4-mac'
 " buffergator for buffer management
 Plug 'jeetsukumaran/vim-buffergator'
 
-" gruvbox theme
-Plug 'morhetz/gruvbox'
+if !has("nvim")
+    " gruvbox theme
+    Plug 'morhetz/gruvbox'
+endif
 
 " clang-format intergration for vim
 Plug 'rhysd/vim-clang-format'
 
 " ALE asynchronos link engine
-Plug 'dense-analysis/ale'
+" Plug 'dense-analysis/ale'
 
 " vim-cmake
 Plug 'vhdirk/vim-cmake'
@@ -127,8 +133,11 @@ Plug 'junegunn/fzf.vim'
 
 " nvim specific plugins
 if has("nvim")
+    " convenience functions
+    Plug 'nvim-lua/plenary.nvim'
+
     " remote plugin manager
-    Plug 'roxma/nvim-yarp'
+    " Plug 'roxma/nvim-yarp'
 
     " autocompletion
     " Plug 'ncm2/ncm2'
@@ -153,6 +162,43 @@ if has("nvim")
 
     " better support for lsp colors
     Plug 'folke/lsp-colors.nvim'
+
+    " devicons
+    Plug 'kyazdani42/nvim-web-devicons'
+
+    " gitsigns
+    Plug 'lewis6991/gitsigns.nvim'
+
+    if g:vimrc_enable_feline
+        " feline airline alternative
+        Plug 'Famiu/feline.nvim'
+    endif
+
+    if g:vimrc_enable_barbar
+        " tabline plugin
+        Plug 'romgrk/barbar.nvim'
+    endif
+
+    " live parameter hints
+    Plug 'ray-x/lsp_signature.nvim'
+
+    " colorscheme creation tool
+    Plug 'rktjmp/lush.nvim'
+
+    " gruvbox theme
+    Plug 'npxbr/gruvbox.nvim'
+    " Plug 'morhetz/gruvbox'
+
+    " git-blame integration
+    Plug 'f-person/git-blame.nvim'
+
+    " visualize color codes
+    Plug 'norcalli/nvim-colorizer.lua'
+
+    if g:vimrc_enable_nvimtree
+        " NvimTree alternative to NerdTree
+        Plug 'kyazdani42/nvim-tree.lua'
+    endif
 endif
 
 call plug#end()

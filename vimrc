@@ -9,20 +9,21 @@ echom 'Reading config from ' . s:currentpath . '/' . expand('<sfile>:t')
 set nocompatible
 
 function! SourceFile(file)
-    exec 'source ' . a:file
+    exec 'source ' . s:currentpath . '/' . a:file
 endfunction
 
 function! LuaFile(file)
-    exec 'luafile ' . a:file
+    exec 'luafile ' . s:currentpath . '/' . a:file
 endfunction
 
-call SourceFile(s:currentpath . '/vimrc.plugins')
-call SourceFile(s:currentpath . '/vimrc.common')
-call SourceFile(s:currentpath . '/vimrc.colorscheme')
-call SourceFile(s:currentpath . '/vimrc.termdebug')
+call SourceFile('vimrc.globals')
+call SourceFile('vimrc.plugins')
+call SourceFile('vimrc.common')
+call SourceFile('vimrc.colorscheme')
+call SourceFile('vimrc.termdebug')
 if has("nvim")
-    call LuaFile(s:currentpath . '/vimrc.lsp')
-    call LuaFile(s:currentpath . '/vimrc.ts')
+    call LuaFile('vimrc.lsp')
+    call LuaFile('vimrc.ts')
 endif
 
 " Buffergator config
@@ -32,8 +33,14 @@ nnoremap gb :BuffergatorMruCyclePrev<CR>
 nnoremap gB :BuffergatorMruCycleNext<CR>
 nnoremap <leader>bt :BuffergatorTabsToggle<CR>
 
-" Bind nerdtree to <leader>n
-nnoremap <leader>nt :NERDTreeToggle<CR>
+if g:vimrc_enable_nerdtree
+    " Bind nerdtree to <leader>n
+    nnoremap <leader>nt :NERDTreeToggle<CR>
+endif
+
+if g:vimrc_enable_nvimtree
+    call SourceFile('vimrc.nvimtree')
+endif
 
 " Open file under cursor in new tab
 " nnoremap <F3> <c-w>gf
@@ -101,7 +108,18 @@ endfunction
 let g:python3_host_program = PythonInterpreter()
 
 " airline config
-call SourceFile(s:currentpath . '/vimrc.airline')
+if g:vimrc_enable_airline
+    call SourceFile('vimrc.airline')
+endif
+
+if g:vimrc_enable_barbar
+    call SourceFile('vimrc.barbar')
+endif
+
+if g:vimrc_enable_feline
+    set noshowmode
+    call LuaFile('vimrc.feline')
+endif
 
 " python-syntax config
 let python_highlight_all = 1
@@ -120,7 +138,7 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 
-call SourceFile(s:currentpath . '/vimrc.ale')
+" call SourceFile('vimrc.ale')
 
 " easymotion config
 " Disable default mappings
@@ -154,7 +172,7 @@ let g:clang_format#style_options = {
             \ "SortIncludes": "false"}
 
 " FZF config
-call SourceFile(s:currentpath . '/vimrc.fzf')
+call SourceFile('vimrc.fzf')
 
 " CtrlP config
 let g:ctrlp_map = '<C-p>'
@@ -207,7 +225,10 @@ nnoremap <silent> <expr> <S-Tab> SmartTab(1)
 let g:instant_markdown_autostart = 0
 
 " autocomplete settings
-call SourceFile(s:currentpath . '/vimrc.autocomplete')
+call SourceFile('vimrc.autocomplete')
+
+" nvim-colorizer
+lua require'colorizer'.setup()
 
 " function to remove all trailing whitespace
 augroup NoTrailingWhitespace
