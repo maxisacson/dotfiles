@@ -42,3 +42,48 @@ let bufferline.clickable = v:false " disable/enable clickable tabs
 " if set to 'both', will show buffer index and icons in the tabline
 let bufferline.icons = 'both'
 
+let bufferline.icon_custom_colors = v:true
+
+function! s:fg(group)
+    let hl = nvim_get_hl_by_name(a:group, 1)
+    return printf("#%06x", hl.foreground)
+endfunction
+
+let s:bg0 = s:fg("GruvboxBg0")
+let s:bg1 = s:fg("GruvboxBg1")
+let s:bg2 = s:fg("GruvboxBg2")
+let s:bg4 = s:fg("GruvboxBg4")
+let s:fg1 = s:fg("GruvboxFg1")
+let s:red = s:fg("GruvboxRed")
+let s:orange = s:fg("GruvboxOrange")
+let s:blue = s:fg("GruvboxBlue")
+let s:yellow  = s:fg("GruvboxYellow")
+let s:purple = s:fg("GruvboxPurple")
+let s:aqua = s:fg("GruvboxAqua")
+let s:green = s:fg("GruvboxGreen")
+let s:gray = s:fg("GruvboxGray")
+
+execute "hi BufferCurrent gui=bold guifg=" . s:orange . " guibg=" . s:bg1
+execute "hi BufferCurrentIndex guifg=" . s:orange . " guibg=" . s:bg1
+execute "hi BufferCurrentMod gui=bold guifg=" . s:red . " guibg=" . s:bg1
+execute "hi BufferCurrentSign guifg=" . s:orange . " guibg=" . s:bg1
+execute "hi BufferCurrentTarget gui=bold guifg=" . s:red . " guibg=" . s:bg1
+
+execute "hi BufferVisible guifg=" . s:blue . " guibg=" . s:bg1
+execute "hi BufferVisibleIndex guifg=" . s:blue . " guibg=" . s:bg1
+execute "hi BufferVisibleMod guifg=" . s:yellow . " guibg=" . s:bg1
+execute "hi BufferVisibleSign guifg=" . s:blue . " guibg=" . s:bg1
+execute "hi BufferVisibleTarget gui=bold guifg=" . s:red . " guibg=" . s:bg1
+
+execute "hi BufferInactive guifg=" . s:bg4 . " guibg=" . s:bg1
+execute "hi BufferInactiveIndex guifg=" . s:bg2 . " guibg=" . s:bg1
+execute "hi BufferInactiveMod guifg=" . s:yellow . " guibg=" . s:bg1
+execute "hi BufferInactiveSign guifg=" . s:bg2 . " guibg=" . s:bg1
+execute "hi BufferInactiveTarget gui=bold guifg=" . s:red . " guibg=" . s:bg1
+
+execute "hi BufferTabpages gui=bold guifg=" . s:orange . " guibg=" . s:bg1
+execute "hi BufferTabpageFill guifg=" . s:bg4 . " guibg=" . s:bg1
+
+execute "hi link BufferCurrentIcon  BufferCurrent"
+execute "hi link BufferVisibleIcon BufferVisible"
+execute "hi link BufferInactiveIcon BufferInactive"
