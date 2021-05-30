@@ -1,9 +1,9 @@
 " Move to previous/next
-nnoremap <silent>    <Leader>s :BufferPrevious<CR>
-nnoremap <silent>    <Leader>d :BufferNext<CR>
+nnoremap <silent>    <Leader>w :BufferPrevious<CR>
+nnoremap <silent>    <Leader>e :BufferNext<CR>
 " Re-order to previous/next
-nnoremap <silent>    <Leader>w :BufferMovePrevious<CR>
-nnoremap <silent>    <Leader>e :BufferMoveNext<CR>
+nnoremap <silent>    <Leader>s :BufferMovePrevious<CR>
+nnoremap <silent>    <Leader>d :BufferMoveNext<CR>
 " Goto buffer in position...
 nnoremap <silent>    <Leader>1 :BufferGoto 1<CR>
 nnoremap <silent>    <Leader>2 :BufferGoto 2<CR>
@@ -63,11 +63,11 @@ let s:aqua = s:fg("GruvboxAqua")
 let s:green = s:fg("GruvboxGreen")
 let s:gray = s:fg("GruvboxGray")
 
-execute "hi BufferCurrent gui=bold guifg=" . s:orange . " guibg=" . s:bg1
-execute "hi BufferCurrentIndex guifg=" . s:orange . " guibg=" . s:bg1
-execute "hi BufferCurrentMod gui=bold guifg=" . s:red . " guibg=" . s:bg1
-execute "hi BufferCurrentSign guifg=" . s:orange . " guibg=" . s:bg1
-execute "hi BufferCurrentTarget gui=bold guifg=" . s:red . " guibg=" . s:bg1
+execute "hi BufferCurrent gui=bold guifg=" . s:fg1 . " guibg=" . s:bg2
+execute "hi BufferCurrentIndex guifg=" . s:fg1 . " guibg=" . s:bg2
+execute "hi BufferCurrentMod gui=bold guifg=" . s:yellow . " guibg=" . s:bg2
+execute "hi BufferCurrentSign guifg=" . s:fg1 . " guibg=" . s:bg2
+execute "hi BufferCurrentTarget gui=bold guifg=" . s:red . " guibg=" . s:bg2
 
 execute "hi BufferVisible guifg=" . s:blue . " guibg=" . s:bg1
 execute "hi BufferVisibleIndex guifg=" . s:blue . " guibg=" . s:bg1

@@ -241,3 +241,9 @@ function! DeleteTrailingWhiteSpace()
     %s/\s\+$//ge
     call setpos(".", cursor_pos)
 endfunction
+
+augroup AutoClearCursorline
+    autocmd!
+    autocmd WinEnter * setlocal cursorline
+    autocmd WinLeave * setlocal nocursorline
+augroup END
