@@ -3,82 +3,67 @@ require('gitsigns').setup()
 local lsp = require('feline.providers.lsp')
 local vi_mode_utils = require('feline.providers.vi_mode')
 
+--local components = {
+--    left = {active = {}, inactive = {}},
+--    mid = {active = {}, inactive = {}},
+--    right = {active = {}, inactive = {}}
+--}
 local components = {
-    left = {active = {}, inactive = {}},
-    mid = {active = {}, inactive = {}},
-    right = {active = {}, inactive = {}}
+    active = {},
+    inactive = {},
 }
 
-local properties = {
-    force_inactive = {
-        filetypes = {},
-        buftypes = {},
-        bufnames = {}
-    }
-}
-
-properties.force_inactive.filetypes = {
-    'NvimTree',
-    'dbui',
-    'packer',
-    'startify',
-    'fugitive',
-    'fugitiveblame',
-    'nerdtree'
-}
-
-properties.force_inactive.buftypes = {
-    'terminal'
-}
-
--- properties.force_inactive.bufnames = {
---     'some_buffer_name'
--- }
-
+table.insert(components.active, {})
+table.insert(components.active, {})
+table.insert(components.active, {})
+table.insert(components.inactive, {})
+table.insert(components.inactive, {})
 
 local colors = {
-  dark0_hard = '#1d2021',
-  dark0 = '#282828',
-  dark0_soft = '#32302f',
-  dark1 = '#3c3836',
-  dark2 = '#504945',
-  dark3 = '#665c54',
-  dark4 = '#7c6f64',
+    dark0_hard = '#1d2021',
+    dark0 = '#282828',
+    dark0_soft = '#32302f',
+    dark1 = '#3c3836',
+    dark2 = '#504945',
+    dark3 = '#665c54',
+    dark4 = '#7c6f64',
 
-  light0_hard = '#f9f5d7',
-  light0 = '#fbf1c7',
-  light0_soft = '#f2e5bc',
-  light1 = '#ebdbb2',
-  light2 = '#d5c4a1',
-  light3 = '#bdae93',
-  light4 = '#a89984',
+    light0_hard = '#f9f5d7',
+    light0 = '#fbf1c7',
+    light0_soft = '#f2e5bc',
+    light1 = '#ebdbb2',
+    light2 = '#d5c4a1',
+    light3 = '#bdae93',
+    light4 = '#a89984',
 
-  gray = '#928374',
+    gray = '#928374',
 
-  bright_red = '#fb4934',
-  bright_green = '#b8bb26',
-  bright_yellow = '#fabd2f',
-  bright_blue = '#83a598',
-  bright_purple = '#d3869b',
-  bright_aqua = '#8ec07c',
-  bright_orange = '#fe8019',
+    bright_red = '#fb4934',
+    bright_green = '#b8bb26',
+    bright_yellow = '#fabd2f',
+    bright_blue = '#83a598',
+    bright_purple = '#d3869b',
+    bright_aqua = '#8ec07c',
+    bright_orange = '#fe8019',
 
-  neutral_red = '#cc241d',
-  neutral_green = '#98971a',
-  neutral_yellow = '#d79921',
-  neutral_blue = '#458588',
-  neutral_purple = '#b16286',
-  neutral_aqua = '#689d6a',
-  neutral_orange = '#d65d0e',
+    neutral_red = '#cc241d',
+    neutral_green = '#98971a',
+    neutral_yellow = '#d79921',
+    neutral_blue = '#458588',
+    neutral_purple = '#b16286',
+    neutral_aqua = '#689d6a',
+    neutral_orange = '#d65d0e',
 
-  faded_red = '#9d0006',
-  faded_green = '#79740e',
-  faded_yellow = '#b57614',
-  faded_blue = '#076678',
-  faded_purple = '#8f3f71',
-  faded_aqua = '#427b58',
-  faded_orange = '#af3a03',
+    faded_red = '#9d0006',
+    faded_green = '#79740e',
+    faded_yellow = '#b57614',
+    faded_blue = '#076678',
+    faded_purple = '#8f3f71',
+    faded_aqua = '#427b58',
+    faded_orange = '#af3a03',
 }
+colors.fg=colors.light1
+colors.bg=colors.dark1
 
 local vi_mode_colors = {
     NORMAL = colors.light4,
@@ -121,7 +106,7 @@ local separators = {
 }
 
 
-components.left.active[1] = {
+table.insert(components.active[1], {
     provider = 'vi_mode',
     hl = function()
         local val = {}
@@ -144,48 +129,52 @@ components.left.active[1] = {
         return val
     end,
     icon = ''
-}
+})
 
-components.left.active[2] = {
+table.insert(components.active[1], {
     provider = 'git_branch',
     hl = { fg = colors.light4, bg = colors.dark2 },
-}
+    left_sep = { str = ' ', hl = { fg = colors.light4, bg = colors.dark2 } },
+    right_sep = { str = ' ', hl = { fg = colors.light4, bg = colors.dark2 } },
+})
 
-
-components.left.active[3] = {
+table.insert(components.active[1], {
     provider = 'git_diff_added',
     hl = { fg = colors.bright_green, bg = colors.dark2 },
-    icon = ' +'
-}
+    icon = '+',
+    right_sep = { str = ' ', hl = { fg = colors.light4, bg = colors.dark2 } },
+})
 
-components.left.active[4] = {
+table.insert(components.active[1], {
     provider = 'git_diff_changed',
     hl = { fg = colors.bright_yellow, bg = colors.dark2 },
-    icon = ' :'
-}
+    icon = ':',
+    right_sep = { str = ' ', hl = { fg = colors.light4, bg = colors.dark2 } },
+})
 
-components.left.active[5] = {
+table.insert(components.active[1], {
     provider = 'git_diff_removed',
     hl = { fg = colors.bright_red, bg = colors.dark2 },
     right_sep = { str = ' ', hl = { bg = colors.dark2 } },
-    icon = ' -'
-}
+    icon = '-',
+    right_sep = { str = ' ', hl = { fg = colors.light4, bg = colors.dark2 } },
+})
 
-components.left.active[6] = {
+table.insert(components.active[1], {
     provider = 'file_info',
     hl = { fg = colors.light4 },
     left_sep = ' ',
     right_set = ''
-}
+})
 
-components.right.active[1] = {
+table.insert(components.active[3], {
     provider = function() return vim.bo.filetype end,
     hl = { fg = colors.light4 },
     left_sep = '',
     right_sep = ' '
-}
+})
 
-components.right.active[2] = {
+table.insert(components.active[3], {
     provider = function()
         local enc = (vim.bo.fenc ~= '' and vim.bo.fenc) or vim.o.enc
         local ff = (vim.bo.ff ~= '' and vim.bo.ff) or vim.o.ff
@@ -195,9 +184,9 @@ components.right.active[2] = {
     hl = { fg = colors.light4, bg = colors.dark2 },
     left_sep = { str = ' ', hl = { bg = colors.dark2 } },
     right_sep = { str = ' ', hl = { bg = colors.dark2 } }
-}
+})
 
-components.right.active[3] = {
+table.insert(components.active[3], {
     provider = function()
         local line = vim.fn.line('.')
         local lines = vim.fn.line('$')
@@ -207,9 +196,9 @@ components.right.active[3] = {
     hl = { fg = colors.dark0, bg = colors.light4 },
     left_sep = { str = ' ', hl = { bg = colors.light4 } },
     right_sep = { str = ' ', hl = { bg = colors.light4 } }
-}
+})
 
-components.right.active[4] = {
+table.insert(components.active[3], {
     provider = function()
         local line = vim.fn.line('.')
         local lines = vim.fn.line('$')
@@ -218,30 +207,30 @@ components.right.active[4] = {
     hl = { fg = colors.dark0, bg = colors.light4, style = 'bold' },
     left_sep = '',
     right_sep = ''
-}
+})
 
-components.right.active[5] = {
+table.insert(components.active[3], {
     provider = function()
         return string.format(':%d', vim.fn.col('.'))
     end,
     hl = { fg = colors.dark0, bg = colors.light4 },
     left_sep = { str ='', hl = { fg = colors.dark0, bg = colors.light4 } },
     right_sep = { str =' ', hl = { bg = colors.light4 } }
-}
+})
 
-components.right.active[6] = {
+table.insert(components.active[3], {
     provider = 'diagnostic_hints',
     enabled = function() return lsp.diagnostics_exist('Hint') end,
     hl = { fg = colors.dark0, bg = colors.light4 },
-}
+})
 
-components.right.active[7] = {
+table.insert(components.active[3], {
     provider = 'diagnostic_info',
     enabled = function() return lsp.diagnostics_exist('Information') end,
     hl = { fg = colors.dark0, bg = colors.light4 },
-}
+})
 
-components.right.active[8] = {
+table.insert(components.active[3], {
     provider = function(component)
         if lsp.diagnostics_exist('Warning') then
             return lsp.diagnostic_warnings(component)
@@ -251,9 +240,9 @@ components.right.active[8] = {
     hl = { fg = colors.dark0, bg = colors.bright_orange },
     left_sep = { str = '', hl = { fg = colors.dark0, bg = colors.bright_orange } },
     right_sep = { str = ' ', hl = { bg = colors.bright_orange } }
-}
+})
 
-components.right.active[9] = {
+table.insert(components.active[3], {
     provider = function(component)
         if lsp.diagnostics_exist('Error') then
             return lsp.diagnostic_errors(component)
@@ -263,14 +252,14 @@ components.right.active[9] = {
     hl = { fg = colors.dark0, bg = colors.bright_red },
     left_sep = { str ='', hl = { fg = colors.dark0, bg = colors.bright_red } },
     right_sep = { str =' ', hl = { bg = colors.bright_red } }
-}
+})
 
-components.left.inactive[1] =  {
+table.insert(components.inactive[1], {
     provider = 'file_info',
     hl = { fg = colors.dark4 },
     left_sep = ' ',
     right_set = ''
-}
+})
 
 -- components.right.inactive[1] = {
 --     provider = function() return vim.bo.filetype end,
@@ -324,10 +313,27 @@ components.left.inactive[1] =  {
 -- }
 
 require('feline').setup({
-    default_fg=colors.light1,
-    default_bg=colors.dark1,
+    --default_fg=colors.light1,
+    --default_bg=colors.dark1,
     components=components,
     separators=separators,
     properties=properties,
     vi_mode_colors=vi_mode_colors,
+    colors=colors,
+
+    force_inactive = {
+        filetypes = {
+            'NvimTree',
+            'dbui',
+            'packer',
+            'startify',
+            'fugitive',
+            'fugitiveblame',
+            'nerdtree'
+        },
+        buftypes = {
+            'terminal'
+        },
+        bufnames = {}
+    },
 })
