@@ -94,12 +94,12 @@ fi
 
 if [[ $(yes_or_no "Configure init.vim?") == "y" ]]; then
     create_dir "$HOME/.config/nvim"
-    append_to_file "so $here/vimrc" "~/.config/nvim/init.vim"
+    append_to_file "so $here/nvim/init.vim" "~/.config/nvim/init.vim"
     append_to_file "set guicursor=" "~/.config/nvim/init.vim"
 fi
 
 if [[ $(yes_or_no "Configure .vimrc?") == "y" ]]; then
-    append_to_file "so $here/vimrc" "~/.vimrc"
+    append_to_file "so $here/nvim/init.vim" "~/.vimrc"
 fi
 
 if [[ $(yes_or_no "Configure colorscheme?") == "y" ]]; then
