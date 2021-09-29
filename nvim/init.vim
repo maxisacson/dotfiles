@@ -16,14 +16,14 @@ function! LuaFile(file)
     exec 'luafile ' . s:currentpath . '/' . a:file
 endfunction
 
-call SourceFile('vimrc.globals')
-call SourceFile('vimrc.plugins')
-call SourceFile('vimrc.common')
-call SourceFile('vimrc.colorscheme')
-call SourceFile('vimrc.termdebug')
+call SourceFile('init.globals')
+call SourceFile('init.plugins')
+call SourceFile('init.common')
+call SourceFile('init.colorscheme')
+call SourceFile('init.termdebug')
 if has("nvim")
-    call LuaFile('vimrc.lsp')
-    call LuaFile('vimrc.ts')
+    call LuaFile('init.lsp')
+    call LuaFile('init.ts')
 endif
 
 " Buffergator config
@@ -39,18 +39,8 @@ if g:vimrc_enable_nerdtree
 endif
 
 if g:vimrc_enable_nvimtree
-    call SourceFile('vimrc.nvimtree')
+    call SourceFile('init.nvimtree')
 endif
-
-" Open file under cursor in new tab
-" nnoremap <F3> <c-w>gf
-
-" make <filename-no-ext>
-" nnoremap <Leader>b :!make %:r<CR>
-
-" Read .vimrc from working directory
-" set exrc
-" set secure
 
 " vim-easy-align key bindings
 xmap ga <Plug>(EasyAlign)
@@ -109,16 +99,16 @@ let g:python3_host_program = PythonInterpreter()
 
 " airline config
 if g:vimrc_enable_airline
-    call SourceFile('vimrc.airline')
+    call SourceFile('init.airline')
 endif
 
 if g:vimrc_enable_barbar
-    call SourceFile('vimrc.barbar')
+    call SourceFile('init.barbar')
 endif
 
 if g:vimrc_enable_feline
     set noshowmode
-    call LuaFile('vimrc.feline')
+    call LuaFile('init.feline')
 endif
 
 " python-syntax config
@@ -138,7 +128,7 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 
-" call SourceFile('vimrc.ale')
+" call SourceFile('init.ale')
 
 " easymotion config
 " Disable default mappings
@@ -172,7 +162,7 @@ let g:clang_format#style_options = {
             \ "SortIncludes": "false"}
 
 " FZF config
-call SourceFile('vimrc.fzf')
+call SourceFile('init.fzf')
 
 " CtrlP config
 let g:ctrlp_map = '<C-p>'
@@ -225,7 +215,7 @@ nnoremap <silent> <expr> <S-Tab> SmartTab(1)
 let g:instant_markdown_autostart = 0
 
 " autocomplete settings
-call SourceFile('vimrc.autocomplete')
+call SourceFile('init.autocomplete')
 
 " nvim-colorizer
 lua require'colorizer'.setup()
