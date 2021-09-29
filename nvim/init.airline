@@ -1,3 +1,6 @@
+" vim: ft=vim
+" airline config
+
 " Disable showmode since we're using airline
 set noshowmode
 
