@@ -1,5 +1,0 @@
-" vim: ft=vim
-" autocomplete settings
-
-" call SourceFile('init.nvim-compe')
-call LuaFile('init.nvim-cmp')

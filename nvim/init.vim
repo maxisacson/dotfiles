@@ -9,64 +9,74 @@ echom 'Reading config from ' . s:currentpath . '/' . expand('<sfile>:t')
 set nocompatible
 
 function! SourceFile(file)
-    exec 'source ' . s:currentpath . '/' . a:file
+    exec 'source ' . a:file
 endfunction
 
 function! LuaFile(file)
-    exec 'luafile ' . s:currentpath . '/' . a:file
+    exec 'luafile ' . a:file
 endfunction
 
-call SourceFile('init.globals')
-call SourceFile('init.plugins')
-call SourceFile('init.common')
-call SourceFile('init.colorscheme')
-call SourceFile('init.termdebug')
+function! LoadConf(file)
+    let fullpath = s:currentpath . '/conf.d/' . a:file
+    let ext = strcharpart(a:file, strchars(a:file) - 3, 3)
+    if ext == 'vim'
+        call SourceFile(fullpath)
+    elseif ext == 'lua'
+        call LuaFile(fullpath)
+    endif
+endfunction
+
+call LoadConf('globals.vim')
+call LoadConf('plugins.vim')
+call LoadConf('common.vim')
+call LoadConf('colorscheme.vim')
+call LoadConf('termdebug.vim')
 
 if has("nvim")
-    call LuaFile('init.lsp')
-    call LuaFile('init.ts')
+    call LoadConf('lsp.lua')
+    call LoadConf('ts.lua')
 endif
 
-call SourceFile('init.buffergator')
+call LoadConf('buffergator.vim')
 
 if g:vimrc_enable_nerdtree
-    call SourceFile('init.nerdtree')
+    call LoadConf('nerdtree.vim')
 endif
 
 if g:vimrc_enable_nvimtree
-    call SourceFile('init.nvimtree')
+    call LoadConf('nvimtree.vim')
 endif
 
-call SourceFile('init.easyalign')
-call SourceFile('init.prettifymath')
-call SourceFile('init.includeguard')
-call SourceFile('init.python')
+call LoadConf('easyalign.vim')
+call LoadConf('prettifymath.vim')
+call LoadConf('includeguard.vim')
+call LoadConf('python.vim')
 
 if g:vimrc_enable_airline
-    call SourceFile('init.airline')
+    call LoadConf('airline.vim')
 endif
 
 if g:vimrc_enable_barbar
-    call SourceFile('init.barbar')
+    call LoadConf('barbar.vim')
 endif
 
 if g:vimrc_enable_feline
     set noshowmode
-    call LuaFile('init.feline')
+    call LoadConf('feline.lua')
 endif
 
-call SourceFile('init.nerdcommenter')
-" call SourceFile('init.ale')
-call SourceFile('init.easymotion')
-call SourceFile('init.vimtex')
-call SourceFile('init.clang-format')
-call SourceFile('init.fzf')
-call SourceFile('init.ctrlp')
-call SourceFile('init.ack')
-call SourceFile('init.ag')
-call SourceFile('init.smarttab')
-call SourceFile('init.instant-markdown')
-call SourceFile('init.autocomplete')
-call LuaFile('init.colorizer')
-call SourceFile('init.whitespace')
-call SourceFile('init.autoccl')
+call LoadConf('nerdcommenter.vim')
+" call LoadConf('ale.vim')
+call LoadConf('easymotion.vim')
+call LoadConf('vimtex.vim')
+call LoadConf('clang-format.vim')
+call LoadConf('fzf.vim')
+call LoadConf('ctrlp.vim')
+call LoadConf('ack.vim')
+call LoadConf('ag.vim')
+call LoadConf('smarttab.vim')
+call LoadConf('instant-markdown.vim')
+call LoadConf('nvim-cmp.lua')
+call LoadConf('colorizer.lua')
+call LoadConf('whitespace.vim')
+call LoadConf('autoccl.vim')
