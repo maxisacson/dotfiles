@@ -79,6 +79,9 @@ Plug 'pangloss/vim-javascript'
 " julia syntax
 Plug 'JuliaEditorSupport/julia-vim'
 
+" GLSL syntax
+Plug 'tikhomirov/vim-glsl'
+
 " syntax for DAST shift reports
 " Plug 'https://gitlab.cern.ch/misacson/vim-dastshiftreport.git'
 

@@ -17,7 +17,7 @@ function! LuaFile(file)
 endfunction
 
 function! LoadConf(file)
-    let fullpath = s:currentpath . '/conf.d/' . a:file
+    let fullpath = s:currentpath . '/init.d/' . a:file
     let ext = strcharpart(a:file, strchars(a:file) - 3, 3)
     if ext == 'vim'
         call SourceFile(fullpath)
