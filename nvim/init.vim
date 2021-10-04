@@ -34,7 +34,9 @@ call LoadConf('termdebug.vim')
 
 if has("nvim")
     call LoadConf('lsp.lua')
+    call LoadConf('lsp_signature.lua')
     call LoadConf('ts.lua')
+    call LoadConf('gitsigns.lua')
 endif
 
 call LoadConf('buffergator.vim')

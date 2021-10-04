@@ -1,15 +1,6 @@
--- vim: ft=lua
--- require'lspconfig'.clangd.setup{}
-
-
 local nvim_lsp = require('lspconfig')
+
 local on_attach = function(client, bufnr)
-    require('lsp_signature').on_attach({
-        bind = true,
-        handler_opts = {
-            border = 'single'
-        }
-    })
 
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -71,9 +62,9 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
         signs = false,
         update_in_insert = true,
         virtual_text = true,
-        -- virtual_text = {
-        --     prefix = '',
-        -- }
+        virtual_text = {
+            prefix = '',
+        }
     }
 )
 
