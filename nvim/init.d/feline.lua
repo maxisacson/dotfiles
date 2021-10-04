@@ -1,13 +1,7 @@
--- vim: ft=lua
 require('gitsigns').setup()
 local lsp = require('feline.providers.lsp')
 local vi_mode_utils = require('feline.providers.vi_mode')
 
---local components = {
---    left = {active = {}, inactive = {}},
---    mid = {active = {}, inactive = {}},
---    right = {active = {}, inactive = {}}
---}
 local components = {
     active = {},
     inactive = {},
@@ -261,60 +255,7 @@ table.insert(components.inactive[1], {
     right_set = ''
 })
 
--- components.right.inactive[1] = {
---     provider = function() return vim.bo.filetype end,
---     hl = { fg = colors.dark4, },
---     left_sep = '',
---     right_sep = ' ',
--- }
---
--- components.right.inactive[2] = {
---     provider = function()
---         local enc = (vim.bo.fenc ~= '' and vim.bo.fenc) or vim.o.enc
---         local ff = (vim.bo.ff ~= '' and vim.bo.ff) or vim.o.ff
---         ff = (ff ~= '' and '['..ff..']') or ''
---         return enc..ff
---     end,
---     hl = { fg = colors.dark4, },
---     left_sep = ' ',
---     right_sep = ' '
--- }
---
--- components.right.inactive[3] = {
---     provider = function()
---         local line = vim.fn.line('.')
---         local lines = vim.fn.line('$')
---
---         return vim.fn.round(100 * line / lines) .. '%%'
---     end,
---     hl = { fg = colors.dark4 },
---     left_sep = ' ',
---     right_sep = ' ',
--- }
---
--- components.right.inactive[4] = {
---     provider = function()
---         local line = vim.fn.line('.')
---         local lines = vim.fn.line('$')
---         return string.format('☰ %d/%d ', line, lines)
---     end,
---     hl = { fg = colors.dark4 },
---     left_sep = '',
---     right_sep = '',
--- }
---
--- components.right.inactive[5] = {
---     provider = function()
---         return string.format(':%d', vim.fn.col('.'))
---     end,
---     hl = { fg = colors.dark4 },
---     left_sep = '',
---     right_sep = ' ',
--- }
-
 require('feline').setup({
-    --default_fg=colors.light1,
-    --default_bg=colors.dark1,
     components=components,
     separators=separators,
     properties=properties,
