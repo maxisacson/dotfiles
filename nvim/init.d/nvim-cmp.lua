@@ -1,4 +1,4 @@
--- vim: ft=lua
+vim.api.nvim_set_option('completeopt', 'menu,menuone,noselect')
 
 local cmp = require'cmp'
 cmp.setup({
