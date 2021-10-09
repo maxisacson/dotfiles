@@ -36,13 +36,12 @@ let bufferline = get(g:, 'bufferline', {})
 let bufferline.animation = v:false " disable/enable animation
 let bufferline.closable = v:false " disable/enable close button
 let bufferline.clickable = v:false " disable/enable clickable tabs
-
-" Enable/disable icons
-" if set to 'numbers', will show buffer index in the tabline
-" if set to 'both', will show buffer index and icons in the tabline
 let bufferline.icons = 'both'
+let bufferline.icon_custom_colors = v:false
+let bufferline.maximum_padding = 0
+" let bufferline.icon_separator_active = ''
+" let bufferline.icon_separator_inactive = ''
 
-let bufferline.icon_custom_colors = v:true
 
 function! s:fg(group)
     let hl = nvim_get_hl_by_name(a:group, 1)
@@ -64,20 +63,40 @@ let s:aqua = s:fg("GruvboxAqua")
 let s:green = s:fg("GruvboxGreen")
 let s:gray = s:fg("GruvboxGray")
 
+" Meaning of terms:
+"
+" format: "Buffer" + status + part
+"
+" status:
+"     *Current: current buffer
+"     *Visible: visible but not current buffer
+"    *Inactive: invisible but not current buffer
+"
+" part:
+"        *Icon: filetype icon
+"       *Index: buffer index
+"         *Mod: when modified
+"        *Sign: the separator between buffers
+"      *Target: letter in buffer-picking mode
+"
+" BufferTabpages: tabpage indicator
+" BufferTabpageFill: filler after the buffer section
+" BufferOffset: offset section, created with set_offset()
+
 execute "hi BufferCurrent gui=bold guifg=" . s:fg1 . " guibg=" . s:bg2
 execute "hi BufferCurrentIndex guifg=" . s:fg4 . " guibg=" . s:bg2
 execute "hi BufferCurrentMod gui=bold guifg=" . s:yellow . " guibg=" . s:bg2
-execute "hi BufferCurrentSign guifg=" . s:fg4 . " guibg=" . s:bg2
+execute "hi BufferCurrentSign guifg=" . s:bg2 . " guibg=" . s:bg2
 execute "hi BufferCurrentTarget gui=bold guifg=" . s:red . " guibg=" . s:bg2
 
 execute "hi BufferVisible guifg=" . s:blue . " guibg=" . s:bg1
 execute "hi BufferVisibleIndex guifg=" . s:blue . " guibg=" . s:bg1
 execute "hi BufferVisibleMod guifg=" . s:yellow . " guibg=" . s:bg1
-execute "hi BufferVisibleSign guifg=" . s:blue . " guibg=" . s:bg1
+execute "hi BufferVisibleSign guifg=" . s:bg2 . " guibg=" . s:bg1
 execute "hi BufferVisibleTarget gui=bold guifg=" . s:red . " guibg=" . s:bg1
 
 execute "hi BufferInactive guifg=" . s:bg4 . " guibg=" . s:bg1
-execute "hi BufferInactiveIndex guifg=" . s:bg2 . " guibg=" . s:bg1
+execute "hi BufferInactiveIndex guifg=" . s:bg4 . " guibg=" . s:bg1
 execute "hi BufferInactiveMod guifg=" . s:yellow . " guibg=" . s:bg1
 execute "hi BufferInactiveSign guifg=" . s:bg2 . " guibg=" . s:bg1
 execute "hi BufferInactiveTarget gui=bold guifg=" . s:red . " guibg=" . s:bg1
@@ -88,3 +107,4 @@ execute "hi BufferTabpageFill guifg=" . s:bg4 . " guibg=" . s:bg1
 execute "hi link BufferCurrentIcon  BufferCurrent"
 execute "hi link BufferVisibleIcon BufferVisible"
 execute "hi link BufferInactiveIcon BufferInactive"
+execute "hi link BufferOffset BufferTabpageFill"
