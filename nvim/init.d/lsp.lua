@@ -1,3 +1,4 @@
+vim.lsp.set_log_level('trace')
 local nvim_lsp = require('lspconfig')
 
 local on_attach = function(client, bufnr)
