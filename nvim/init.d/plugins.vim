@@ -162,11 +162,17 @@ if has("nvim")
     " nvim-compe (replaces completion-nvim)
     " Plug 'hrsh7th/nvim-compe'
 
+
     " nvim-cmp (replaces nvim-compe)
-    Plug 'hrsh7th/cmp-nvim-lsp'
-    Plug 'hrsh7th/cmp-buffer'
-    Plug 'hrsh7th/cmp-path'
+    Plug 'hrsh7th/cmp-nvim-lsp' " lsp source
+    Plug 'hrsh7th/vim-vsnip'    " snippet plugin
+    Plug 'hrsh7th/cmp-vsnip'    " snippet source
+    Plug 'hrsh7th/cmp-buffer'   " buffer source
+    Plug 'hrsh7th/cmp-path'     " path source
     Plug 'hrsh7th/nvim-cmp'
+
+    " preconfigured snippets
+    Plug 'rafamadriz/friendly-snippets'
 
     " treesitter
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
