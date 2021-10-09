@@ -54,6 +54,7 @@ let s:bg1 = s:fg("GruvboxBg1")
 let s:bg2 = s:fg("GruvboxBg2")
 let s:bg4 = s:fg("GruvboxBg4")
 let s:fg1 = s:fg("GruvboxFg1")
+let s:fg4 = s:fg("GruvboxFg4")
 let s:red = s:fg("GruvboxRed")
 let s:orange = s:fg("GruvboxOrange")
 let s:blue = s:fg("GruvboxBlue")
@@ -64,9 +65,9 @@ let s:green = s:fg("GruvboxGreen")
 let s:gray = s:fg("GruvboxGray")
 
 execute "hi BufferCurrent gui=bold guifg=" . s:fg1 . " guibg=" . s:bg2
-execute "hi BufferCurrentIndex guifg=" . s:fg1 . " guibg=" . s:bg2
+execute "hi BufferCurrentIndex guifg=" . s:fg4 . " guibg=" . s:bg2
 execute "hi BufferCurrentMod gui=bold guifg=" . s:yellow . " guibg=" . s:bg2
-execute "hi BufferCurrentSign guifg=" . s:fg1 . " guibg=" . s:bg2
+execute "hi BufferCurrentSign guifg=" . s:fg4 . " guibg=" . s:bg2
 execute "hi BufferCurrentTarget gui=bold guifg=" . s:red . " guibg=" . s:bg2
 
 execute "hi BufferVisible guifg=" . s:blue . " guibg=" . s:bg1
