@@ -1,5 +1,9 @@
 nnoremap <Leader>nt :NvimTreeToggle<CR>
 
+lua <<EOF
+    require'nvim-tree'.setup()
+EOF
+
 if g:vimrc_colorscheme == 'gruvbox'
     hi link NvimTreeFolderName GruvboxBlueBold
     hi link NvimTreeEmptyFolderName GruvboxBlueBold
