@@ -17,12 +17,12 @@ function! LuaFile(file)
 endfunction
 
 function! LoadConf(file)
-    let fullpath = s:currentpath . '/init.d/' . a:file
-    let ext = strcharpart(a:file, strchars(a:file) - 3, 3)
-    if ext == 'vim'
-        call SourceFile(fullpath)
-    elseif ext == 'lua'
-        call LuaFile(fullpath)
+    let l:fullpath = s:currentpath . '/init.d/' . a:file
+    let l:ext = strcharpart(a:file, strchars(a:file) - 3, 3)
+    if l:ext == 'vim'
+        call SourceFile(l:fullpath)
+    elseif l:ext == 'lua'
+        call LuaFile(l:fullpath)
     endif
 endfunction
 
@@ -38,8 +38,6 @@ if has("nvim")
     call LoadConf('ts.lua')
     call LoadConf('gitsigns.lua')
 endif
-
-call LoadConf('buffergator.vim')
 
 if g:vimrc_enable_nerdtree
     call LoadConf('nerdtree.vim')
@@ -68,15 +66,11 @@ if g:vimrc_enable_feline
 endif
 
 call LoadConf('nerdcommenter.vim')
-call LoadConf('easymotion.vim')
 call LoadConf('vimtex.vim')
 call LoadConf('clang-format.vim')
 call LoadConf('fzf.vim')
-call LoadConf('ctrlp.vim')
 call LoadConf('ack.vim')
-call LoadConf('ag.vim')
 call LoadConf('smarttab.vim')
-call LoadConf('instant-markdown.vim')
 call LoadConf('nvim-cmp.lua')
 call LoadConf('colorizer.lua')
 call LoadConf('whitespace.vim')

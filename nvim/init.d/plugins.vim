@@ -1,8 +1,5 @@
 call plug#begin('~/.vim/bundle')
 
-" Ctrl-P fuzzy search
-Plug 'ctrlpvim/ctrlp.vim'
-
 if g:vimrc_enable_airline
     " vim-airline
     Plug 'vim-airline/vim-airline'
@@ -13,9 +10,6 @@ endif
 
 " extra syntax highlighting for C/C++
 Plug 'justinmk/vim-syntax-extra'
-
-" Vim-solarized
-Plug 'altercation/vim-colors-solarized'
 
 " vim-fugitive for git integration
 Plug 'tpope/vim-fugitive'
@@ -48,7 +42,6 @@ Plug 'tpope/vim-markdown'
 
 " better syntax highlighting for javascript
 Plug 'pangloss/vim-javascript'
-" Plug 'jelera/vim-javascript-syntax'
 
 " julia syntax
 Plug 'JuliaEditorSupport/julia-vim'
@@ -59,9 +52,6 @@ Plug 'tikhomirov/vim-glsl'
 " latex plugin
 Plug 'lervag/vimtex'
 
-" easymotion
-Plug 'easymotion/vim-easymotion'
-
 " extra syntax for cpp-files
 Plug 'maxisacson/vim-cpp-extra'
 
@@ -70,9 +60,6 @@ Plug 'maxisacson/vim-latex-extra'
 
 " syntax for geant4 macro files
 Plug 'maxisacson/vim-geant4-mac'
-
-" buffergator for buffer management
-Plug 'jeetsukumaran/vim-buffergator'
 
 if !has("nvim")
     " gruvbox theme
@@ -91,7 +78,7 @@ Plug 'junegunn/fzf.vim'
 
 " nvim specific plugins
 if has("nvim")
-    " convenience functions
+    " convenience functions -- dependancy for lewis6991/gitsigns.nvim (at least)
     Plug 'nvim-lua/plenary.nvim'
 
     " LSP configurations for neovim
@@ -133,11 +120,11 @@ if has("nvim")
     " live parameter hints
     Plug 'ray-x/lsp_signature.nvim'
 
-    " colorscheme creation tool
+    " colorscheme creation tool -- dependency for ellisonleao/gruvbox.nvim
     Plug 'rktjmp/lush.nvim'
 
     " gruvbox theme
-    Plug 'npxbr/gruvbox.nvim'
+    Plug 'ellisonleao/gruvbox.nvim'
 
     " git-blame integration
     Plug 'f-person/git-blame.nvim'
