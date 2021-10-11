@@ -14,3 +14,8 @@ let g:vimrc_fix_normalfloat_hilink_to_pmenu = get(g:vimrc_globals, "fix_normalfl
 
 let g:vimrc_enable_nerdtree = get(g:vimrc_globals, "enable_nerdtree", !g:vimrc_has_nvim)
 let g:vimrc_enable_nvimtree = get(g:vimrc_globals, "enable_nvimtree", !g:vimrc_enable_nerdtree)
+
+let g:vimrc_override_python3_host_prog = has_key(g:vimrc_globals, "python3_host_prog")
+if g:vimrc_override_python3_host_prog
+    let g:vimrc_python3_host_prog = g:vimrc_globals["python3_host_prog"]
+endif
