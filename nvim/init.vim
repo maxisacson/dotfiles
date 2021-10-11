@@ -68,7 +68,6 @@ if g:vimrc_enable_feline
 endif
 
 call LoadConf('nerdcommenter.vim')
-" call LoadConf('ale.vim')
 call LoadConf('easymotion.vim')
 call LoadConf('vimtex.vim')
 call LoadConf('clang-format.vim')

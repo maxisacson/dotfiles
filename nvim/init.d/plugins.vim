@@ -1,21 +1,7 @@
-" vim: ft=vim
-
 call plug#begin('~/.vim/bundle')
-
-" YouComleteMe
-" Plug 'Valloric/YouCompleteMe'
-
-" YCM-Generator
-" Plug 'rdnetto/YCM-Generator'
 
 " Ctrl-P fuzzy search
 Plug 'ctrlpvim/ctrlp.vim'
-
-" matcher for better Ctrl-P behaviour
-" Plug 'burke/matcher'
-
-" vim-poweline
-" Plug 'Lokaltog/vim-powerline'
 
 if g:vimrc_enable_airline
     " vim-airline
@@ -31,14 +17,8 @@ Plug 'justinmk/vim-syntax-extra'
 " Vim-solarized
 Plug 'altercation/vim-colors-solarized'
 
-" more vim themes
-" Plug 'flazz/vim-colorschemes'
-
 " vim-fugitive for git integration
 Plug 'tpope/vim-fugitive'
-
-" ag.vim for nice search features
-" Plug 'rking/ag.vim' " deprecated
 
 " ack.vim for ag and ack integration
 Plug 'mileszs/ack.vim'
@@ -47,9 +27,6 @@ if g:vimrc_enable_nerdtree
     " nerdtree for file browsing
     Plug 'scrooloose/nerdtree'
 endif
-
-" python-mode
-" Plug 'klen/python-mode'
 
 " better python syntax highlighting
 Plug 'hdima/python-syntax'
@@ -66,9 +43,6 @@ Plug 'tpope/vim-surround'
 " vim-repeat
 Plug 'tpope/vim-repeat'
 
-" markdown preview for vim
-" Plug 'suan/vim-instant-markdown'
-
 " vim-markdown
 Plug 'tpope/vim-markdown'
 
@@ -82,26 +56,11 @@ Plug 'JuliaEditorSupport/julia-vim'
 " GLSL syntax
 Plug 'tikhomirov/vim-glsl'
 
-" syntax for DAST shift reports
-" Plug 'https://gitlab.cern.ch/misacson/vim-dastshiftreport.git'
-
-" syntax for TRExFitter config files
-" Plug 'https://gitlab.cern.ch/misacson/vim-trexfitter.git'
-
-" syntastic syntax checker
-" Plug 'vim-syntastic/syntastic'
-
 " latex plugin
 Plug 'lervag/vimtex'
 
 " easymotion
 Plug 'easymotion/vim-easymotion'
-
-" vim-css-colors
-" Plug 'ap/vim-css-color'
-
-" vim-obsession for saving and restoring vim sessions
-" Plug 'tpope/vim-obsession'
 
 " extra syntax for cpp-files
 Plug 'maxisacson/vim-cpp-extra'
@@ -111,9 +70,6 @@ Plug 'maxisacson/vim-latex-extra'
 
 " syntax for geant4 macro files
 Plug 'maxisacson/vim-geant4-mac'
-
-" unimpaired keybindings
-" Plug 'tpope/vim-unimpaired'
 
 " buffergator for buffer management
 Plug 'jeetsukumaran/vim-buffergator'
@@ -125,9 +81,6 @@ endif
 
 " clang-format intergration for vim
 Plug 'rhysd/vim-clang-format'
-
-" ALE asynchronos link engine
-" Plug 'dense-analysis/ale'
 
 " vim-cmake
 Plug 'vhdirk/vim-cmake'
@@ -141,27 +94,8 @@ if has("nvim")
     " convenience functions
     Plug 'nvim-lua/plenary.nvim'
 
-    " remote plugin manager
-    " Plug 'roxma/nvim-yarp'
-
-    " autocompletion
-    " Plug 'ncm2/ncm2'
-    " Plug 'ncm2/ncm2-bufword'
-    " Plug 'ncm2/ncm2-path'
-
-    " gdb integration
-    " Plug 'huawenyu/neogdb.vim'
-
     " LSP configurations for neovim
     Plug 'neovim/nvim-lspconfig'
-
-    " completion-nvim
-    " Plug 'nvim-lua/completion-nvim'
-    " Plug 'steelsojka/completion-buffers'
-
-    " nvim-compe (replaces completion-nvim)
-    " Plug 'hrsh7th/nvim-compe'
-
 
     " nvim-cmp (replaces nvim-compe)
     Plug 'hrsh7th/cmp-nvim-lsp' " lsp source
@@ -204,7 +138,6 @@ if has("nvim")
 
     " gruvbox theme
     Plug 'npxbr/gruvbox.nvim'
-    " Plug 'morhetz/gruvbox'
 
     " git-blame integration
     Plug 'f-person/git-blame.nvim'
