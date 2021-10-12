@@ -72,8 +72,10 @@ endif
 " clang-format intergration for vim
 Plug 'rhysd/vim-clang-format'
 
-" vim-cmake
-Plug 'vhdirk/vim-cmake'
+if g:vimrc_enable_vim_cmake
+    " vim-cmake
+    Plug 'vhdirk/vim-cmake'
+endif
 
 " fzf fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }

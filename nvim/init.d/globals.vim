@@ -19,3 +19,5 @@ let g:vimrc_override_python3_host_prog = has_key(g:vimrc_globals, "python3_host_
 if g:vimrc_override_python3_host_prog
     let g:vimrc_python3_host_prog = g:vimrc_globals["python3_host_prog"]
 endif
+
+let g:vimrc_enable_vim_cmake = get(g:vimrc_globals, "enable_vim_cmake", executable("cmake"))
