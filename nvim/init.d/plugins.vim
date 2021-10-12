@@ -61,6 +61,9 @@ Plug 'maxisacson/vim-latex-extra'
 " syntax for geant4 macro files
 Plug 'maxisacson/vim-geant4-mac'
 
+" syntax for EGS input files
+Plug 'maxisacson/vim-egsinp'
+
 if !has("nvim")
     " gruvbox theme
     Plug 'morhetz/gruvbox'
