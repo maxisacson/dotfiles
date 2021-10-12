@@ -151,6 +151,7 @@ if has("nvim")
     if g:vimrc_enable_telescope
         " Telescope -- modular fuzzy finder
         Plug 'nvim-telescope/telescope.nvim'
+        Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
     endif
 endif
 
