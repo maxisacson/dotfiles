@@ -77,13 +77,19 @@ if g:vimrc_enable_vim_cmake
     Plug 'vhdirk/vim-cmake'
 endif
 
-" fzf fuzzy finder
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+if g:vimrc_enable_fzf
+    " fzf fuzzy finder
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+endif
 
 " nvim specific plugins
 if has("nvim")
-    " convenience functions -- dependancy for lewis6991/gitsigns.nvim (at least)
+    " convenience functions
+    " dependancy for
+    "   - lewis6991/gitsigns.nvim
+    "   - nvim-telescope/telescope.nvim
+    "   - maybe more
     Plug 'nvim-lua/plenary.nvim'
 
     " LSP configurations for neovim
@@ -140,6 +146,11 @@ if has("nvim")
     if g:vimrc_enable_nvimtree
         " NvimTree alternative to NerdTree
         Plug 'kyazdani42/nvim-tree.lua'
+    endif
+
+    if g:vimrc_enable_telescope
+        " Telescope -- modular fuzzy finder
+        Plug 'nvim-telescope/telescope.nvim'
     endif
 endif
 

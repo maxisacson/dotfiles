@@ -65,11 +65,21 @@ if g:vimrc_enable_feline
     call LoadConf('feline.lua')
 endif
 
+if g:vimrc_enable_telescope
+    call LoadConf('telescope.lua')
+endif
+
+if g:vimrc_enable_fzf
+    call LoadConf('fzf.vim')
+endif
+
+if g:vimrc_enable_ack
+    call LoadConf('ack.vim')
+endif
+
 call LoadConf('nerdcommenter.vim')
 call LoadConf('vimtex.vim')
 call LoadConf('clang-format.vim')
-call LoadConf('fzf.vim')
-call LoadConf('ack.vim')
 call LoadConf('smarttab.vim')
 call LoadConf('nvim-cmp.lua')
 call LoadConf('colorizer.lua')

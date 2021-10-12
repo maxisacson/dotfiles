@@ -10,7 +10,7 @@ let g:vimrc_enable_barbar = get(g:vimrc_globals, "enable_barabr", !g:vimrc_enabl
 let g:vimrc_colorscheme = get(g:vimrc_globals, "colorscheme", "gruvbox")
 
 " Fix lsp floating diagnostic for 'ellisonleao/gruvbox.nvim'
-let g:vimrc_fix_normalfloat_hilink_to_pmenu = get(g:vimrc_globals, "fix_normalfloat_hilink_to_pmenu", 1)
+let g:vimrc_fix_normalfloat_hilink_to_pmenu = get(g:vimrc_globals, "fix_normalfloat_hilink_to_pmenu", v:true)
 
 let g:vimrc_enable_nerdtree = get(g:vimrc_globals, "enable_nerdtree", !g:vimrc_has_nvim)
 let g:vimrc_enable_nvimtree = get(g:vimrc_globals, "enable_nvimtree", !g:vimrc_enable_nerdtree)
@@ -21,3 +21,6 @@ if g:vimrc_override_python3_host_prog
 endif
 
 let g:vimrc_enable_vim_cmake = get(g:vimrc_globals, "enable_vim_cmake", executable("cmake"))
+let g:vimrc_enable_telescope = get(g:vimrc_globals, "enable_telescope", v:false)
+let g:vimrc_enable_fzf = get(g:vimrc_globals, "enable_fzf", !g:vimrc_enable_telescope)
+let g:vimrc_enable_ack = get(g:vimrc_globals, "enable_ack", !g:vimrc_enable_telescope)
