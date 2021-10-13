@@ -1,10 +1,13 @@
-nnoremap <Leader>nt :NvimTreeToggle<CR>
+-- config for nvim-tree
 
-lua <<EOF
-    require'nvim-tree'.setup()
-EOF
+require'nvim-tree'.setup{
+    update_cwd = true
+}
 
-if g:vimrc_colorscheme == 'gruvbox'
+vim.api.nvim_set_keymap('n', '<Leader>nt', ':NvimTreeToggle<CR>', { noremap=true, silent=true })
+
+if vim.g.vimrc_colorscheme == 'gruvbox' then
+    vim.cmd([[
     hi link NvimTreeFolderName GruvboxBlueBold
     hi link NvimTreeEmptyFolderName GruvboxBlueBold
     hi link NvimTreeOpenedFolderName GruvboxBlueBold
@@ -23,4 +26,5 @@ if g:vimrc_colorscheme == 'gruvbox'
     hi link NvimTreeGitDirty GruvboxRedBold
     hi link NvimTreeGitDeleted GruvboxRedBold
     hi link NvimTreeGitStaged GruvboxRed
-endif
+    ]])
+end

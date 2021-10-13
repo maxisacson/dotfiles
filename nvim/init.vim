@@ -44,7 +44,7 @@ if g:vimrc_enable_nerdtree
 endif
 
 if g:vimrc_enable_nvimtree
-    call LoadConf('nvimtree.vim')
+    call LoadConf('nvim-tree.lua')
 endif
 
 call LoadConf('easyalign.vim')
