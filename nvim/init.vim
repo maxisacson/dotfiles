@@ -26,62 +26,52 @@ function! LoadConf(file)
     endif
 endfunction
 
+function! LoadConfCond(file, cond)
+    if a:cond
+        call LoadConf(a:file)
+    endif
+endfunction
+
 call LoadConf('globals.vim')
 call LoadConf('plugins.vim')
 call LoadConf('common.vim')
 call LoadConf('colorscheme.vim')
-call LoadConf('termdebug.vim')
 
 if has("nvim")
-    call LoadConf('lsp.lua')
-    call LoadConf('lsp_signature.lua')
-    call LoadConf('ts.lua')
+    call LoadConfCond('lsp.lua', g:vimrc_enable_lsp)
+    call LoadConfCond('lsp_signature.lua', g:vimrc_enable_lsp)
+    call LoadConfCond('ts.lua', g:vimrc_enable_treesitter)
+
     call LoadConf('gitsigns.lua')
 endif
 
-if g:vimrc_enable_nerdtree
-    call LoadConf('nerdtree.vim')
-endif
-
-if g:vimrc_enable_nvimtree
-    call LoadConf('nvim-tree.lua')
-endif
+call LoadConfCond('nerdtree.vim', g:vimrc_enable_nerdtree)
+call LoadConfCond('nvim-tree.lua', g:vimrc_enable_nvimtree)
 
 call LoadConf('easyalign.vim')
 call LoadConf('prettifymath.vim')
 call LoadConf('includeguard.vim')
 call LoadConf('python.vim')
 
-if g:vimrc_enable_airline
-    call LoadConf('airline.vim')
-endif
-
-if g:vimrc_enable_barbar
-    call LoadConf('barbar.vim')
-endif
+call LoadConfCond('airline.vim', g:vimrc_enable_airline)
+call LoadConfCond('barbar.vim', g:vimrc_enable_barbar)
 
 if g:vimrc_enable_feline
     set noshowmode
     call LoadConf('feline.lua')
 endif
 
-if g:vimrc_enable_telescope
-    call LoadConf('telescope.lua')
-endif
-
-if g:vimrc_enable_fzf
-    call LoadConf('fzf.vim')
-endif
-
-if g:vimrc_enable_ack
-    call LoadConf('ack.vim')
-endif
+call LoadConfCond('telescope.lua', g:vimrc_enable_telescope)
+call LoadConfCond('fzf.vim', g:vimrc_enable_fzf)
+call LoadConfCond('ack.vim', g:vimrc_enable_ack)
 
 call LoadConf('nerdcommenter.vim')
 call LoadConf('vimtex.vim')
 call LoadConf('clang-format.vim')
 call LoadConf('smarttab.vim')
-call LoadConf('nvim-cmp.lua')
+
+call LoadConfCond('nvim-cmp.lua', g:vimrc_enable_nvim_cmp)
+
 call LoadConf('colorizer.lua')
 call LoadConf('whitespace.vim')
 call LoadConf('autoccl.vim')

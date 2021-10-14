@@ -6,7 +6,7 @@ let g:vimrc_has_nvim = has('nvim')
 
 let g:vimrc_enable_airline = get(g:vimrc_globals, "enable_airline", !g:vimrc_has_nvim)
 let g:vimrc_enable_feline = get(g:vimrc_globals, "enable_feline", !g:vimrc_enable_airline)
-let g:vimrc_enable_barbar = get(g:vimrc_globals, "enable_barabr", !g:vimrc_enable_airline)
+let g:vimrc_enable_barbar = get(g:vimrc_globals, "enable_barbar", !g:vimrc_enable_airline)
 let g:vimrc_colorscheme = get(g:vimrc_globals, "colorscheme", "gruvbox")
 
 " Fix lsp floating diagnostic for 'ellisonleao/gruvbox.nvim'
@@ -24,3 +24,6 @@ let g:vimrc_enable_vim_cmake = get(g:vimrc_globals, "enable_vim_cmake", executab
 let g:vimrc_enable_telescope = get(g:vimrc_globals, "enable_telescope", v:false)
 let g:vimrc_enable_fzf = get(g:vimrc_globals, "enable_fzf", !g:vimrc_enable_telescope)
 let g:vimrc_enable_ack = get(g:vimrc_globals, "enable_ack", !g:vimrc_enable_telescope)
+let g:vimrc_enable_lsp = get(g:vimrc_globals, "enable_lsp", v:true)
+let g:vimrc_enable_treesitter = get(g:vimrc_globals, "enable_treesitter", v:true)
+let g:vimrc_enable_nvim_cmp = get(g:vimrc_globals, "enable_nvim_cmp", v:true)

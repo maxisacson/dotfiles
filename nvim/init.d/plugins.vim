@@ -14,8 +14,10 @@ Plug 'justinmk/vim-syntax-extra'
 " vim-fugitive for git integration
 Plug 'tpope/vim-fugitive'
 
-" ack.vim for ag and ack integration
-Plug 'mileszs/ack.vim'
+if g:vimrc_enable_ack
+    " ack.vim for ag and ack integration
+    Plug 'mileszs/ack.vim'
+endif
 
 if g:vimrc_enable_nerdtree
     " nerdtree for file browsing
@@ -92,25 +94,38 @@ if has("nvim")
     "   - maybe more
     Plug 'nvim-lua/plenary.nvim'
 
-    " LSP configurations for neovim
-    Plug 'neovim/nvim-lspconfig'
+    if g:vimrc_enable_lsp
+        " LSP configurations for neovim
+        Plug 'neovim/nvim-lspconfig'
 
-    " nvim-cmp (replaces nvim-compe)
-    Plug 'hrsh7th/cmp-nvim-lsp' " lsp source
-    Plug 'hrsh7th/vim-vsnip'    " snippet plugin
-    Plug 'hrsh7th/cmp-vsnip'    " snippet source
-    Plug 'hrsh7th/cmp-buffer'   " buffer source
-    Plug 'hrsh7th/cmp-path'     " path source
-    Plug 'hrsh7th/nvim-cmp'
+        " better support for lsp colors
+        Plug 'folke/lsp-colors.nvim'
 
-    " preconfigured snippets
-    Plug 'rafamadriz/friendly-snippets'
+        " live parameter hints
+        Plug 'ray-x/lsp_signature.nvim'
+    endif
 
-    " treesitter
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    if g:vimrc_enable_nvim_cmp
+        " nvim-cmp (replaces nvim-compe)
+        if g:vimrc_enable_lsp
+            Plug 'hrsh7th/cmp-nvim-lsp' " lsp source
+        endif
+        Plug 'hrsh7th/vim-vsnip'    " snippet plugin
+        Plug 'hrsh7th/cmp-vsnip'    " snippet source
+        Plug 'hrsh7th/cmp-buffer'   " buffer source
+        Plug 'hrsh7th/cmp-path'     " path source
+        Plug 'hrsh7th/nvim-cmp'
+    endif
 
-    " better support for lsp colors
-    Plug 'folke/lsp-colors.nvim'
+    if g:vimrc_enable_nvim_cmp
+        " preconfigured snippets
+        Plug 'rafamadriz/friendly-snippets'
+    endif
+
+    if g:vimrc_enable_treesitter
+        " treesitter
+        Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    endif
 
     " devicons
     Plug 'kyazdani42/nvim-web-devicons'
@@ -127,9 +142,6 @@ if has("nvim")
         " tabline plugin
         Plug 'romgrk/barbar.nvim'
     endif
-
-    " live parameter hints
-    Plug 'ray-x/lsp_signature.nvim'
 
     " colorscheme creation tool -- dependency for ellisonleao/gruvbox.nvim
     Plug 'rktjmp/lush.nvim'
