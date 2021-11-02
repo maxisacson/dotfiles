@@ -35,6 +35,9 @@ set showcmd
 " Set default spell language
 set spelllang=en_gb
 
+" Set window title
+set title
+
 " Always use ft=tex as default for .tex-files
 let g:tex_flavor = 'latex'
 
