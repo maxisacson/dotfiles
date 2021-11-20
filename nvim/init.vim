@@ -49,8 +49,6 @@ call LoadConfCond('nerdtree.vim', g:vimrc_enable_nerdtree)
 call LoadConfCond('nvim-tree.lua', g:vimrc_enable_nvimtree)
 
 call LoadConf('easyalign.vim')
-call LoadConf('prettifymath.vim')
-call LoadConf('includeguard.vim')
 call LoadConf('python.vim')
 
 call LoadConfCond('airline.vim', g:vimrc_enable_airline)
@@ -68,10 +66,8 @@ call LoadConfCond('ack.vim', g:vimrc_enable_ack)
 call LoadConf('nerdcommenter.vim')
 call LoadConf('vimtex.vim')
 call LoadConf('clang-format.vim')
-call LoadConf('smarttab.vim')
 
 call LoadConfCond('nvim-cmp.lua', g:vimrc_enable_nvim_cmp)
 
 call LoadConf('colorizer.lua')
-call LoadConf('whitespace.vim')
-call LoadConf('autoccl.vim')
+call LoadConf("custom.vim")

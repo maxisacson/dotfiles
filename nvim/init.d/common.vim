@@ -108,6 +108,3 @@ nnoremap <leader>lf :lfirst<CR>
 nnoremap <leader>ll :llast<CR>
 nnoremap <leader>lc :lclose<CR>
 nnoremap <leader>lo :lopen<CR>
-
-" reload vimrc
-command! ReloadVimrc :so $MYVIMRC | echom "Reloaded " . $MYVIMRC | redraw
