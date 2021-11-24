@@ -35,12 +35,13 @@ cmp.setup({
         end, { "i", "s" }),
 
     },
-    sources = {
+    sources = cmp.config.sources({
         { name = 'nvim_lsp' },
+        { name = 'neorg' },
         { name = 'vsnip' },
         { name = 'buffer' },
         { name = 'path' }
-    },
+    }),
     formatting = {
         format = lspkind.cmp_format({
             with_text = true,

@@ -71,3 +71,5 @@ call LoadConfCond('nvim-cmp.lua', g:vimrc_enable_nvim_cmp)
 
 call LoadConf('colorizer.lua')
 call LoadConf("custom.vim")
+
+call LoadConfCond('neorg.lua', g:vimrc_enable_neorg)

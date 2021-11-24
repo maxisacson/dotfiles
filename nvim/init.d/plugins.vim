@@ -168,6 +168,11 @@ if has("nvim")
         Plug 'nvim-telescope/telescope.nvim'
         Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
     endif
+
+    " Neorg note taking plugin
+    if g:vimrc_enable_neorg
+        Plug 'nvim-neorg/neorg'
+    endif
 endif
 
 call plug#end()
