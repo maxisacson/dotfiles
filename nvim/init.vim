@@ -73,3 +73,4 @@ call LoadConf('colorizer.lua')
 call LoadConf("custom.vim")
 
 call LoadConfCond('neorg.lua', g:vimrc_enable_neorg)
+call LoadConfCond('orgmode.lua', g:vimrc_enable_orgmode)

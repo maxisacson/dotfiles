@@ -37,6 +37,7 @@ cmp.setup({
     },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
+        { name = 'orgmode' },
         { name = 'neorg' },
         { name = 'vsnip' },
         { name = 'buffer' },
@@ -49,6 +50,8 @@ cmp.setup({
             menu = ({
                 nvim_lsp = "[LSP]",
                 vsnip = "[VSnip]",
+                orgmode = "[Orgmode]",
+                neorg = "[Neorg]",
                 buffer = "[Buffer]",
                 path = "[Path]",
             })

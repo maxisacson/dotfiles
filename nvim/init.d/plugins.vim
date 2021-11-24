@@ -173,6 +173,10 @@ if has("nvim")
     if g:vimrc_enable_neorg
         Plug 'nvim-neorg/neorg'
     endif
+
+    if g:vimrc_enable_orgmode
+        Plug 'nvim-orgmode/orgmode'
+    endif
 endif
 
 call plug#end()

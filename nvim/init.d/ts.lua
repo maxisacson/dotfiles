@@ -9,6 +9,16 @@ if vim.g.vimrc_enable_neorg then
         },
     }
 end
+if vim.g.vimrc_enable_orgmode then
+    parser_configs.org = {
+        install_info = {
+            url = 'https://github.com/milisims/tree-sitter-org',
+            revision = 'main',
+            files = {'src/parser.c', 'src/scanner.cc'},
+        },
+        filetype = 'org',
+    }
+end
 
 require'nvim-treesitter.configs'.setup {
     ensure_installed = "maintained",
