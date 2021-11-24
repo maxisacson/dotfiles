@@ -115,6 +115,9 @@ if has("nvim")
         Plug 'hrsh7th/cmp-buffer'   " buffer source
         Plug 'hrsh7th/cmp-path'     " path source
         Plug 'hrsh7th/nvim-cmp'
+
+        " VSCode-like icons in completion menu
+        Plug 'onsails/lspkind-nvim'
     endif
 
     if g:vimrc_enable_nvim_cmp

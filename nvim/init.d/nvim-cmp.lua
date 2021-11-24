@@ -1,5 +1,6 @@
 vim.o.completeopt = 'menu,menuone,noselect'
 
+local lspkind = require'lspkind'
 local cmp = require'cmp'
 cmp.setup({
     snippet = {
@@ -39,5 +40,17 @@ cmp.setup({
         { name = 'vsnip' },
         { name = 'buffer' },
         { name = 'path' }
-    }
+    },
+    formatting = {
+        format = lspkind.cmp_format({
+            with_text = true,
+            maxwidth = 50,
+            menu = ({
+                nvim_lsp = "[LSP]",
+                vsnip = "[VSnip]",
+                buffer = "[Buffer]",
+                path = "[Path]",
+            })
+        })
+    },
 })
