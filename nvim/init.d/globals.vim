@@ -27,3 +27,4 @@ let g:vimrc_enable_ack = get(g:vimrc_globals, "enable_ack", !g:vimrc_enable_tele
 let g:vimrc_enable_lsp = get(g:vimrc_globals, "enable_lsp", v:true)
 let g:vimrc_enable_treesitter = get(g:vimrc_globals, "enable_treesitter", v:true)
 let g:vimrc_enable_nvim_cmp = get(g:vimrc_globals, "enable_nvim_cmp", v:true)
+let g:vimrc_pylsp_cmd = get(g:vimrc_globals, "pylsp_cmd", "pylsp")

@@ -68,13 +68,21 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
     }
 )
 
-local servers = { 'pylsp', 'cmake' }
+-- Servers that don't require special setup
+local servers = { 'cmake' }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
         on_attach = on_attach,
         capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
     }
 end
+
+-- Servers that do require special setup
+nvim_lsp.pylsp.setup {
+    on_attach = on_attach,
+    cmd = { vim.g.vimrc_pylsp_cmd },
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+}
 
 nvim_lsp.clangd.setup {
     on_attach = on_attach,
