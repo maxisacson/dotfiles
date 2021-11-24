@@ -10,6 +10,11 @@ require('neorg').setup{
                     default = "~/neorg"
                 }
             }
+        },
+        ["core.norg.completion"] = {
+            config = {
+                engine = "nvim-cmp"
+            }
         }
     },
 }
