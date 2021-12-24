@@ -38,6 +38,12 @@ local on_attach = function(client, bufnr)
         hi LspDiagnosticsUnderlineWarning cterm=undercurl gui=undercurl guisp=Orange
         hi LspDiagnosticsUnderlineInformation cterm=undercurl gui=undercurl guisp=LightBlue
         hi LspDiagnosticsUnderlineHint cterm=undercurl gui=undercurl guisp=LightGrey
+        hi clear LspReferenceRead
+        hi clear LspReferenceWrite
+        hi clear LspReferenceText
+        hi LspReferenceRead cterm=reverse gui=reverse
+        hi LspReferenceWrite cterm=reverse gui=reverse
+        hi LspReferenceText cterm=reverse gui=reverse
     ]], false)
 
     -- Set autocommands conditional on server_capabilities
@@ -63,7 +69,8 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
         update_in_insert = true,
         virtual_text = true,
         virtual_text = {
-            prefix = '',
+            -- prefix = '',
+            prefix = '',
         }
     }
 )
@@ -82,6 +89,13 @@ nvim_lsp.pylsp.setup {
     on_attach = on_attach,
     cmd = { vim.g.vimrc_pylsp_cmd },
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+}
+
+require('rust-tools').setup {
+    server = {
+        on_attach = on_attach,
+        capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    }
 }
 
 nvim_lsp.clangd.setup {

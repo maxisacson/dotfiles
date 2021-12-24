@@ -1,8 +1,6 @@
 -- config for nvim-tree
 
-require'nvim-tree'.setup{
-    update_cwd = true
-}
+require'nvim-tree'.setup{}
 
 vim.api.nvim_set_keymap('n', '<Leader>nt', ':NvimTreeToggle<CR>', { noremap=true, silent=true })
 

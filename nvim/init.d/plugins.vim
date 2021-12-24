@@ -93,6 +93,7 @@ if has("nvim")
     "   - nvim-telescope/telescope.nvim
     "   - maybe more
     Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-lua/popup.nvim'
 
     if g:vimrc_enable_lsp
         " LSP configurations for neovim
@@ -153,7 +154,7 @@ if has("nvim")
     Plug 'ellisonleao/gruvbox.nvim'
 
     " git-blame integration
-    Plug 'f-person/git-blame.nvim'
+    " Plug 'f-person/git-blame.nvim'
 
     " visualize color codes
     Plug 'norcalli/nvim-colorizer.lua'
@@ -177,6 +178,9 @@ if has("nvim")
     if g:vimrc_enable_orgmode
         Plug 'nvim-orgmode/orgmode'
     endif
+
+    " To enable more features from rust-analyzer
+    Plug 'simrat39/rust-tools.nvim'
 endif
 
 call plug#end()
