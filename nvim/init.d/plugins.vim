@@ -139,7 +139,7 @@ if has("nvim")
 
     if g:vimrc_enable_feline
         " feline airline alternative
-        Plug 'Famiu/feline.nvim'
+        Plug 'feline-nvim/feline.nvim'
     endif
 
     if g:vimrc_enable_barbar
