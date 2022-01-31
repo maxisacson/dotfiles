@@ -212,39 +212,39 @@ table.insert(components.active[3], {
 })
 
 table.insert(components.active[3], {
-    provider = 'diagnostic_hints',
-    enabled = function() return lsp.diagnostics_exist('Hint') end,
-    hl = { fg = colors.dark0, bg = colors.light4 },
+   provider = 'diagnostic_hints',
+   enabled = function() return lsp.diagnostics_exist('Hint') end,
+   hl = { fg = colors.dark0, bg = colors.light4 },
 })
 
 table.insert(components.active[3], {
-    provider = 'diagnostic_info',
-    enabled = function() return lsp.diagnostics_exist('Information') end,
-    hl = { fg = colors.dark0, bg = colors.light4 },
+   provider = 'diagnostic_info',
+   enabled = function() return lsp.diagnostics_exist('Info') end,
+   hl = { fg = colors.dark0, bg = colors.light4 },
 })
 
 table.insert(components.active[3], {
-    provider = function(component)
-        if lsp.diagnostics_exist('Warning') then
-            return lsp.diagnostic_warnings(component)
-        end
-        return ''
-    end,
-    hl = { fg = colors.dark0, bg = colors.bright_orange },
-    left_sep = { str = '', hl = { fg = colors.dark0, bg = colors.bright_orange } },
-    right_sep = { str = ' ', hl = { bg = colors.bright_orange } }
+   provider = function(component)
+       if lsp.diagnostics_exist('Warn') then
+           return lsp.diagnostic_warnings(component)
+       end
+       return ''
+   end,
+   hl = { fg = colors.dark0, bg = colors.bright_orange },
+   left_sep = { str = '', hl = { fg = colors.dark0, bg = colors.bright_orange } },
+   right_sep = { str = ' ', hl = { bg = colors.bright_orange } }
 })
 
 table.insert(components.active[3], {
-    provider = function(component)
-        if lsp.diagnostics_exist('Error') then
-            return lsp.diagnostic_errors(component)
-        end
-        return ''
-    end,
-    hl = { fg = colors.dark0, bg = colors.bright_red },
-    left_sep = { str ='', hl = { fg = colors.dark0, bg = colors.bright_red } },
-    right_sep = { str =' ', hl = { bg = colors.bright_red } }
+   provider = function(component)
+       if lsp.diagnostics_exist('Error') then
+           return lsp.diagnostic_errors(component)
+       end
+       return ''
+   end,
+   hl = { fg = colors.dark0, bg = colors.bright_red },
+   left_sep = { str ='', hl = { fg = colors.dark0, bg = colors.bright_red } },
+   right_sep = { str =' ', hl = { bg = colors.bright_red } }
 })
 
 table.insert(components.inactive[1], {
