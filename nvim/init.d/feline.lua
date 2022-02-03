@@ -259,7 +259,7 @@ require('feline').setup({
     separators=separators,
     properties=properties,
     vi_mode_colors=vi_mode_colors,
-    colors=colors,
+    theme=colors,
 
     force_inactive = {
         filetypes = {
