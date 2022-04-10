@@ -66,6 +66,9 @@ Plug 'maxisacson/vim-geant4-mac'
 " syntax for EGS input files
 Plug 'maxisacson/vim-egsinp'
 
+" syntax for experimental files
+Plug 'git@github.com:maxisacson/vim-rs-experimental-syntax.git'
+
 if !has("nvim")
     " gruvbox theme
     Plug 'morhetz/gruvbox'
