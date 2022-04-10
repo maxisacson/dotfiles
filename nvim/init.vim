@@ -39,7 +39,7 @@ call LoadConf('colorscheme.vim')
 
 if has("nvim")
     call LoadConfCond('lsp.lua', g:vimrc_enable_lsp)
-    call LoadConfCond('lsp_signature.lua', g:vimrc_enable_lsp)
+    call LoadConfCond('lsp_signature.lua', g:vimrc_enable_lsp && g:vimrc_enable_lsp_signature)
     call LoadConfCond('ts.lua', g:vimrc_enable_treesitter)
 
     call LoadConf('gitsigns.lua')

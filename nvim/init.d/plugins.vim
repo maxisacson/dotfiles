@@ -106,7 +106,9 @@ if has("nvim")
         Plug 'folke/lsp-colors.nvim'
 
         " live parameter hints
-        Plug 'ray-x/lsp_signature.nvim'
+        if g:vimrc_enable_lsp_signature
+            Plug 'ray-x/lsp_signature.nvim'
+        endif
     endif
 
     if g:vimrc_enable_nvim_cmp
