@@ -88,6 +88,13 @@ end
 nvim_lsp.pylsp.setup {
     on_attach = on_attach,
     cmd = { vim.g.vimrc_pylsp_cmd },
+    settings = {
+        pylsp = {
+            plugins = {
+                pycodestyle = { ignore = {'E501', 'E231', 'E226'} },
+            }
+        }
+    },
     capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 }
 
