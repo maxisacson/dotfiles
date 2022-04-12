@@ -21,7 +21,7 @@ if vim.g.vimrc_enable_orgmode then
 end
 
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = "maintained",
+    ensure_installed = "all",
     highlight = {
         enable = true,
     },
