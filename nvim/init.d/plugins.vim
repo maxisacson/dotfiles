@@ -54,6 +54,9 @@ Plug 'tikhomirov/vim-glsl'
 " latex plugin
 Plug 'lervag/vimtex'
 
+" for diffing blocks of text
+Plug 'AndrewRadev/linediff.vim'
+
 " extra syntax for cpp-files
 Plug 'maxisacson/vim-cpp-extra'
 
