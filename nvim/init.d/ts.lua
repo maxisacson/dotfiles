@@ -1,6 +1,6 @@
 
 local parser_configs = require('nvim-treesitter.parsers').get_parser_configs()
-if vim.g.vimrc_enable_neorg then
+if vim.g.vimrc.enable_neorg then
     parser_configs.norg = {
         install_info = {
             url = "https://github.com/nvim-neorg/tree-sitter-norg",
@@ -9,7 +9,7 @@ if vim.g.vimrc_enable_neorg then
         },
     }
 end
-if vim.g.vimrc_enable_orgmode then
+if vim.g.vimrc.enable_orgmode then
     parser_configs.org = {
         install_info = {
             url = 'https://github.com/milisims/tree-sitter-org',

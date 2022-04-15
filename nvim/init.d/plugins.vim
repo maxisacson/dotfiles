@@ -1,6 +1,6 @@
 call plug#begin('~/.vim/bundle')
 
-if g:vimrc_enable_airline
+if g:vimrc.enable_airline
     " vim-airline
     Plug 'vim-airline/vim-airline'
 
@@ -14,12 +14,12 @@ Plug 'justinmk/vim-syntax-extra'
 " vim-fugitive for git integration
 Plug 'tpope/vim-fugitive'
 
-if g:vimrc_enable_ack
+if g:vimrc.enable_ack
     " ack.vim for ag and ack integration
     Plug 'mileszs/ack.vim'
 endif
 
-if g:vimrc_enable_nerdtree
+if g:vimrc.enable_nerdtree
     " nerdtree for file browsing
     Plug 'scrooloose/nerdtree'
 endif
@@ -80,12 +80,12 @@ endif
 " clang-format intergration for vim
 Plug 'rhysd/vim-clang-format'
 
-if g:vimrc_enable_vim_cmake
+if g:vimrc.enable_vim_cmake
     " vim-cmake
     Plug 'vhdirk/vim-cmake'
 endif
 
-if g:vimrc_enable_fzf
+if g:vimrc.enable_fzf
     " fzf fuzzy finder
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
@@ -101,7 +101,7 @@ if has("nvim")
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-lua/popup.nvim'
 
-    if g:vimrc_enable_lsp
+    if g:vimrc.enable_lsp
         " LSP configurations for neovim
         Plug 'neovim/nvim-lspconfig'
 
@@ -109,14 +109,14 @@ if has("nvim")
         Plug 'folke/lsp-colors.nvim'
 
         " live parameter hints
-        if g:vimrc_enable_lsp_signature
+        if g:vimrc.enable_lsp_signature
             Plug 'ray-x/lsp_signature.nvim'
         endif
     endif
 
-    if g:vimrc_enable_nvim_cmp
+    if g:vimrc.enable_nvim_cmp
         " nvim-cmp (replaces nvim-compe)
-        if g:vimrc_enable_lsp
+        if g:vimrc.enable_lsp
             Plug 'hrsh7th/cmp-nvim-lsp' " lsp source
         endif
         Plug 'hrsh7th/vim-vsnip'    " snippet plugin
@@ -129,12 +129,12 @@ if has("nvim")
         Plug 'onsails/lspkind-nvim'
     endif
 
-    if g:vimrc_enable_nvim_cmp
+    if g:vimrc.enable_nvim_cmp
         " preconfigured snippets
         Plug 'rafamadriz/friendly-snippets'
     endif
 
-    if g:vimrc_enable_treesitter
+    if g:vimrc.enable_treesitter
         " treesitter
         Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     endif
@@ -145,12 +145,12 @@ if has("nvim")
     " gitsigns
     Plug 'lewis6991/gitsigns.nvim'
 
-    if g:vimrc_enable_feline
+    if g:vimrc.enable_feline
         " feline airline alternative
         Plug 'feline-nvim/feline.nvim'
     endif
 
-    if g:vimrc_enable_barbar
+    if g:vimrc.enable_barbar
         " tabline plugin
         Plug 'romgrk/barbar.nvim'
     endif
@@ -167,23 +167,23 @@ if has("nvim")
     " visualize color codes
     Plug 'norcalli/nvim-colorizer.lua'
 
-    if g:vimrc_enable_nvimtree
+    if g:vimrc.enable_nvimtree
         " NvimTree alternative to NerdTree
         Plug 'kyazdani42/nvim-tree.lua'
     endif
 
-    if g:vimrc_enable_telescope
+    if g:vimrc.enable_telescope
         " Telescope -- modular fuzzy finder
         Plug 'nvim-telescope/telescope.nvim'
         Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
     endif
 
     " Neorg note taking plugin
-    if g:vimrc_enable_neorg
+    if g:vimrc.enable_neorg
         Plug 'nvim-neorg/neorg'
     endif
 
-    if g:vimrc_enable_orgmode
+    if g:vimrc.enable_orgmode
         Plug 'nvim-orgmode/orgmode'
     endif
 

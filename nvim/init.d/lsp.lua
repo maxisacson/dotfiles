@@ -87,7 +87,7 @@ end
 -- Servers that do require special setup
 nvim_lsp.pylsp.setup {
     on_attach = on_attach,
-    cmd = { vim.g.vimrc_pylsp_cmd },
+    cmd = { vim.g.vimrc.pylsp_cmd },
     settings = {
         pylsp = {
             plugins = {

@@ -2,8 +2,8 @@
 
 " python3 host program
 function! PythonInterpreter()
-    if g:vimrc_override_python3_host_prog
-        return g:vimrc_python3_host_prog
+    if g:vimrc.override_python3_host_prog
+        return g:vimrc.python3_host_prog
     endif
 
     if empty(glob("/usr/bin/python3"))

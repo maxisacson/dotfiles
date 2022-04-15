@@ -71,7 +71,7 @@ nnoremap <Leader>< <C-w><
 " Buffer management
 set hidden " allow buffers to be open in the background
 nnoremap <Leader><Leader> <C-^>
-if !g:vimrc_enable_barbar
+if !g:vimrc.enable_barbar
     " nnoremap <Leader>w :bprev<CR>
     " nnoremap <Leader>e :bnext<CR>
     nnoremap <Leader>s :bprev<CR>
