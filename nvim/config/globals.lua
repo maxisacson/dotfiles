@@ -2,11 +2,6 @@ local M = {}
 
 function M.build_config(opt)
     local default_opt = {
-        enable_airline = false,
-        enable_feline = true,
-        enable_barbar = true,
-        enable_nerdtree = false,
-        enable_nvimtree = true,
         enable_vim_cmake = vim.fn.executable("cmake") == 1,
         enable_telescope = true,
         enable_fzf = false,
