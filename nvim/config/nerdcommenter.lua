@@ -1,8 +1,6 @@
 -- nerdcommenter configuration
-vim.cmd([[
-    let g:NERDSpaceDelims = 1
-    let g:NERDCompactSexyComs = 1
-    let g:NERDDefaultAlign = 'left'
-    let g:NERDCommentEmptyLines = 1
-    let g:NERDTrimTrailingWhitespace = 1
-]])
+vim.g.NERDSpaceDelims = 1
+vim.g.NERDCompactSexyComs = 1
+vim.g.NERDDefaultAlign = 'left'
+vim.g.NERDCommentEmptyLines = 1
+vim.g.NERDTrimTrailingWhitespace = 1

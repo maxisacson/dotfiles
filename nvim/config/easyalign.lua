@@ -1,5 +1,3 @@
-vim.cmd([[
-    " vim-easy-align key bindings
-    xmap ga <Plug>(EasyAlign)
-    nmap ga <Plug>(EasyAlign)
-]])
+-- vim-easy-align key bindings
+vim.api.nvim_set_keymap("x", "ga", "<Plug>(EasyAlign)", {})
+vim.api.nvim_set_keymap("n", "ga", "<Plug>(EasyAlign)", {})
