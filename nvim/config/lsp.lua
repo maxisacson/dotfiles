@@ -69,18 +69,20 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
         update_in_insert = true,
         virtual_text = true,
         virtual_text = {
-            -- prefix = '',
             prefix = '',
         }
     }
 )
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- Servers that don't require special setup
 local servers = { 'cmake' }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
         on_attach = on_attach,
-        capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+        capabilities = capabilities
     }
 end
 
@@ -95,19 +97,19 @@ nvim_lsp.pylsp.setup {
             }
         }
     },
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    capabilities = capabilities
 }
 
 require('rust-tools').setup {
     server = {
         on_attach = on_attach,
-        capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+        capabilities = capabilities
     }
 }
 
 nvim_lsp.clangd.setup {
     on_attach = on_attach,
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    capabilities = capabilities,
 
     cmd = {"clangd", "--background-index", "--compile-commands-dir=build","--clang-tidy",
         "--clang-tidy-checks='"..
@@ -131,4 +133,30 @@ nvim_lsp.clangd.setup {
         "-readability-uppercase-literal-suffix,"..
         "-modernize-use-trailing-return-type,"..
     "'"}
+}
+
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, 'lua/?.lua')
+table.insert(runtime_path, 'lua/?/init.lua')
+
+nvim_lsp.sumneko_lua.setup {
+    on_attach = on_atach,
+    capabilities = capabilities,
+    settings = {
+        Lua = {
+            runtime = {
+                version = "LuaJIT",
+                path = runtime_path
+            },
+            diagnostics = {
+                globals = { 'vim' }
+            },
+            workspace = {
+                library = vim.api.nvim_get_runtime_file('', true)
+            },
+            telemetry = {
+                enable = false
+            }
+        }
+    }
 }
