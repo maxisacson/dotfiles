@@ -1,25 +1,13 @@
-vim.cmd([[
-    " python3 host program
-    function! PythonInterpreter()
-        if g:vimrc.override_python3_host_prog
-            return g:vimrc.python3_host_prog
-        endif
+-- Set python3 host program
+function PythonInterpreter()
+    if vim.g.vimrc.override_python3_host_prog then
+        return vim.g.vimrc.python3_host_prog
+    end
 
-        if empty(glob("/usr/bin/python3"))
-            return system("which python3")
-        endif
+    if vim.fn.empty(vim.fn.glob("/usr/bin/python3")) then
+        return vim.fn.system("which python3")
+    end
 
-        return "/usr/bin/python3"
-    endfunction
-    let g:python3_host_prog = PythonInterpreter()
-
-    " python-syntax config
-    let python_highlight_all = 1
-    "let python_version_2 = 1
-
-    " PyMode config
-    let g:pymode = 0
-    "let g:pymode_rope_completion = 0
-    "let g:pymode_rope_lookup_project = 0
-    "let g:pymode_rope = 0
-]])
+    return "/usr/bin/python3"
+end
+vim.g.python3_host_prog = PythonInterpreter()
