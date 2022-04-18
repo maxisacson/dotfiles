@@ -140,7 +140,7 @@ table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
 nvim_lsp.sumneko_lua.setup {
-    on_attach = on_atach,
+    on_attach = on_attach,
     capabilities = capabilities,
     settings = {
         Lua = {

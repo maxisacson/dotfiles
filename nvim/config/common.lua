@@ -1,112 +1,106 @@
--- Standard config
-vim.cmd([[
-    set nocompatible
-    syntax on
+-- Set indenting stuff
+vim.opt.tabstop = 4 -- number of spaces in a <Tab>
+vim.opt.shiftwidth = 4 -- number of spaces to use for autoindent. Should be == tabstop
+vim.opt.expandtab = true -- use spaces as <Tab>
+vim.opt.smarttab = true -- insert shiftwidth worth of whitespace at beginning of line
+vim.opt.backspace = 'indent,eol,start' -- make <BS> well behaved
+vim.opt.autoindent = true -- make sure autoindent is turned on
+vim.opt.cinoptions = 'l1,g0.75s,h0.25s,N-s'
 
-    " Set indenting stuff
-    set tabstop=4 " number of spaces in a <Tab>
-    set shiftwidth=4 " number of spaces to use for autoindent. Should be == tabstop
-    set expandtab " use spaces as <Tab>
-    set smarttab " insert shiftwidth worth of whitespace at beginning of line
-    set backspace=indent,eol,start " make <BS> well behaved
-    set autoindent " make sure autoindent is turned on
-    set cinoptions=l1,g0.75s,h0.25s,N-s
+-- Format options
+vim.opt.textwidth = 80
+vim.opt.formatoptions:remove{'t'}
 
-    " Format options
-    set textwidth=80
-    set formatoptions-=t
+-- status line
+vim.opt.laststatus = 2 -- 2 = always
 
-    " status line
-    set laststatus=2 " 2 = always
+-- Set incremental search
+vim.opt.incsearch = true
 
-    " Set incremental search
-    set incsearch
+-- Always keep 1 line above and below cursor,
+-- and 5 columns to the right and left
+vim.opt.scrolloff = 1
+vim.opt.sidescrolloff = 5
 
-    " Always keep 1 line above and below cursor,
-    " and 5 columns to the right and left
-    set scrolloff=1
-    set sidescrolloff=5
+-- Line numbering
+vim.opt.number = true
 
-    " Line numbering
-    set number
+-- Show command
+vim.opt.showcmd = true
 
-    " Show command
-    set showcmd
+-- Set default spell language
+vim.opt.spelllang = 'en_gb'
 
-    " Set default spell language
-    set spelllang=en_gb
+-- Set window title
+vim.opt.title = true
 
-    " Set window title
-    set title
+-- Always use ft=tex as default for .tex-files
+vim.g.tex_flavor = 'latex'
 
-    " Always use ft=tex as default for .tex-files
-    let g:tex_flavor = 'latex'
+-- Map , to <Leader>
+vim.g.mapleader = ','
 
-    " Map , to <Leader>
-    let mapleader=','
+-- always split the screen to the right or below
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 
-    " always split the screen to the right or below
-    set splitright
-    set splitbelow
+local function keymap(...) vim.api.nvim_set_keymap(...) end
 
-    " Window movement bindings
-    nnoremap <C-Left> <C-w>h
-    nnoremap <C-Right> <C-w>l
-    nnoremap <C-Up> <C-w>k
-    nnoremap <C-Down> <C-w>j
-    nnoremap <C-h> <C-w>h
-    nnoremap <C-l> <C-w>l
-    nnoremap <C-k> <C-w>k
-    nnoremap <C-j> <C-w>j
-    " convenience mapping for CTRL_W
-    nnoremap ` <C-w>
-    nnoremap § <C-w>
+-- Window movement bindings
+keymap('n', '<C-Left>',  '<C-w>h', { noremap = true })
+keymap('n', '<C-Right>', '<C-w>l', { noremap = true })
+keymap('n', '<C-Up>',    '<C-w>k', { noremap = true })
+keymap('n', '<C-Down>',  '<C-w>j', { noremap = true })
+keymap('n', '<C-h>',     '<C-w>h', { noremap = true })
+keymap('n', '<C-l>',     '<C-w>l', { noremap = true })
+keymap('n', '<C-k>',     '<C-w>k', { noremap = true })
+keymap('n', '<C-j>',     '<C-w>j', { noremap = true })
+-- convenience mapping for CTRL_W
+keymap('n', '`', '<C-w>', { noremap = true })
+keymap('n', '§', '<C-w>', { noremap = true })
 
 
-    " Window resize bindings
-    nnoremap <Leader>+ <C-w>+
-    nnoremap <Leader>- <C-w>-
-    nnoremap <Leader>> <C-w>>
-    nnoremap <Leader>< <C-w><
+-- Window resize bindings
+keymap('n', '<Leader>+', '<C-w>+', { noremap = true })
+keymap('n', '<Leader>-', '<C-w>-', { noremap = true })
+keymap('n', '<Leader>>', '<C-w>>', { noremap = true })
+keymap('n', '<Leader><', '<C-w><', { noremap = true })
 
-    " Buffer management
-    set hidden " allow buffers to be open in the background
-    nnoremap <Leader><Leader> <C-^>
-    " if !g:vimrc.enable_barbar
-    "     " nnoremap <Leader>w :bprev<CR>
-    "     " nnoremap <Leader>e :bnext<CR>
-    "     nnoremap <Leader>s :bprev<CR>
-    "     nnoremap <Leader>d :bnext<CR>
-    "     nnoremap <silent> <leader>qq :b# <BAR> bd #<CR>
-    " endif
+-- Buffer management
+vim.opt.hidden = true -- allow buffers to be open in the background
+keymap('n', '<Leader><Leader>', '<C-^>', { noremap = true })
+-- " if !g:vimrc.enable_barbar
+-- "     nnoremap <Leader>w :bprev<CR>
+-- "     nnoremap <Leader>e :bnext<CR>
+-- "     nnoremap <silent> <leader>qq :b# <BAR> bd #<CR>
+-- " endif
 
-    " Tab management
-    " nnoremap <S-q> :tabp<CR>
-    " nnoremap <S-w> :tabnew<CR>
-    " nnoremap <S-e> :tabn<CR>
-    " nnoremap <silent> <Leader><S-q> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
-    " nnoremap <silent> <Leader><S-e> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
+-- " Tab management
+-- " nnoremap <S-q> :tabp<CR>
+-- " nnoremap <S-w> :tabnew<CR>
+-- " nnoremap <S-e> :tabn<CR>
+-- " nnoremap <silent> <Leader><S-q> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
+-- " nnoremap <silent> <Leader><S-e> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
 
-    " Highlight column
-    set colorcolumn=+1
-    highlight ColorColumn ctermbg=Black
+-- Highlight column
+vim.opt.colorcolumn = '+1'
+vim.cmd([[highlight ColorColumn ctermbg=Black]])
 
-    " Always show sign column
-    set signcolumn=yes
+-- Always show sign column
+vim.opt.signcolumn = 'yes'
 
-    " mappings for quickfix list apart from tab
-    nnoremap <leader>qn :cnext<CR>
-    nnoremap <leader>qp :cprev<CR>
-    nnoremap <leader>qf :cfirst<CR>
-    nnoremap <leader>ql :clast<CR>
-    nnoremap <leader>qc :cclose<CR>
-    nnoremap <leader>qo :copen<CR>
+-- mappings for quickfix list apart from tab
+keymap('n', '<leader>qn', ':cnext<CR>',  { noremap = true })
+keymap('n', '<leader>qp', ':cprev<CR>',  { noremap = true })
+keymap('n', '<leader>qf', ':cfirst<CR>', { noremap = true })
+keymap('n', '<leader>ql', ':clast<CR>',  { noremap = true })
+keymap('n', '<leader>qc', ':cclose<CR>', { noremap = true })
+keymap('n', '<leader>qo', ':copen<CR>',  { noremap = true })
 
-    " mappings for location list apart from tab
-    nnoremap <leader>ln :lnext<CR>
-    nnoremap <leader>lp :lprev<CR>
-    nnoremap <leader>lf :lfirst<CR>
-    nnoremap <leader>ll :llast<CR>
-    nnoremap <leader>lc :lclose<CR>
-    nnoremap <leader>lo :lopen<CR>
-]])
+-- mappings for location list apart from tab
+keymap('n', '<leader>ln', ':lnext<CR>',  { noremap = true })
+keymap('n', '<leader>lp', ':lprev<CR>',  { noremap = true })
+keymap('n', '<leader>lf', ':lfirst<CR>', { noremap = true })
+keymap('n', '<leader>ll', ':llast<CR>',  { noremap = true })
+keymap('n', '<leader>lc', ':lclose<CR>', { noremap = true })
+keymap('n', '<leader>lo', ':lopen<CR>',  { noremap = true })
