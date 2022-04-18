@@ -19,3 +19,7 @@ fi
 if [ -d "$HOME/Android/Sdk/platform-tools" ]; then
     PATH="$HOME/Android/Sdk/platform-tools:$PATH"
 fi
+
+if [ -d "$HOME/.local/opt/lua-language-server/bin" ]; then
+    PATH="$HOME/.local/opt/lua-language-server/bin:$PATH"
+fi

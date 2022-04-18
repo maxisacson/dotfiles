@@ -33,7 +33,7 @@ local on_attach = function(client, bufnr)
         buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
     end
 
-    vim.api.nvim_exec([[
+    vim.cmd([[
         hi LspDiagnosticsUnderlineError cterm=undercurl gui=undercurl guisp=Red
         hi LspDiagnosticsUnderlineWarning cterm=undercurl gui=undercurl guisp=Orange
         hi LspDiagnosticsUnderlineInformation cterm=undercurl gui=undercurl guisp=LightBlue
@@ -44,15 +44,12 @@ local on_attach = function(client, bufnr)
         hi LspReferenceRead cterm=reverse gui=reverse
         hi LspReferenceWrite cterm=reverse gui=reverse
         hi LspReferenceText cterm=reverse gui=reverse
-    ]], false)
+    ]])
 
     -- Set autocommands conditional on server_capabilities
     if client.resolved_capabilities.document_highlight then
         vim.opt.updatetime = 250
         vim.cmd([[
-            hi! link LspReferenceRead Search
-            hi! link LspReferenceText Search
-            hi! link LspReferenceWrite Search
             augroup lsp_document_highlight
                 autocmd! * <buffer>
                 autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
