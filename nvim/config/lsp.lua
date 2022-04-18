@@ -48,18 +48,18 @@ local on_attach = function(client, bufnr)
 
     -- Set autocommands conditional on server_capabilities
     if client.resolved_capabilities.document_highlight then
-        vim.api.nvim_exec([[
-            set updatetime=500
-            hi link LspReferenceRead Search
-            hi link LspReferenceText Search
-            hi link LspReferenceWrite Search
+        vim.opt.updatetime = 250
+        vim.cmd([[
+            hi! link LspReferenceRead Search
+            hi! link LspReferenceText Search
+            hi! link LspReferenceWrite Search
             augroup lsp_document_highlight
                 autocmd! * <buffer>
                 autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
                 autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
                 autocmd CursorHold <buffer> lua vim.diagnostic.open_float({show_header=false, focusable=false})
             augroup END
-        ]], false)
+        ]])
     end
 end
 
@@ -67,7 +67,6 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
         signs = false,
         update_in_insert = true,
-        virtual_text = true,
         virtual_text = {
             prefix = '',
         }
