@@ -9,7 +9,21 @@ local function setup(mod)
     return string.format('require("setup.%s")', mod)
 end
 
-return require('packer').startup(function(use)
+local packer = require('packer')
+local putil = require('packer.util')
+packer.init({
+    display = {
+        open_fn = function()
+            return putil.float({border = 'single'})
+        end
+    },
+    profile = {
+        enable = true,
+        threshold = 1,
+    }
+})
+
+return packer.startup(function(use)
     local vimrc = vim.g.vimrc
 
     -- Packer can manage itself
