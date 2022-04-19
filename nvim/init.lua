@@ -4,7 +4,7 @@ local conf = {
         if not pred then
             return
         end
-        return require('config.' .. mod)
+        return require('setup.' .. mod)
     end
 }
 
