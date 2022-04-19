@@ -1,9 +1,9 @@
-vim.cmd([[
-    augroup PackerUserConfig
-        autocmd!
-        autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-    augroup end
-]])
+local ag = vim.api.nvim_create_augroup("PackerUserConfig", { clear = true })
+vim.api.nvim_create_autocmd("BufWritePost", {
+    group = ag,
+    pattern = "plugins.lua",
+    command = "source <afile> | PackerCompile"
+})
 
 local function setup(mod)
     return string.format('require("setup.%s")', mod)
