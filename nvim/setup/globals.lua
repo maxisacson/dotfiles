@@ -2,16 +2,16 @@ local M = {}
 
 function M.build_config(opt)
     local default_opt = {
-        enable_vim_cmake = vim.fn.executable("cmake") == 1,
-        enable_telescope = true,
-        enable_fzf = false,
-        enable_ack = false,
-        enable_lsp = true,
-        enable_treesitter = true,
-        enable_nvim_cmp = true,
-        enable_neorg = false,
-        enable_orgmode = false,
-        enable_lsp_signature = true,
+        disable_vim_cmake = vim.fn.executable("cmake") == 0,
+        disable_telescope = false,
+        disable_fzf = true,
+        disable_ack = true,
+        disable_lsp = false,
+        disable_treesitter = false,
+        disable_nvim_cmp = false,
+        disable_neorg = true,
+        disable_orgmode = true,
+        disable_lsp_signature = false,
 
         -- " Fix lsp floating diagnostic for 'ellisonleao/gruvbox.nvim'
         fix_normalfloat_hilink_to_pmenu = true,
@@ -20,23 +20,27 @@ function M.build_config(opt)
         override_python3_host_prog = false,
         python3_host_prog = "python",
         pylsp_cmd = "pylsp",
+
+        path = vim.env['HOME'] .. '/.config/nvim'
     }
 
     local user_opt = default_opt
-    for k,v in pairs(user_opt) do
-        if opt[k] ~= nil then
-            user_opt[k] = opt[k]
+    for k,v in pairs(opt) do
+        if user_opt[k] ~= nil then
+            user_opt[k] = v
+        else
+            error('unknown opt: ' .. k)
         end
     end
 
-    if user_opt.enable_telescope then
-        if user_opt.enable_fzf then
-            print("Incompatible opts: enable_telescope and enable_fzf. Setting enable_fzf = false")
-            user_opt.enable_fzf = false
+    if not user_opt.disable_telescope then
+        if not user_opt.disable_fzf then
+            print("Incompatible: disable_telescope = false and disable_fzf = false. Setting disable_fzf = true")
+            user_opt.disable_fzf = true
         end
-        if user_opt.enable_ack then
-            print("Incompatible opts: enable_telescope and enable_ack. Setting enable_ack = false")
-            user_opt.enable_ack = false
+        if not user_opt.disable_ack then
+            print("Incompatible: disable_telescope = false and disable_ack = false. Setting disable_ack = true")
+            user_opt.disable_ack = true
         end
     end
 

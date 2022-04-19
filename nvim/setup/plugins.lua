@@ -1,10 +1,13 @@
-
 vim.cmd([[
     augroup PackerUserConfig
         autocmd!
         autocmd BufWritePost plugins.lua source <afile> | PackerCompile
     augroup end
 ]])
+
+local function setup(mod)
+    return string.format('require("setup.%s")', mod)
+end
 
 return require('packer').startup(function(use)
     local vimrc = vim.g.vimrc
@@ -16,13 +19,17 @@ return require('packer').startup(function(use)
     use 'tpope/vim-fugitive'
 
     -- ack.vim for ag and ack integration
-    use {'mileszs/ack.vim', disable = not vimrc.enable_ack }
+    use {
+        'mileszs/ack.vim',
+        disable = vimrc.disable_ack,
+        config = setup('ack')
+    }
 
     -- nerdcomment for easy commenting
-    use 'scrooloose/nerdcommenter'
+    use { 'scrooloose/nerdcommenter', config = setup('nerdcommenter') }
 
     -- vim-easy-align for easy alignment
-    use 'junegunn/vim-easy-align'
+    use { 'junegunn/vim-easy-align', config = setup('easyalign') }
 
     -- vim-surround
     use 'tpope/vim-surround'
@@ -37,7 +44,7 @@ return require('packer').startup(function(use)
     use 'tikhomirov/vim-glsl'
 
     -- latex plugin
-    use 'lervag/vimtex'
+    use { 'lervag/vimtex', config = setup('vimtex') }
 
     -- for diffing blocks of text
     use 'AndrewRadev/linediff.vim'
@@ -58,64 +65,121 @@ return require('packer').startup(function(use)
     use 'git@github.com:maxisacson/vim-rs-experimental-syntax.git'
 
     -- clang-format intergration for vim
-    use 'rhysd/vim-clang-format'
+    use { 'rhysd/vim-clang-format', config = setup('clang-format') }
 
     -- vim-cmake
-    use { 'vhdirk/vim-cmake', disable = not vimrc.enable_vim_cmake }
+    use { 'vhdirk/vim-cmake', disable = vimrc.disable_vim_cmake }
 
     -- fzf fuzzy finder
-    use { 'junegunn/fzf.vim', disable = not vimrc.enable_fzf, requires = {{'junegunn/fzf', run = vim.fn['fzf#install']}} }
+    use {
+        'junegunn/fzf.vim',
+        disable = vimrc.disable_fzf,
+        config = setup('fzf'),
+        requires = {
+            { 'junegunn/fzf', run = vim.fn['fzf#install'] }
+        }
+    }
 
     -- LSP configurations for neovim
-    use { 'neovim/nvim-lspconfig', disable = not vimrc.enable_lsp }
+    use {
+        'neovim/nvim-lspconfig',
+        disable = vimrc.disable_lsp,
+        config = setup('lsp')
+    }
 
     -- better support for lsp colors
-    use { 'folke/lsp-colors.nvim', disable = not vimrc.enable_lsp }
+    use { 'folke/lsp-colors.nvim', disable = vimrc.disable_lsp }
 
     -- live parameter hints
-    use { 'ray-x/lsp_signature.nvim', disable = not vimrc.enable_lsp or not vimrc.enable_lsp_signature }
+    use {
+        'ray-x/lsp_signature.nvim',
+        disable = vimrc.disable_lsp or vimrc.disable_lsp_signature,
+        config = setup('lsp_signature')
+    }
 
     -- nvim-cmp for autocompletion
-    use { 'hrsh7th/cmp-nvim-lsp', disable = not vimrc.enable_nvim_cmp or not vimrc.enable_lsp } -- lsp source
-    use { 'hrsh7th/vim-vsnip',    disable = not vimrc.enable_nvim_cmp }  -- snippet plugin
-    use { 'hrsh7th/cmp-vsnip',    disable = not vimrc.enable_nvim_cmp }  -- snippet source
-    use { 'hrsh7th/cmp-buffer',   disable = not vimrc.enable_nvim_cmp }  -- buffer source
-    use { 'hrsh7th/cmp-path',     disable = not vimrc.enable_nvim_cmp }  -- path source
-    use { 'hrsh7th/nvim-cmp',     disable = not vimrc.enable_nvim_cmp }
+    use {
+        'hrsh7th/nvim-cmp', disable = vimrc.disable_nvim_cmp,
+        requires = {
+            { 'hrsh7th/cmp-nvim-lsp', disable = vimrc.disable_lsp },
+            { 'hrsh7th/vim-vsnip' }, -- snippet plugin
+            { 'hrsh7th/cmp-vsnip' }, -- snippet source
+            { 'hrsh7th/cmp-buffer' }, -- buffer source
+            { 'hrsh7th/cmp-path' }, -- path source
+            { 'hrsh7th/nvim-cmp' },
+        },
+        config = setup('nvim-cmp')
+    }
 
     -- VSCode-like icons in completion menu
-    use { 'onsails/lspkind-nvim', disable = not vimrc.enable_nvim_cmp }
+    use { 'onsails/lspkind-nvim', disable = vimrc.disable_nvim_cmp }
 
     -- preconfigured snippets
-    use { 'rafamadriz/friendly-snippets', disable = not vimrc.enable_nvim_cmp }
+    use { 'rafamadriz/friendly-snippets', disable = vimrc.disable_nvim_cmp }
 
     -- treesitter
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate', disable = not vimrc.enable_treesitter }
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        disable = vimrc.disable_treesitter,
+        run = ':TSUpdate',
+        config = setup('treesitter')
+    }
 
     -- feline airline alternative
-    use { 'feline-nvim/feline.nvim', requires = {{'kyazdani42/nvim-web-devicons'}, {'lewis6991/gitsigns.nvim'}} }
+    use {
+        'feline-nvim/feline.nvim',
+        requires = {
+            { 'kyazdani42/nvim-web-devicons' },
+            { 'lewis6991/gitsigns.nvim', config = setup('gitsigns') }
+        },
+        config = setup('feline')
+    }
 
     -- tabline plugin
-    use { 'romgrk/barbar.nvim', requires = 'kyazdani42/nvim-web-devicons' }
+    use {
+        'romgrk/barbar.nvim',
+        requires = 'kyazdani42/nvim-web-devicons',
+        config = setup('barbar')
+    }
 
     -- gruvbox theme
     use { 'ellisonleao/gruvbox.nvim', requires = 'rktjmp/lush.nvim' }
 
     -- visualize color codes
-    use 'norcalli/nvim-colorizer.lua'
+    use { 'norcalli/nvim-colorizer.lua', config = setup('colorizer') }
 
     -- NvimTree alternative to NerdTree
-    use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons' }
+    use {
+        'kyazdani42/nvim-tree.lua',
+        requires = 'kyazdani42/nvim-web-devicons',
+        config = setup('nvim-tree')
+    }
 
     -- Telescope -- modular fuzzy finder
-    use { 'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim', disable = not vimrc.enable_telescope }
-    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', disable = not vimrc.enable_telescope }
+    use {
+        'nvim-telescope/telescope.nvim',
+        disable = vimrc.disable_telescope,
+        requires = {
+            { 'nvim-lua/plenary.nvim' },
+            { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+        },
+        config = setup('telescope')
+    }
 
     -- Neorg note taking plugin
-    use { 'nvim-neorg/neorg', requires = 'nvim-lua/plenary.nvim', disable = not vimrc.enable_neorg }
+    use {
+        'nvim-neorg/neorg',
+        disable = vimrc.disable_neorg,
+        requires = 'nvim-lua/plenary.nvim',
+        config = setup('neorg')
+    }
 
     -- orgmode for nvim
-    use { 'nvim-orgmode/orgmode', disable = not vimrc.enable_orgmode }
+    use {
+        'nvim-orgmode/orgmode',
+        disable = vimrc.disable_orgmode,
+        config = setup('orgmode')
+    }
 
     -- To enable more features from rust-analyzer
     use { 'simrat39/rust-tools.nvim', requires = 'nvim-lua/popup.nvim' }
