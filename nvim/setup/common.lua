@@ -1,38 +1,40 @@
+local opt = vim.opt
+
 -- Set indenting stuff
-vim.opt.tabstop = 4 -- number of spaces in a <Tab>
-vim.opt.shiftwidth = 4 -- number of spaces to use for autoindent. Should be == tabstop
-vim.opt.expandtab = true -- use spaces as <Tab>
-vim.opt.smarttab = true -- insert shiftwidth worth of whitespace at beginning of line
-vim.opt.backspace = 'indent,eol,start' -- make <BS> well behaved
-vim.opt.autoindent = true -- make sure autoindent is turned on
-vim.opt.cinoptions = 'l1,g0.75s,h0.25s,N-s'
+opt.tabstop = 4 -- number of spaces in a <Tab>
+opt.shiftwidth = 4 -- number of spaces to use for autoindent. Should be == tabstop
+opt.expandtab = true -- use spaces as <Tab>
+opt.smarttab = true -- insert shiftwidth worth of whitespace at beginning of line
+opt.backspace = 'indent,eol,start' -- make <BS> well behaved
+opt.autoindent = true -- make sure autoindent is turned on
+opt.cinoptions = 'l1,g0.75s,h0.25s,N-s'
 
 -- Format options
-vim.opt.textwidth = 80
-vim.opt.formatoptions:remove{'t'}
+opt.textwidth = 80
+opt.formatoptions:remove{'t'}
 
 -- status line
-vim.opt.laststatus = 2 -- 2 = always
+opt.laststatus = 2 -- 2 = always
 
 -- Set incremental search
-vim.opt.incsearch = true
+opt.incsearch = true
 
 -- Always keep 1 line above and below cursor,
 -- and 5 columns to the right and left
-vim.opt.scrolloff = 1
-vim.opt.sidescrolloff = 5
+opt.scrolloff = 1
+opt.sidescrolloff = 5
 
 -- Line numbering
-vim.opt.number = true
+opt.number = true
 
 -- Show command
-vim.opt.showcmd = true
+opt.showcmd = true
 
 -- Set default spell language
-vim.opt.spelllang = 'en_gb'
+opt.spelllang = 'en_gb'
 
 -- Set window title
-vim.opt.title = true
+opt.title = true
 
 -- Always use ft=tex as default for .tex-files
 vim.g.tex_flavor = 'latex'
@@ -41,8 +43,8 @@ vim.g.tex_flavor = 'latex'
 vim.g.mapleader = ','
 
 -- always split the screen to the right or below
-vim.opt.splitright = true
-vim.opt.splitbelow = true
+opt.splitright = true
+opt.splitbelow = true
 
 local function keymap(...) vim.api.nvim_set_keymap(...) end
 
@@ -83,11 +85,11 @@ keymap('n', '<Leader><Leader>', '<C-^>', { noremap = true })
 -- " nnoremap <silent> <Leader><S-e> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
 
 -- Highlight column
-vim.opt.colorcolumn = '+1'
+opt.colorcolumn = '+1'
 vim.cmd([[highlight ColorColumn ctermbg=Black]])
 
 -- Always show sign column
-vim.opt.signcolumn = 'yes'
+opt.signcolumn = 'yes'
 
 -- mappings for quickfix list apart from tab
 keymap('n', '<leader>qn', ':cnext<CR>',  { noremap = true })
