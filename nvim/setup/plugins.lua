@@ -76,7 +76,7 @@ return packer.startup(function(use)
     use 'maxisacson/vim-egsinp'
 
     -- syntax for experimental files
-    use 'git@github.com:maxisacson/vim-rs-experimental-syntax.git'
+    use 'maxisacson/vim-rs-experimental-syntax'
 
     -- clang-format intergration for vim
     use { 'rhysd/vim-clang-format', config = setup('clang-format') }
