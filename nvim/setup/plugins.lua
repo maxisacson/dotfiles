@@ -120,6 +120,7 @@ return packer.startup(function(use)
             { 'hrsh7th/cmp-vsnip' }, -- snippet source
             { 'hrsh7th/cmp-buffer' }, -- buffer source
             { 'hrsh7th/cmp-path' }, -- path source
+            { 'hrsh7th/cmp-nvim-lsp-signature-help' },
             { 'hrsh7th/nvim-cmp' },
         },
         config = setup('nvim-cmp')

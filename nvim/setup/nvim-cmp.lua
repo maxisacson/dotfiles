@@ -37,6 +37,7 @@ cmp.setup({
     },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
+        { name = 'nvim_lsp_signature_help' },
         { name = 'orgmode' },
         { name = 'neorg' },
         { name = 'vsnip' },
@@ -49,6 +50,7 @@ cmp.setup({
             maxwidth = 50,
             menu = ({
                 nvim_lsp = "[LSP]",
+                nvim_lsp_signature_help = "[Signature]",
                 vsnip = "[VSnip]",
                 orgmode = "[Orgmode]",
                 neorg = "[Neorg]",

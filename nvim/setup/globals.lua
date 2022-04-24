@@ -11,7 +11,7 @@ function M.build_config(opt)
         disable_nvim_cmp = false,
         disable_neorg = true,
         disable_orgmode = true,
-        disable_lsp_signature = false,
+        disable_lsp_signature = true,
 
         -- " Fix lsp floating diagnostic for 'ellisonleao/gruvbox.nvim'
         fix_normalfloat_hilink_to_pmenu = true,
