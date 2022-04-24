@@ -5,8 +5,6 @@ require('gitsigns').setup {
     }
 }
 
-vim.cmd([[
-    hi link GitSignsAdd GruvboxGreenSign
-    hi link GitSignsChange GruvboxYellowSign
-    hi link GitSignsDelete GruvboxRedSign
-]])
+vim.api.nvim_set_hl(0, 'GitSignsAdd', { link='GruvboxGreenSign' })
+vim.api.nvim_set_hl(0, 'GitSignsChange', { link='GruvboxYellowSign' })
+vim.api.nvim_set_hl(0, 'GitSignsDelete', { link='GruvboxRedSign' })
