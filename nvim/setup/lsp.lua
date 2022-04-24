@@ -1,62 +1,64 @@
 local nvim_lsp = require('lspconfig')
 
 local on_attach = function(client, bufnr)
-
-    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+    vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
 
     -- Mappings.
-    local opts = { noremap=true, silent=true }
-    buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-    buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    buf_set_keymap('n', '<C-[>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-    buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-    buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-    buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-    buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-    buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-    buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-    buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
-    buf_set_keymap('n', '<space>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    local opts = { buffer = bufnr }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+    vim.keymap.set('n', '<C-[>', vim.lsp.buf.signature_help, opts)
+    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
+    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+    vim.keymap.set('n', '<space>wl',
+        function()
+            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+        end, opts)
+    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
+    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+    vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+    vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+    vim.keymap.set('n', '<space>a', vim.lsp.buf.code_action, opts)
 
     -- Set some keybinds conditional on server capabilities
     if client.resolved_capabilities.document_formatting then
-        buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+        vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, opts)
     elseif client.resolved_capabilities.document_range_formatting then
-        buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+        vim.keymap.set('n', '<space>f', vim.lsp.buf.range_formatting, opts)
     end
 
-    vim.cmd([[
-        hi LspDiagnosticsUnderlineError cterm=undercurl gui=undercurl guisp=Red
-        hi LspDiagnosticsUnderlineWarning cterm=undercurl gui=undercurl guisp=Orange
-        hi LspDiagnosticsUnderlineInformation cterm=undercurl gui=undercurl guisp=LightBlue
-        hi LspDiagnosticsUnderlineHint cterm=undercurl gui=undercurl guisp=LightGrey
-        hi clear LspReferenceRead
-        hi clear LspReferenceWrite
-        hi clear LspReferenceText
-        hi LspReferenceRead cterm=reverse gui=reverse
-        hi LspReferenceWrite cterm=reverse gui=reverse
-        hi LspReferenceText cterm=reverse gui=reverse
-    ]])
+    local hi = function(...)
+        vim.api.nvim_set_hl(0, ...)
+    end
+
+    hi('LspDiagnosticsUnderlineError', { undercurl = 1, sp = 'Red' })
+    hi('LspDiagnosticsUnderlineWarning', { undercurl = 1, sp = 'Orange' })
+    hi('LspDiagnosticsUnderlineInformation', { undercurl = 1, sp = 'LightBlue' })
+    hi('LspDiagnosticsUnderlineHint', { undercurl = 1, sp = 'LightGrey' })
+    hi('LspReferenceRead', {})
+    hi('LspReferenceWrite', {})
+    hi('LspReferenceText', {})
+    hi('LspReferenceRead', { reverse = 1 })
+    hi('LspReferenceWrite', { reverse = 1 })
+    hi('LspReferenceText', { reverse = 1 })
 
     -- Set autocommands conditional on server_capabilities
     if client.resolved_capabilities.document_highlight then
         vim.opt.updatetime = 250
-        vim.cmd([[
-            augroup lsp_document_highlight
-                autocmd! * <buffer>
-                autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-                autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-                autocmd CursorHold <buffer> lua vim.diagnostic.open_float({show_header=false, focusable=false})
-            augroup END
-        ]])
+
+        local g = vim.api.nvim_create_augroup("LspDocumentHighlight", { clear = true })
+        vim.api.nvim_create_autocmd('CursorHold', { group = g, buffer = bufnr, callback = vim.lsp.buf.document_highlight })
+        vim.api.nvim_create_autocmd('CursorMoved', { group = g, buffer = bufnr, callback = vim.lsp.buf.clear_references })
+        vim.api.nvim_create_autocmd('CursorHold', { group = g, buffer = bufnr,
+            callback = function()
+                vim.diagnostic.open_float({ show_header = false, focusable = false })
+            end
+        })
     end
 end
 
@@ -89,7 +91,7 @@ nvim_lsp.pylsp.setup {
     settings = {
         pylsp = {
             plugins = {
-                pycodestyle = { ignore = {'E501', 'E231', 'E226'} },
+                pycodestyle = { ignore = { 'E501', 'E231', 'E226' } },
             }
         }
     },
@@ -107,28 +109,31 @@ nvim_lsp.clangd.setup {
     on_attach = on_attach,
     capabilities = capabilities,
 
-    cmd = {"clangd", "--background-index", "--compile-commands-dir=build","--clang-tidy",
-        "--clang-tidy-checks='"..
-        "-*,"..
-        "clang-analyzer-*,"..
-        "modernize-*,"..
-        "readability-*,"..
-        "performance-*,"..
-        "cppcoreguidelines-*,"..
-        "bugprone-*,"..
-        "cert-*,"..
-        "hicpp-*,"..
-        "-cppcoreguidelines-pro-bounds-constant-array-index,"..
-        "-cppcoreguidelines-pro-bounds-array-to-pointer-decay,"..
-        "-cppcoreguidelines-avoid-magic-numbers,"..
-        "-readability-braces-around-statements,"..
-        "-readability-magic-numbers,"..
-        "-hicpp-braces-around-statements,"..
-        "-hicpp-no-array-decay,"..
-        "-hicpp-uppercase-literal-suffix,"..
-        "-readability-uppercase-literal-suffix,"..
-        "-modernize-use-trailing-return-type,"..
-    "'"}
+    cmd = { "clangd",
+        "--background-index",
+        "--compile-commands-dir=build",
+        "--clang-tidy",
+        "--clang-tidy-checks='" ..
+            "-*," ..
+            "clang-analyzer-*," ..
+            "modernize-*," ..
+            "readability-*," ..
+            "performance-*," ..
+            "cppcoreguidelines-*," ..
+            "bugprone-*," ..
+            "cert-*," ..
+            "hicpp-*," ..
+            "-cppcoreguidelines-pro-bounds-constant-array-index," ..
+            "-cppcoreguidelines-pro-bounds-array-to-pointer-decay," ..
+            "-cppcoreguidelines-avoid-magic-numbers," ..
+            "-readability-braces-around-statements," ..
+            "-readability-magic-numbers," ..
+            "-hicpp-braces-around-statements," ..
+            "-hicpp-no-array-decay," ..
+            "-hicpp-uppercase-literal-suffix," ..
+            "-readability-uppercase-literal-suffix," ..
+            "-modernize-use-trailing-return-type," ..
+            "'" }
 }
 
 local runtime_path = vim.split(package.path, ';')
