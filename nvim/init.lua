@@ -13,6 +13,7 @@ function M.setup(opt)
     setup('common')
     setup('colorscheme')
     setup('python')
+    setup('terminal')
     setup('custom')
 end
 return M
