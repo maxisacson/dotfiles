@@ -1,21 +1,25 @@
 -- Configuration for telescope.nvim
+local builtin = require('telescope.builtin')
+local actions = require 'telescope.actions'
+local telescope = require('telescope')
 
-vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>lua require("telescope.builtin").find_files({no_ignore=true})<CR>', {noremap=true, silent=true})
-vim.api.nvim_set_keymap('n', '<leader>fg', '<cmd>lua require("telescope.builtin").live_grep()<CR>',  {noremap=true, silent=true})
-vim.api.nvim_set_keymap('n', '<leader>fb', '<cmd>lua require("telescope.builtin").buffers()<CR>',    {noremap=true, silent=true})
-vim.api.nvim_set_keymap('n', '<leader>fh', '<cmd>lua require("telescope.builtin").help_tags()<CR>',  {noremap=true, silent=true})
-
-vim.api.nvim_set_keymap('n', '<C-Space>', '<cmd>lua telescope_project_files()<CR>', {noremap=true, silent=true})
-vim.api.nvim_set_keymap('n', '<C-\\>', '<cmd>lua require("telescope.builtin").live_grep()<CR>',  {noremap=true, silent=true})
-
-_G.telescope_project_files = function()
-  local opts = {} -- define here if you want to define something
-  local ok = pcall(require'telescope.builtin'.git_files, opts)
-  if not ok then require'telescope.builtin'.find_files(opts) end
+local telescope_project_files = function()
+    local topts = {} -- define here if you want to define something
+    local ok = pcall(builtin.git_files, topts)
+    if not ok then builtin.find_files(topts) end
 end
 
-local actions = require'telescope.actions'
-require'telescope'.setup{
+local opts = { silent = true }
+
+vim.keymap.set('n', '<leader>ff', function() builtin.find_files({no_ignore=true}) end, opts)
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, opts)
+vim.keymap.set('n', '<leader>fb', builtin.buffers, opts)
+vim.keymap.set('n', '<leader>fh', builtin.help_tags, opts)
+
+vim.keymap.set('n', '<C-Space>', telescope_project_files, opts)
+vim.keymap.set('n', '<C-\\>', builtin.live_grep, opts)
+
+telescope.setup {
     defaults = {
         mappings = {
             i = {
@@ -26,12 +30,12 @@ require'telescope'.setup{
     },
     extensions = {
         fzf = {
-            fuzzy = true,                    -- false will only do exact matching
-            override_generic_sorter = true,  -- override the generic sorter
-            override_file_sorter = true,     -- override the file sorter
-            case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+            fuzzy = true, -- false will only do exact matching
+            override_generic_sorter = true, -- override the generic sorter
+            override_file_sorter = true, -- override the file sorter
+            case_mode = "smart_case", -- or "ignore_case" or "respect_case"
         }
     }
 }
 
-require('telescope').load_extension('fzf')
+telescope.load_extension('fzf')
