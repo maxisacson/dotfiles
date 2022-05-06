@@ -104,6 +104,12 @@ return packer.startup(function(use)
     -- better support for lsp colors
     use { 'folke/lsp-colors.nvim', disable = vimrc.disable_lsp }
 
+    -- lsp status spinner
+    use { 'j-hui/fidget.nvim',
+        disable = vimrc.disable_lsp,
+        config = setup('fidget')
+    }
+
     -- live parameter hints
     use {
         'ray-x/lsp_signature.nvim',
