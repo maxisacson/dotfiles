@@ -91,7 +91,7 @@ nvim_lsp.pylsp.setup {
     settings = {
         pylsp = {
             plugins = {
-                pycodestyle = { ignore = { 'E501', 'E231', 'E226' } },
+                pycodestyle = { ignore = { 'E501', 'E231', 'E226', 'E402' } },
             }
         }
     },

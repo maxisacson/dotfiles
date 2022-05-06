@@ -7,5 +7,5 @@ map('t', '<C-k>', '<C-\\><C-n><C-w>k', {})
 map('t', '<C-l>', '<C-\\><C-n><C-w>l', {})
 
 local g = vim.api.nvim_create_augroup('TermOpenConfig', { clear=true })
-vim.api.nvim_create_autocmd('TermOpen', { group=g, pattern='*', command='startinsert' })
+vim.api.nvim_create_autocmd('TermOpen', { group=g, pattern='*', command='set nobuflisted | startinsert' })
 vim.api.nvim_create_autocmd('BufEnter', { group=g, pattern='term://*', command='startinsert' })
