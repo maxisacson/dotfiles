@@ -38,7 +38,7 @@ map('n', '<Space>bl', ':BufferOrderByLanguage<CR>', opts)
 vim.g.bufferline = {
     animation = false, -- disable/enable animation
     closable = false, -- disable/enable close button
-    clickable = false, -- disable/enable clickable tabs
+    clickable = true, -- disable/enable clickable tabs
     icons = 'both',
     icon_custom_colors = false,
     maximum_padding = 0
