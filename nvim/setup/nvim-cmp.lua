@@ -3,15 +3,17 @@ vim.o.completeopt = 'menu,menuone,noselect'
 local lspkind = require'lspkind'
 local cmp = require'cmp'
 cmp.setup({
+    preselect = false,
     snippet = {
         expand = function(args)
             vim.fn["vsnip#anonymous"](args.body)
         end
     },
-    mapping = {
+    mapping = cmp.mapping.preset.insert({
         ['<C-d>'] = cmp.mapping.scroll_docs(4),
         ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-e>'] = cmp.mapping.close(),
+        ['<C-e>'] = cmp.mapping.abort(),
+        ['<C-Space>'] = cmp.mapping.complete(),
         ['<CR>'] = cmp.mapping.confirm({ select = false }),
 
         ["<Tab>"] = cmp.mapping(function(fallback)
@@ -34,7 +36,7 @@ cmp.setup({
             end
         end, { "i", "s" }),
 
-    },
+    }),
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
         { name = 'nvim_lsp_signature_help' },
