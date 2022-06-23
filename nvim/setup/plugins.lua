@@ -204,4 +204,12 @@ return packer.startup(function(use)
 
     -- To enable more features from rust-analyzer
     use { 'simrat39/rust-tools.nvim', requires = 'nvim-lua/popup.nvim' }
+
+    -- Debugging
+    use { 'mfussenegger/nvim-dap', config = setup('nvim-dap') }
+    use { 'rcarriga/nvim-dap-ui', config = setup('nvim-dap-ui') }
+    use { 'nvim-telescope/telescope-dap.nvim', config = function() require'telescope'.load_extension('dap') end }
+    use { 'theHamsta/nvim-dap-virtual-text', config = setup('nvim-dap-virtual-text') }
+    use { 'mfussenegger/nvim-dap-python', config = setup('nvim-dap-python') }
+
 end)

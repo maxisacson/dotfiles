@@ -1,0 +1,13 @@
+local dap = require('dap')
+
+vim.keymap.set('n', '<F5>', dap.continue, { silent = true, desc = 'dap: Continue' })
+vim.keymap.set('n', '<S-F5>', dap.terminate, { silent = true, desc = 'dap: Terminate' })
+vim.keymap.set('n', '<F10>', dap.step_over, { silent = true, desc = 'dap: Step over' })
+vim.keymap.set('n', '<C-F10>', dap.run_to_cursor, { silent = true, desc = 'dap: Run to cursor' })
+vim.keymap.set('n', '<F11>', dap.step_into, { silent = true, desc = 'dap: Step into' })
+vim.keymap.set('n', '<S-F11>', dap.step_out, { silent = true, desc = 'dap: Step out' })
+vim.keymap.set('n', '<Leader>b', dap.toggle_breakpoint, { silent = true, desc = 'dap: Toggle breakpoint' })
+vim.keymap.set('n', '<Leader>B', function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, { silent = true, desc = 'dap: Set conditional breakpoint' })
+vim.keymap.set('n', '<Leader>lg', function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { silent = true, desc = 'dap: Set log point' })
+vim.keymap.set('n', '<Leader>dr', dap.repl.open, { silent = true, desc = 'dap: Open REPL' })
+vim.keymap.set('n', '<Leader>dl', dap.run_last, { silent = true, desc = 'dap: Run last' })

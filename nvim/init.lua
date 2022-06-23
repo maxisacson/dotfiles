@@ -9,6 +9,7 @@ function M.setup(opt)
     end
 
     setup('globals').setup(opt)
+    setup('utils')
     setup('plugins')
     setup('common')
     setup('colorscheme')
