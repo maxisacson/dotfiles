@@ -44,7 +44,8 @@ cmp.setup({
         { name = 'neorg' },
         { name = 'vsnip' },
         { name = 'buffer' },
-        { name = 'path' }
+        { name = 'path' },
+        { name = 'rs_experimentals' },
     }),
     formatting = {
         format = lspkind.cmp_format({
@@ -58,7 +59,12 @@ cmp.setup({
                 neorg = "[Neorg]",
                 buffer = "[Buffer]",
                 path = "[Path]",
+                rs_experimentals = "[RSExp]"
             })
         })
     },
+})
+
+require('cmp_rs_experimentals').setup({
+    filename = '/home/max/git/cmp-rs-experimentals/lua/cmp_rs_experimentals/experimentals.txt'
 })
