@@ -26,9 +26,9 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>a', vim.lsp.buf.code_action, opts)
 
     -- Set some keybinds conditional on server capabilities
-    if client.resolved_capabilities.document_formatting then
-        vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, opts)
-    elseif client.resolved_capabilities.document_range_formatting then
+    if client.server_capabilities.documentFormattingProvider then
+        vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format({ async = true }) end, opts)
+    elseif client.server_capabilities.documentRangeFormattingProvider then
         vim.keymap.set('n', '<space>f', vim.lsp.buf.range_formatting, opts)
     end
 
@@ -48,11 +48,12 @@ local on_attach = function(client, bufnr)
     hi('LspReferenceText', { reverse = 1 })
 
     -- Set autocommands conditional on server_capabilities
-    if client.resolved_capabilities.document_highlight then
+    if client.server_capabilities.documentHighlightProvider then
         vim.opt.updatetime = 250
 
         local g = vim.api.nvim_create_augroup("LspDocumentHighlight", { clear = true })
-        vim.api.nvim_create_autocmd('CursorHold', { group = g, buffer = bufnr, callback = vim.lsp.buf.document_highlight })
+        vim.api.nvim_create_autocmd('CursorHold',
+            { group = g, buffer = bufnr, callback = vim.lsp.buf.document_highlight })
         vim.api.nvim_create_autocmd('CursorMoved', { group = g, buffer = bufnr, callback = vim.lsp.buf.clear_references })
         vim.api.nvim_create_autocmd('CursorHold', { group = g, buffer = bufnr,
             callback = function()
@@ -64,13 +65,12 @@ end
 
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
-        signs = false,
-        update_in_insert = true,
-        virtual_text = {
-            prefix = '',
-        }
+    signs = false,
+    update_in_insert = true,
+    virtual_text = {
+        prefix = '',
     }
-)
+})
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
