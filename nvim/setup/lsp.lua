@@ -76,7 +76,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- Servers that don't require special setup
-local servers = { 'cmake' }
+local servers = { 'cmake', 'tsserver' }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
         on_attach = on_attach,
