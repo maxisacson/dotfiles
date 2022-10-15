@@ -72,8 +72,7 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
     }
 })
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Servers that don't require special setup
 local servers = { 'cmake', 'tsserver' }
