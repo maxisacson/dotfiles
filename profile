@@ -23,3 +23,7 @@ fi
 if [ -d "$HOME/.local/opt/lua-language-server/bin" ]; then
     PATH="$HOME/.local/opt/lua-language-server/bin:$PATH"
 fi
+
+if [ -d "$HOME/.local/opt/go/bin" ]; then
+    PATH="$HOME/.local/opt/go/bin:$PATH"
+fi
