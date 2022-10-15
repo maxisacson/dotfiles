@@ -162,3 +162,11 @@ nvim_lsp.sumneko_lua.setup {
         }
     }
 }
+
+nvim_lsp.arduino_language_server.setup {
+    cmd = {
+        vim.g.vimrc.arduinolsp_cmd,
+        '-cli-config', vim.g.vimrc.arduinocli_config,
+        '-fqbn', vim.g.vimrc.arduinolsp_fqbn
+    }
+}
