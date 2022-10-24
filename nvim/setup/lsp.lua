@@ -72,8 +72,7 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
     }
 })
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Servers that don't require special setup
 local servers = { 'cmake', 'tsserver' }
@@ -160,5 +159,13 @@ nvim_lsp.sumneko_lua.setup {
                 enable = false
             }
         }
+    }
+}
+
+nvim_lsp.arduino_language_server.setup {
+    cmd = {
+        vim.g.vimrc.arduinolsp_cmd,
+        '-cli-config', vim.g.vimrc.arduinocli_config,
+        '-fqbn', vim.g.vimrc.arduinolsp_fqbn
     }
 }

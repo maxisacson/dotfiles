@@ -22,6 +22,10 @@ function M.build_config(opt)
         pylsp_cmd = "pylsp",
         lualsp_cmd = "lua-language-server",
 
+        arduinolsp_cmd = 'arduino-language-server',
+        arduinolsp_fqbn = 'arduino:avr:uno',
+        arduinocli_config = vim.env['HOME'] .. '/.arduino15/arduino-cli.yaml',
+
         path = vim.env['HOME'] .. '/.config/nvim'
     }
 
