@@ -1,7 +1,12 @@
-vim.o.completeopt = 'menu,menuone,noselect'
-
 local lspkind = require'lspkind'
 local cmp = require'cmp'
+
+local feedkey = function(key, mode)
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+end
+
+vim.o.completeopt = 'menu,menuone,noselect'
+
 cmp.setup({
     preselect = false,
     snippet = {
@@ -19,7 +24,7 @@ cmp.setup({
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
-            elseif vim.fn["vsnip#available"]() == 1 then
+            elseif vim.fn["vsnip#available"](1) == 1 then
                 feedkey("<Plug>(vsnip-expand-or-jump)", "")
             else
                 fallback()
