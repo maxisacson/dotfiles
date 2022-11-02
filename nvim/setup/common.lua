@@ -3,11 +3,13 @@ local opt = vim.opt
 -- Set indenting stuff
 opt.tabstop = 4 -- number of spaces in a <Tab>
 opt.shiftwidth = 4 -- number of spaces to use for autoindent. Should be == tabstop
+opt.softtabstop = 4 -- number of spaces for <Tab> when editing
 opt.expandtab = true -- use spaces as <Tab>
 opt.smarttab = true -- insert shiftwidth worth of whitespace at beginning of line
 opt.backspace = 'indent,eol,start' -- make <BS> well behaved
 opt.autoindent = true -- make sure autoindent is turned on
 opt.cinoptions = 'l1,g0.75s,h0.25s,N-s'
+opt.smartindent = true
 
 -- Format options
 opt.textwidth = 80
@@ -20,16 +22,20 @@ opt.formatoptions:remove{'t'}
 -- 3: always and ONLY the last window
 opt.laststatus = 3
 
+-- block cursor
+opt.guicursor = ""
+
 -- Set incremental search
 opt.incsearch = true
 
--- Always keep 1 line above and below cursor,
+-- Always keep 2 line above and below cursor,
 -- and 5 columns to the right and left
-opt.scrolloff = 1
+opt.scrolloff = 2
 opt.sidescrolloff = 5
 
 -- Line numbering
 opt.number = true
+opt.relativenumber = true
 
 -- Show command
 opt.showcmd = true
@@ -49,6 +55,17 @@ vim.g.mapleader = ','
 -- always split the screen to the right or below
 opt.splitright = true
 opt.splitbelow = true
+
+-- 24 bit RGB
+opt.termguicolors = true
+
+-- Always show sign column
+opt.signcolumn = 'yes'
+
+-- Highlight column
+opt.colorcolumn = '+1'
+vim.cmd([[highlight ColorColumn ctermbg=Black]])
+
 
 local function keymap(...) vim.api.nvim_set_keymap(...) end
 
@@ -87,13 +104,6 @@ keymap('n', '<Leader><Leader>', '<C-^>', { noremap = true })
 -- " nnoremap <S-e> :tabn<CR>
 -- " nnoremap <silent> <Leader><S-q> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 -- " nnoremap <silent> <Leader><S-e> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
-
--- Highlight column
-opt.colorcolumn = '+1'
-vim.cmd([[highlight ColorColumn ctermbg=Black]])
-
--- Always show sign column
-opt.signcolumn = 'yes'
 
 -- mappings for quickfix list apart from tab
 keymap('n', '<leader>qn', ':cnext<CR>',  { noremap = true })
