@@ -150,7 +150,6 @@ table.insert(components.active[1], {
 table.insert(components.active[1], {
     provider = 'git_diff_removed',
     hl = { fg = colors.bright_red, bg = colors.dark2 },
-    right_sep = { str = ' ', hl = { bg = colors.dark2 } },
     icon = '-',
     right_sep = { str = ' ', hl = { fg = colors.light4, bg = colors.dark2 } },
 })
