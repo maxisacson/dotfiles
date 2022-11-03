@@ -169,3 +169,14 @@ nvim_lsp.arduino_language_server.setup {
         '-fqbn', vim.g.vimrc.arduinolsp_fqbn
     }
 }
+
+-- vim.lsp.set_log_level("debug")
+
+local util = require'lspconfig.util'
+nvim_lsp.omnisharp.setup {
+    cmd = { "C:/Users/maxisa/scoop/shims/omnisharp.EXE" },
+    root_dir = function(fname)
+        fname = util.path.sanitize(fname)
+        return util.root_pattern('*.sln')(fname) or util.root_pattern('*.csproj')(fname)
+    end
+}
