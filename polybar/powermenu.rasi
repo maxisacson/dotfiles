@@ -1,0 +1,71 @@
+configuration {
+	font: "Fantasque Sans Mono 12";
+}
+
+@import "colors.rasi"
+
+* {
+    background-color: @bg-soft;
+    text-color: @fg;
+    border-color: @bg-soft;
+}
+
+window {
+    border: 1px;
+    border-color: @light4;
+	width: 300px;
+    location: center;
+    x-offset: 0;
+    y-offset: 0;
+}
+
+prompt {
+	padding: 10px 10px 6px 10px; // top right bottom left
+}
+
+textbox-prompt-colon {
+	font: "Material Design Icons Desktop 16";
+    text-color: @fg;
+	padding: 8px 10px 8px 10px; // top right bottom left
+	str: "󰐥";
+    expand: true;
+}
+
+inputbar {
+	children: [ textbox-prompt-colon, prompt ];
+}
+
+listview {
+    padding: 10px 10px 10px 10px;
+    columns: 1;
+    lines: 5;
+    spacing: 5px;
+    cycle: true;
+    border: 1px 0px 0px 0px;
+    border-color: @light4;
+}
+
+mainbox {
+    children: [ inputbar, listview ];
+}
+
+element {
+	border: 4px 10px 4px 10px; // top right bottom left
+}
+
+element-icon {
+}
+
+element-text {
+    padding: 2px;
+}
+
+element-text selected {
+    background-color: @light4;
+    text-color: @bg;
+}
+
+element selected {
+    border-color: @light4;
+    text-color: @bg;
+}
