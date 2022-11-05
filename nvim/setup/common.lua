@@ -56,11 +56,11 @@ vim.g.mapleader = ','
 opt.splitright = true
 opt.splitbelow = true
 
--- 24 bit RGB
-opt.termguicolors = true
-
 -- Always show sign column
 opt.signcolumn = 'yes'
+
+-- Highlight the current line
+vim.opt.cursorline = true
 
 -- Highlight column
 opt.colorcolumn = '+1'
