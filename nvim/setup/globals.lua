@@ -36,17 +36,6 @@ function M.build_config(opt)
         end
     end
 
-    if not user_opt.disable_telescope then
-        if not user_opt.disable_fzf then
-            print("Incompatible: disable_telescope = false and disable_fzf = false. Setting disable_fzf = true")
-            user_opt.disable_fzf = true
-        end
-        if not user_opt.disable_ack then
-            print("Incompatible: disable_telescope = false and disable_ack = false. Setting disable_ack = true")
-            user_opt.disable_ack = true
-        end
-    end
-
     return user_opt
 end
 
