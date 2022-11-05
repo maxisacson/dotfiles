@@ -95,8 +95,8 @@ return packer.startup({
             'hrsh7th/nvim-cmp', disable = vimrc.disable_nvim_cmp,
             requires = {
                 { 'hrsh7th/cmp-nvim-lsp', disable = vimrc.disable_lsp },
-                { 'hrsh7th/vim-vsnip' }, -- snippet plugin
-                { 'hrsh7th/cmp-vsnip' }, -- snippet source
+                { 'L3MON4D3/LuaSnip' }, -- snippet plugin
+                { 'saadparwaiz1/cmp_luasnip' }, -- snippet source
                 { 'hrsh7th/cmp-buffer' }, -- buffer source
                 { 'hrsh7th/cmp-path' }, -- path source
                 { 'hrsh7th/cmp-nvim-lsp-signature-help' },
