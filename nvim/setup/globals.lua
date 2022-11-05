@@ -5,7 +5,6 @@ function M.build_config(opt)
         disable_vim_cmake = vim.fn.executable("cmake") == 0,
         disable_telescope = false,
         disable_fzf = true,
-        disable_ack = true,
         disable_lsp = false,
         disable_treesitter = false,
         disable_nvim_cmp = false,

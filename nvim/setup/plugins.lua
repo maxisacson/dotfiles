@@ -22,13 +22,6 @@ return packer.startup({
         -- vim-fugitive for git integration
         use 'tpope/vim-fugitive'
 
-        -- ack.vim for ag and ack integration
-        use {
-            'mileszs/ack.vim',
-            disable = vimrc.disable_ack,
-            config = setup('ack')
-        }
-
         -- nerdcomment for easy commenting
         use { 'scrooloose/nerdcommenter', config = setup('nerdcommenter') }
 
