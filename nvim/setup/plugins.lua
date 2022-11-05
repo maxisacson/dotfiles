@@ -67,16 +67,6 @@ return packer.startup({
         -- vim-cmake
         use { 'vhdirk/vim-cmake', disable = vimrc.disable_vim_cmake }
 
-        -- fzf fuzzy finder
-        use {
-            'junegunn/fzf.vim',
-            disable = vimrc.disable_fzf,
-            config = setup('fzf'),
-            requires = {
-                { 'junegunn/fzf', run = vim.fn['fzf#install'] }
-            }
-        }
-
         -- LSP configurations for neovim
         use {
             'neovim/nvim-lspconfig',
