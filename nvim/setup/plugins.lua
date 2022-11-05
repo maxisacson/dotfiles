@@ -206,11 +206,6 @@ return packer.startup({
     end,
 
     config = {
-        -- display = {
-        --     open_fn = function()
-        --         return putil.float({ border = 'single' })
-        --     end
-        -- },
         profile = {
             enable = true,
             threshold = 1,
