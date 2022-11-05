@@ -8,18 +8,16 @@ end
 -- Reload vimrc
 vim.api.nvim_create_user_command("ReloadVimrc", "so $MYVIMRC | echom 'Reloaded' . $MYVIMRC | redraw", { force = true })
 
-local delete_trailing_white_space = function()
+-- Remove all trailing whitespace on write
+local trim_white_space = function()
     local cursor_pos = vim.fn.getpos('.')
-    vim.cmd([[%s/\s\+$//ge]])
+    vim.cmd([[keeppatterns %s/\s\+$//e]])
     vim.fn.setpos('.', cursor_pos)
 end
-
--- Remove all trailing whitespace on write
-local ag_ws = vim.api.nvim_create_augroup("NoTrailingWhitespace", { clear = true })
 vim.api.nvim_create_autocmd("BufWrite", {
-    group = ag_ws,
+    group = vim.api.nvim_create_augroup("NoTrailingWhitespace", { clear = true }),
     pattern = "*",
-    callback = delete_trailing_white_space,
+    callback = trim_white_space,
     desc = "Delete trailing white space"
 })
 
