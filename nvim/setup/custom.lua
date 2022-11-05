@@ -1,18 +1,34 @@
 -- Custom commands, autocommands, mappings, and functions not fitting anywhere else
 
+P = function(v)
+    print(vim.inspect(v))
+    return v
+end
+
+-- Reload vimrc
+vim.api.nvim_create_user_command("ReloadVimrc", "so $MYVIMRC | echom 'Reloaded' . $MYVIMRC | redraw", { force = true })
+
+local delete_trailing_white_space = function()
+    local cursor_pos = vim.fn.getpos('.')
+    vim.cmd([[%s/\s\+$//ge]])
+    vim.fn.setpos('.', cursor_pos)
+end
+
+-- Remove all trailing whitespace on write
+local ag_ws = vim.api.nvim_create_augroup("NoTrailingWhitespace", { clear = true })
+vim.api.nvim_create_autocmd("BufWrite", {
+    group = ag_ws,
+    pattern = "*",
+    callback = delete_trailing_white_space,
+    desc = "Delete trailing white space"
+})
+
+-- Auto set cursor line on winenter/winleave. This fixed some issue I can't remember right now
+local ag_clear = vim.api.nvim_create_augroup("AutoClearCursorline", { clear = true })
+vim.api.nvim_create_autocmd("WinEnter", { group = ag_clear, pattern = "*", command = "setlocal cursorline", })
+vim.api.nvim_create_autocmd("WinLeave", { group = ag_clear, pattern = "*", command = "setlocal nocursorline", })
+
 vim.cmd([[
-    " Remove all trailing whitespace on write
-    function! DeleteTrailingWhiteSpace()
-        let cursor_pos = getpos(".")
-        %s/\s\+$//ge
-        call setpos(".", cursor_pos)
-    endfunction
-    augroup NoTrailingWhitespace
-        autocmd!
-        autocmd BufWrite * call DeleteTrailingWhiteSpace()
-    augroup END
-
-
     " Use tab and shift-tab to move in quickfix and location lists
     function! SmartTab(shifttab)
         let isquickfix = !empty(filter(getwininfo(), "v:val.quickfix && !v:val.loclist"))
@@ -27,16 +43,6 @@ vim.cmd([[
     endfunction
     nnoremap <silent> <expr> <Tab> SmartTab(0)
     nnoremap <silent> <expr> <S-Tab> SmartTab(1)
-
-
-    " Auto set cursor line on winenter/winleave. This fixed some issue I can't
-    " remember right now
-    augroup AutoClearCursorline
-        autocmd!
-        autocmd WinEnter * setlocal cursorline
-        autocmd WinLeave * setlocal nocursorline
-    augroup END
-
 
     " Function to insert include guards in cpp headers
     function! InsertCppIncludeGuard()
@@ -53,7 +59,6 @@ vim.cmd([[
         normal! 3j
     endfunction
     command! CppGuard call InsertCppIncludeGuard()
-
 
     " Function to format math expressions inline
     function! PrettifyMath()
@@ -78,8 +83,4 @@ vim.cmd([[
     nnoremap <Leader>= :s/=.*$//ge<CR>yypkA=<Esc>j:.!bc -l<CR>kJ:call PrettifyMath()<CR>
     " Evaluate current selection using bc and make it pretty
     vnoremap <Leader>= y'>p:'[,']s/^.*=//ge<CR>:'[,']-1s/\n/+/ge<CR>:s/+$//ge<CR>:.!bc -l<CR>I= <Esc>:'<,'>call PrettifyMath()<CR>j
-
-
-    " Reload vimrc
-    command! ReloadVimrc :so $MYVIMRC | echom "Reloaded " . $MYVIMRC | redraw
 ]])
