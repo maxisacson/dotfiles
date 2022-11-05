@@ -11,9 +11,6 @@ function M.build_config(opt)
         disable_orgmode = true,
         disable_lsp_signature = true,
 
-        -- " Fix lsp floating diagnostic for 'ellisonleao/gruvbox.nvim'
-        fix_normalfloat_hilink_to_pmenu = true,
-
         colorscheme = "gruvbox",
         override_python3_host_prog = false,
         python3_host_prog = "python",
