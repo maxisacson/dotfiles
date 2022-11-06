@@ -129,3 +129,5 @@ keymap('c', '<C-b>', '<Left>', { noremap = true }) -- back one character
 keymap('c', '<C-d>', '<Del>', { noremap = true }) -- delete character under cursor
 keymap('c', '<C-n>', '<Down>', { noremap = true }) -- recall newer command-line
 keymap('c', '<C-p>', '<Up>', { noremap = true }) -- recall previous (older) command-line
+keymap('c', '<A-b>', '<S-Left>', { noremap = true }) -- back one word
+keymap('c', '<A-f>', '<S-Right>', { noremap = true }) -- forward one word
