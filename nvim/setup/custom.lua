@@ -26,6 +26,18 @@ local ag_clear = vim.api.nvim_create_augroup("AutoClearCursorline", { clear = tr
 vim.api.nvim_create_autocmd("WinEnter", { group = ag_clear, pattern = "*", command = "setlocal cursorline", })
 vim.api.nvim_create_autocmd("WinLeave", { group = ag_clear, pattern = "*", command = "setlocal nocursorline", })
 
+local ag_yank = vim.api.nvim_create_augroup("HighlightYank", { clear = true} )
+vim.api.nvim_create_autocmd("TextYankPost", {
+    group = ag_yank,
+    pattern = "*",
+    callback = function()
+        vim.highlight.on_yank({
+            higroup = "Visual",
+            timeout = 50,
+        })
+    end
+})
+
 vim.cmd([[
     " Use tab and shift-tab to move in quickfix and location lists
     " function! SmartTab(shifttab)
