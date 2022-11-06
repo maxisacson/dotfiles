@@ -64,7 +64,24 @@ local insert_cpp_include_guard = function()
 end
 vim.api.nvim_create_user_command("CppGuard", insert_cpp_include_guard, { force = true })
 
+-- execute current line as lua code and append the result
+local lua_exec_and_append_current_line = function()
+    local line = vim.api.nvim_get_current_line()
 
+    local row = vim.fn.line('.') - 1
+    local col = string.len(line)
+
+    local result = table.concat(vim.fn.split(vim.fn.execute('lua =' .. line), '\n'), '\\n ')
+    local commentstring = vim.opt.commentstring:get()
+    local ft = vim.opt.filetype:get()
+    if ft == nil or ft == "" or ft == "txt" then
+        result = '= ' .. result
+    else
+        result = vim.fn.substitute(commentstring, '%s', '-> ' .. result, 'g')
+    end
+    vim.api.nvim_buf_set_text(0, row, col, row, col, { ' ' .. result })
+end
+vim.keymap.set('n', '<Leader>x', lua_exec_and_append_current_line)
 
 vim.cmd([[
     " Use tab and shift-tab to move in quickfix and location lists
