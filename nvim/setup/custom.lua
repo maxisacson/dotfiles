@@ -5,6 +5,15 @@ P = function(v)
     return v
 end
 
+R = function(name)
+    require('plenary.reload').reload_module(name)
+    return require(name)
+end
+
+vim.api.nvim_create_user_command("Reload",
+    function(args) return R(args.args) end,
+    { force = true, nargs = 1, desc = 'Reload lua module' })
+
 -- Reload vimrc
 vim.api.nvim_create_user_command("ReloadVimrc", "so $MYVIMRC | echom 'Reloaded' . $MYVIMRC | redraw", { force = true })
 
@@ -26,7 +35,7 @@ local ag_clear = vim.api.nvim_create_augroup("AutoClearCursorline", { clear = tr
 vim.api.nvim_create_autocmd("WinEnter", { group = ag_clear, pattern = "*", command = "setlocal cursorline", })
 vim.api.nvim_create_autocmd("WinLeave", { group = ag_clear, pattern = "*", command = "setlocal nocursorline", })
 
-local ag_yank = vim.api.nvim_create_augroup("HighlightYank", { clear = true} )
+local ag_yank = vim.api.nvim_create_augroup("HighlightYank", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
     group = ag_yank,
     pattern = "*",
