@@ -35,6 +35,7 @@ local ag_clear = vim.api.nvim_create_augroup("AutoClearCursorline", { clear = tr
 vim.api.nvim_create_autocmd("WinEnter", { group = ag_clear, pattern = "*", command = "setlocal cursorline", })
 vim.api.nvim_create_autocmd("WinLeave", { group = ag_clear, pattern = "*", command = "setlocal nocursorline", })
 
+-- Highlight yanked text
 local ag_yank = vim.api.nvim_create_augroup("HighlightYank", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
     group = ag_yank,
@@ -46,6 +47,24 @@ vim.api.nvim_create_autocmd("TextYankPost", {
         })
     end
 })
+
+-- Function to insert include guards in cpp headers
+local insert_cpp_include_guard = function()
+    local f = vim.fn
+    local guard = f.substitute(f.toupper(f.expand('%:t')), '\\.', '_', 'g') .. '_'
+    vim.api.nvim_buf_set_lines(0, 0, 0, true, {
+        '#ifndef ' .. guard,
+        '#define ' .. guard,
+        '',
+    })
+    vim.api.nvim_buf_set_lines(0, -1, -1, true, {
+        '',
+        '#endif /* ' .. guard .. ' */',
+    })
+end
+vim.api.nvim_create_user_command("CppGuard", insert_cpp_include_guard, { force = true })
+
+
 
 vim.cmd([[
     " Use tab and shift-tab to move in quickfix and location lists
@@ -62,22 +81,6 @@ vim.cmd([[
     " endfunction
     " nnoremap <silent> <expr> <Tab> SmartTab(0)
     " nnoremap <silent> <expr> <S-Tab> SmartTab(1)
-
-    " Function to insert include guards in cpp headers
-    function! InsertCppIncludeGuard()
-        let guard = substitute(toupper(expand("%:t")), "\\.", "_", "g") . "_"
-
-        let cursor_pos = getpos(".")
-
-        execute "normal! ggO#ifndef " . guard
-        execute "normal! o#define " . guard
-        normal! o
-        execute "normal! Go#endif /* " . guard . " */"
-        normal! O
-        call setpos(".", cursor_pos)
-        normal! 3j
-    endfunction
-    command! CppGuard call InsertCppIncludeGuard()
 
     " Function to format math expressions inline
     function! PrettifyMath()
