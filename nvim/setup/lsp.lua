@@ -1,29 +1,43 @@
 local nvim_lsp = require('lspconfig')
 
+local ok, telescope = pcall(require, 'telescope.builtin')
+
 local on_attach = function(client, bufnr)
     vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
 
     -- Mappings.
-    local opts = { buffer = bufnr }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', '<space>sh', vim.lsp.buf.signature_help, opts)
-    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
-    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = bufnr, desc = 'Goto declaration' })
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Hover' })
+    vim.keymap.set('n', '<space>sh', vim.lsp.buf.signature_help, { buffer = bufnr, desc = 'Signature help' })
+    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, { buffer = bufnr, desc = 'Add workspace folder' })
+    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, { buffer = bufnr, desc = 'Remove workspace folder' })
     vim.keymap.set('n', '<space>wl',
         function()
             print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-        end, opts)
-    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-    vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-    vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-    vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
-    vim.keymap.set('n', '<space>a', vim.lsp.buf.code_action, opts)
+        end, { buffer = bufnr, desc = 'List workspace folders' })
+    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, { buffer = bufnr, desc = 'Rename symbol' })
+    vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, { buffer = bufnr, desc = 'Open diagnostics under cursor' })
+    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { buffer = bufnr, desc = 'Goto prev diagnostic' })
+    vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { buffer = bufnr, desc = 'Goto next diagnostic' })
+    vim.keymap.set('n', '<space>a', vim.lsp.buf.code_action, { buffer = bufnr, desc = 'Code action' })
+
+    if ok then
+        vim.keymap.set('n', 'gr', telescope.lsp_references, { buffer = bufnr, desc = 'Goto reference' })
+        vim.keymap.set('n', 'gd', telescope.lsp_definitions, { buffer = bufnr, desc = 'Goto definition' })
+        vim.keymap.set('n', '<space>D', telescope.lsp_type_definitions, { buffer = bufnr, desc = 'Goto type definition' })
+        vim.keymap.set('n', 'gi', telescope.lsp_implementations, { buffer = bufnr, desc = 'Goto implementation' })
+        vim.keymap.set('n', '<space>ds', telescope.lsp_document_symbols, { buffer = bufnr, desc = 'List document symbols' })
+        vim.keymap.set('n', '<space>ws', telescope.lsp_dynamic_workspace_symbols, { buffer = bufnr, desc = 'List workspace symbols' })
+        vim.keymap.set('n', '<space>q', telescope.diagnostics, { buffer = bufnr, desc = 'Open diagnostics' })
+    else
+        vim.keymap.set('n', 'gr', vim.lsp.buf.references, { buffer = bufnr, desc = 'Goto reference' })
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = bufnr, desc = 'Goto definition' })
+        vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, { buffer = bufnr, desc = 'Goto type definition' })
+        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = bufnr, desc = 'Goto implementation' })
+        vim.keymap.set('n', '<space>ds', vim.lsp.buf.document_symbol, { buffer = bufnr, desc = 'List document symbols' })
+        vim.keymap.set('n', '<space>ws', vim.lsp.buf.workspace_symbol, { buffer = bufnr, desc = 'List workspace symbols' })
+        vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, { buffer = bufnr, desc = 'Open diagnostics' })
+    end
 
     -- Set some keybinds conditional on server capabilities
     if client.server_capabilities.documentFormattingProvider then
