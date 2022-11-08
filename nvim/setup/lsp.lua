@@ -86,6 +86,7 @@ end
 -- Servers that do require special setup
 nvim_lsp.pylsp.setup {
     on_attach = on_attach,
+    capabilities = capabilities,
     cmd = { vim.g.vimrc.pylsp_cmd },
     settings = {
         pylsp = {
@@ -94,7 +95,6 @@ nvim_lsp.pylsp.setup {
             }
         }
     },
-    capabilities = capabilities
 }
 
 require('rust-tools').setup {
@@ -163,6 +163,8 @@ nvim_lsp.sumneko_lua.setup {
 }
 
 nvim_lsp.arduino_language_server.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
     cmd = {
         vim.g.vimrc.arduinolsp_cmd,
         '-cli-config', vim.g.vimrc.arduinocli_config,
