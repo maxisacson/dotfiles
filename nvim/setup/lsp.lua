@@ -41,9 +41,11 @@ local on_attach = function(client, bufnr)
 
     -- Set some keybinds conditional on server capabilities
     if client.server_capabilities.documentFormattingProvider then
-        vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format({ async = true }) end, opts)
-    elseif client.server_capabilities.documentRangeFormattingProvider then
-        vim.keymap.set('n', '<space>f', vim.lsp.buf.range_formatting, opts)
+        vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format({ async = true }) end, { buffer = bufnr, desc = 'Format document' })
+    end
+
+    if client.server_capabilities.documentRangeFormattingProvider then
+        vim.keymap.set('v', '<space>f', function() vim.lsp.buf.format({ async = true }) end, { buffer = bufnr, desc = 'Format selection' })
     end
 
     local hi = function(...)
@@ -79,12 +81,12 @@ end
 
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
-    signs = false,
-    update_in_insert = true,
-    virtual_text = {
-        prefix = '',
-    }
-})
+        signs = false,
+        update_in_insert = true,
+        virtual_text = {
+            prefix = '',
+        }
+    })
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
