@@ -67,31 +67,31 @@ opt.colorcolumn = '+1'
 vim.cmd([[highlight ColorColumn ctermbg=Black]])
 
 
-local function keymap(...) vim.api.nvim_set_keymap(...) end
+local function map(...) vim.keymap.set(...) end
 
 -- Window movement bindings
-keymap('n', '<C-Left>', '<C-w>h', { noremap = true })
-keymap('n', '<C-Right>', '<C-w>l', { noremap = true })
-keymap('n', '<C-Up>', '<C-w>k', { noremap = true })
-keymap('n', '<C-Down>', '<C-w>j', { noremap = true })
-keymap('n', '<C-h>', '<C-w>h', { noremap = true })
-keymap('n', '<C-l>', '<C-w>l', { noremap = true })
-keymap('n', '<C-k>', '<C-w>k', { noremap = true })
-keymap('n', '<C-j>', '<C-w>j', { noremap = true })
+map('n', '<C-Left>', '<C-w>h')
+map('n', '<C-Right>', '<C-w>l')
+map('n', '<C-Up>', '<C-w>k')
+map('n', '<C-Down>', '<C-w>j')
+map('n', '<C-h>', '<C-w>h')
+map('n', '<C-l>', '<C-w>l')
+map('n', '<C-k>', '<C-w>k')
+map('n', '<C-j>', '<C-w>j')
 -- convenience mapping for CTRL_W
-keymap('n', '`', '<C-w>', { noremap = true })
-keymap('n', '§', '<C-w>', { noremap = true })
+map('n', '`', '<C-w>')
+map('n', '§', '<C-w>')
 
 
 -- Window resize bindings
-keymap('n', '<Leader>+', '<C-w>+', { noremap = true })
-keymap('n', '<Leader>-', '<C-w>-', { noremap = true })
-keymap('n', '<Leader>>', '<C-w>>', { noremap = true })
-keymap('n', '<Leader><', '<C-w><', { noremap = true })
+map('n', '<Leader>+', '<C-w>+')
+map('n', '<Leader>-', '<C-w>-')
+map('n', '<Leader>>', '<C-w>>')
+map('n', '<Leader><', '<C-w><')
 
 -- Buffer management
 vim.opt.hidden = true -- allow buffers to be open in the background
-keymap('n', '<Leader><Leader>', '<C-^>', { noremap = true })
+map('n', '<Leader><Leader>', '<C-^>')
 -- " if !g:vimrc.enable_barbar
 -- "     nnoremap <Leader>w :bprev<CR>
 -- "     nnoremap <Leader>e :bnext<CR>
@@ -106,26 +106,26 @@ keymap('n', '<Leader><Leader>', '<C-^>', { noremap = true })
 -- " nnoremap <silent> <Leader><S-e> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
 
 -- mappings for quickfix list apart from tab
-keymap('n', '<leader>qn', ':cnext<CR>', { noremap = true })
-keymap('n', '<leader>qp', ':cprev<CR>', { noremap = true })
-keymap('n', '<leader>qf', ':cfirst<CR>', { noremap = true })
-keymap('n', '<leader>ql', ':clast<CR>', { noremap = true })
-keymap('n', '<leader>qc', ':cclose<CR>', { noremap = true })
-keymap('n', '<leader>qo', ':copen<CR>', { noremap = true })
+map('n', '<leader>qn', ':cnext<CR>')
+map('n', '<leader>qp', ':cprev<CR>')
+map('n', '<leader>qf', ':cfirst<CR>')
+map('n', '<leader>ql', ':clast<CR>')
+map('n', '<leader>qc', ':cclose<CR>')
+map('n', '<leader>qo', ':copen<CR>')
 
 -- mappings for location list apart from tab
-keymap('n', '<leader>ln', ':lnext<CR>', { noremap = true })
-keymap('n', '<leader>lp', ':lprev<CR>', { noremap = true })
-keymap('n', '<leader>lf', ':lfirst<CR>', { noremap = true })
-keymap('n', '<leader>ll', ':llast<CR>', { noremap = true })
-keymap('n', '<leader>lc', ':lclose<CR>', { noremap = true })
-keymap('n', '<leader>lo', ':lopen<CR>', { noremap = true })
+map('n', '<leader>ln', ':lnext<CR>')
+map('n', '<leader>lp', ':lprev<CR>')
+map('n', '<leader>lf', ':lfirst<CR>')
+map('n', '<leader>ll', ':llast<CR>')
+map('n', '<leader>lc', ':lclose<CR>')
+map('n', '<leader>lo', ':lopen<CR>')
 
 -- command line editing
-keymap('c', '<C-a>', '<Home>', { noremap = true }) -- start of line
-keymap('c', '<C-e>', '<End>', { noremap = true }) -- end of line
-keymap('c', '<C-f>', '<Right>', { noremap = true }) -- forward one character
-keymap('c', '<C-b>', '<Left>', { noremap = true }) -- back one character
-keymap('c', '<C-d>', '<Del>', { noremap = true }) -- delete character under cursor
-keymap('c', '<A-b>', '<S-Left>', { noremap = true }) -- back one word
-keymap('c', '<A-f>', '<S-Right>', { noremap = true }) -- forward one word
+map('c', '<C-a>', '<Home>') -- start of line
+map('c', '<C-e>', '<End>') -- end of line
+map('c', '<C-f>', '<Right>') -- forward one character
+map('c', '<C-b>', '<Left>') -- back one character
+map('c', '<C-d>', '<Del>') -- delete character under cursor
+map('c', '<A-b>', '<S-Left>') -- back one word
+map('c', '<A-f>', '<S-Right>') -- forward one word

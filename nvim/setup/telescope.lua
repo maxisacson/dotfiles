@@ -9,15 +9,15 @@ local telescope_project_files = function()
     if not ok then builtin.find_files(topts) end
 end
 
-local opts = { silent = true }
+local map = function(mode, lhs, rhs, desc)
+    vim.keymap.set(mode, lhs, rhs, { silent = true, desc = '[Telescope] ' .. desc })
+end
 
-vim.keymap.set('n', '<leader>ff', function() builtin.find_files({no_ignore=true}) end, opts)
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, opts)
-vim.keymap.set('n', '<leader>fb', builtin.buffers, opts)
-vim.keymap.set('n', '<leader>fh', builtin.help_tags, opts)
-
-vim.keymap.set('n', '<C-Space>', telescope_project_files, opts)
-vim.keymap.set('n', '<C-\\>', builtin.live_grep, opts)
+map('n', '<leader>ff', function() builtin.find_files({no_ignore=true}) end, 'Find files')
+map('n', '<leader>fg', builtin.live_grep, 'Line grep')
+map('n', '<leader>fb', builtin.buffers, 'Buffers')
+map('n', '<leader>fh', builtin.help_tags, 'Help tags')
+map('n', '<C-Space>', telescope_project_files, 'Project files')
 
 telescope.setup {
     defaults = {

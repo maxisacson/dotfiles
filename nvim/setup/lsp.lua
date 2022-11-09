@@ -6,8 +6,8 @@ local on_attach = function(client, bufnr)
     vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
 
     -- Mappings.
-    local map = function(mode, rhs, lhs, desc)
-        vim.keymap.set(mode, rhs, lhs, { buffer = bufnr, desc = '[LSP] ' .. desc })
+    local map = function(mode, lhs, rhs, desc)
+        vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = '[LSP] ' .. desc })
     end
 
     map('n', 'gD', vim.lsp.buf.declaration, 'Goto declaration')

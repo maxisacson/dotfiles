@@ -3,9 +3,10 @@
 vim.api.nvim_create_autocmd('FileType', {
     pattern = { 'c', 'cpp', 'objc' },
     callback = function()
-        vim.api.nvim_buf_set_keymap(0, 'n', '<Leader>f<Space>', ':<C-u>ClangFormat<CR>', { noremap = true })
-        vim.api.nvim_buf_set_keymap(0, 'v', '<Leader>f<Space>', ':ClangFormat<CR>', { noremap = true })
-    end })
+        vim.keymap.set('n', '<Leader>f<Space>', ':<C-u>ClangFormat<CR>', { buffer = 0 })
+        vim.keymap.set('v', '<Leader>f<Space>', ':ClangFormat<CR>', { buffer = 0 })
+    end
+})
 
 vim.g['clang_format#code_style'] = 'google'
 vim.g['clang_format#style_options'] = {
