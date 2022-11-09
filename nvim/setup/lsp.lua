@@ -6,46 +6,47 @@ local on_attach = function(client, bufnr)
     vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
 
     -- Mappings.
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { buffer = bufnr, desc = 'Goto declaration' })
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Hover' })
-    vim.keymap.set('n', '<space>sh', vim.lsp.buf.signature_help, { buffer = bufnr, desc = 'Signature help' })
-    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, { buffer = bufnr, desc = 'Add workspace folder' })
-    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, { buffer = bufnr, desc = 'Remove workspace folder' })
-    vim.keymap.set('n', '<space>wl',
-        function()
-            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-        end, { buffer = bufnr, desc = 'List workspace folders' })
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, { buffer = bufnr, desc = 'Rename symbol' })
-    vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, { buffer = bufnr, desc = 'Open diagnostics under cursor' })
-    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { buffer = bufnr, desc = 'Goto prev diagnostic' })
-    vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { buffer = bufnr, desc = 'Goto next diagnostic' })
-    vim.keymap.set('n', '<space>a', vim.lsp.buf.code_action, { buffer = bufnr, desc = 'Code action' })
+    local map = function(mode, rhs, lhs, desc)
+        vim.keymap.set(mode, rhs, lhs, { buffer = bufnr, desc = '[LSP] ' .. desc })
+    end
+
+    map('n', 'gD', vim.lsp.buf.declaration, 'Goto declaration')
+    map('n', 'K', vim.lsp.buf.hover, 'Hover')
+    map('n', '<space>sh', vim.lsp.buf.signature_help, 'Signature help')
+    map('n', '<space>wa', vim.lsp.buf.add_workspace_folder, 'Add workspace folder')
+    map('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, 'Remove workspace folder')
+    map('n', '<space>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, 'List workspace folders' )
+    map('n', '<space>rn', vim.lsp.buf.rename, 'Rename symbol')
+    map('n', '<space>e', vim.diagnostic.open_float, 'Open diagnostics under cursor')
+    map('n', '[d', vim.diagnostic.goto_prev, 'Goto prev diagnostic')
+    map('n', ']d', vim.diagnostic.goto_next, 'Goto next diagnostic')
+    map('n', '<space>a', vim.lsp.buf.code_action, 'Code action')
 
     if ok then
-        vim.keymap.set('n', 'gr', telescope.lsp_references, { buffer = bufnr, desc = 'Goto reference' })
-        vim.keymap.set('n', 'gd', telescope.lsp_definitions, { buffer = bufnr, desc = 'Goto definition' })
-        vim.keymap.set('n', '<space>D', telescope.lsp_type_definitions, { buffer = bufnr, desc = 'Goto type definition' })
-        vim.keymap.set('n', 'gi', telescope.lsp_implementations, { buffer = bufnr, desc = 'Goto implementation' })
-        vim.keymap.set('n', '<space>ds', telescope.lsp_document_symbols, { buffer = bufnr, desc = 'List document symbols' })
-        vim.keymap.set('n', '<space>ws', telescope.lsp_dynamic_workspace_symbols, { buffer = bufnr, desc = 'List workspace symbols' })
-        vim.keymap.set('n', '<space>q', telescope.diagnostics, { buffer = bufnr, desc = 'Open diagnostics' })
+        map('n', 'gr', telescope.lsp_references, 'Goto reference')
+        map('n', 'gd', telescope.lsp_definitions, 'Goto definition')
+        map('n', '<space>D', telescope.lsp_type_definitions, 'Goto type definition')
+        map('n', 'gi', telescope.lsp_implementations, 'Goto implementation')
+        map('n', '<space>ds', telescope.lsp_document_symbols, 'List document symbols')
+        map('n', '<space>ws', telescope.lsp_dynamic_workspace_symbols, 'List workspace symbols')
+        map('n', '<space>q', telescope.diagnostics, 'Open diagnostics')
     else
-        vim.keymap.set('n', 'gr', vim.lsp.buf.references, { buffer = bufnr, desc = 'Goto reference' })
-        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { buffer = bufnr, desc = 'Goto definition' })
-        vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, { buffer = bufnr, desc = 'Goto type definition' })
-        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { buffer = bufnr, desc = 'Goto implementation' })
-        vim.keymap.set('n', '<space>ds', vim.lsp.buf.document_symbol, { buffer = bufnr, desc = 'List document symbols' })
-        vim.keymap.set('n', '<space>ws', vim.lsp.buf.workspace_symbol, { buffer = bufnr, desc = 'List workspace symbols' })
-        vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, { buffer = bufnr, desc = 'Open diagnostics' })
+        map('n', 'gr', vim.lsp.buf.references, 'Goto reference')
+        map('n', 'gd', vim.lsp.buf.definition, 'Goto definition')
+        map('n', '<space>D', vim.lsp.buf.type_definition, 'Goto type definition')
+        map('n', 'gi', vim.lsp.buf.implementation, 'Goto implementation')
+        map('n', '<space>ds', vim.lsp.buf.document_symbol, 'List document symbols')
+        map('n', '<space>ws', vim.lsp.buf.workspace_symbol, 'List workspace symbols')
+        map('n', '<space>q', vim.diagnostic.setloclist, 'Open diagnostics')
     end
 
     -- Set some keybinds conditional on server capabilities
     if client.server_capabilities.documentFormattingProvider then
-        vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format({ async = true }) end, { buffer = bufnr, desc = 'Format document' })
+        map('n', '<space>f', function() vim.lsp.buf.format({ async = true }) end, 'Format document' )
     end
 
     if client.server_capabilities.documentRangeFormattingProvider then
-        vim.keymap.set('v', '<space>f', function() vim.lsp.buf.format({ async = true }) end, { buffer = bufnr, desc = 'Format selection' })
+        map('v', '<space>f', function() vim.lsp.buf.format({ async = true }) end, 'Format selection' )
     end
 
     local hi = function(...)
