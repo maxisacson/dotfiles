@@ -24,7 +24,7 @@ function __prompt_command {
 
     # local FG_DARKGRAY="\[\e[90m\]"
     # local FG_LIGHTRED="\[\e[91m\]"
-    # local FG_LIGHTGREEN="\[\e[92m\]"
+    local FG_LIGHTGREEN="\[\e[92m\]"
     # local FG_LIGHTYELLOW="\[\e[93m\]"
     local FG_LIGHTBLUE="\[\e[94m\]"
     # local FG_LIGHTMAGENTA="\[\e[95m\]"
@@ -65,6 +65,10 @@ function __prompt_command {
     fi
     PS1+="\n"
     PS1+="${chr}\u@\h"
+    if [[ -n $VIRTUAL_ENV ]]; then
+        venv=$(basename $VIRTUAL_ENV)
+        PS1+=" ${FG_LIGHTGREEN}(${venv})${RESET}"
+    fi
     if [ $EXIT != 0 ]; then
         PS1+="${BOLD}${FG_RED}•${RESET}"
     else
