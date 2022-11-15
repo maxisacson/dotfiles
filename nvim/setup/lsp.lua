@@ -1,4 +1,5 @@
 local nvim_lsp = require('lspconfig')
+local util = require'lspconfig.util'
 
 local on_attach = function(client, bufnr)
     vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
@@ -170,13 +171,16 @@ nvim_lsp.arduino_language_server.setup {
     }
 }
 
--- vim.lsp.set_log_level("debug")
-
-local util = require'lspconfig.util'
 nvim_lsp.omnisharp.setup {
-    cmd = { "C:/Users/maxisa/scoop/shims/omnisharp.EXE" },
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { 'C:/Users/maxisa/scoop/shims/omnisharp.EXE' },
     root_dir = function(fname)
         fname = util.path.sanitize(fname)
-        return util.root_pattern('*.sln')(fname) or util.root_pattern('*.csproj')(fname)
-    end
+        return util.root_pattern'*.sln'(fname) or util.root_pattern'*.csproj'(fname)
+    end,
+
+    -- enable_ms_build_load_projects_on_demand = true,
+    -- enable_roslyn_analyzers = true,
+    -- analyze_open_documents_only = true,
 }
