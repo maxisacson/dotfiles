@@ -3,15 +3,17 @@ local opt = vim.opt
 -- Set indenting stuff
 opt.tabstop = 4 -- number of spaces in a <Tab>
 opt.shiftwidth = 4 -- number of spaces to use for autoindent. Should be == tabstop
+opt.softtabstop = 4 -- number of spaces for <Tab> when editing
 opt.expandtab = true -- use spaces as <Tab>
 opt.smarttab = true -- insert shiftwidth worth of whitespace at beginning of line
 opt.backspace = 'indent,eol,start' -- make <BS> well behaved
 opt.autoindent = true -- make sure autoindent is turned on
 opt.cinoptions = 'l1,g0.75s,h0.25s,N-s'
+opt.smartindent = true
 
 -- Format options
 opt.textwidth = 80
-opt.formatoptions:remove{'t'}
+opt.formatoptions:remove { 't' }
 
 -- status line
 -- 0: never
@@ -20,16 +22,20 @@ opt.formatoptions:remove{'t'}
 -- 3: always and ONLY the last window
 opt.laststatus = 3
 
+-- block cursor
+opt.guicursor = ""
+
 -- Set incremental search
 opt.incsearch = true
 
--- Always keep 1 line above and below cursor,
+-- Always keep 2 line above and below cursor,
 -- and 5 columns to the right and left
-opt.scrolloff = 1
+opt.scrolloff = 2
 opt.sidescrolloff = 5
 
 -- Line numbering
 opt.number = true
+opt.relativenumber = true
 
 -- Show command
 opt.showcmd = true
@@ -50,17 +56,28 @@ vim.g.mapleader = ','
 opt.splitright = true
 opt.splitbelow = true
 
+-- Always show sign column
+opt.signcolumn = 'yes'
+
+-- Highlight the current line
+vim.opt.cursorline = true
+
+-- Highlight column
+opt.colorcolumn = '+1'
+vim.cmd([[highlight ColorColumn ctermbg=Black]])
+
+
 local function keymap(...) vim.api.nvim_set_keymap(...) end
 
 -- Window movement bindings
-keymap('n', '<C-Left>',  '<C-w>h', { noremap = true })
+keymap('n', '<C-Left>', '<C-w>h', { noremap = true })
 keymap('n', '<C-Right>', '<C-w>l', { noremap = true })
-keymap('n', '<C-Up>',    '<C-w>k', { noremap = true })
-keymap('n', '<C-Down>',  '<C-w>j', { noremap = true })
-keymap('n', '<C-h>',     '<C-w>h', { noremap = true })
-keymap('n', '<C-l>',     '<C-w>l', { noremap = true })
-keymap('n', '<C-k>',     '<C-w>k', { noremap = true })
-keymap('n', '<C-j>',     '<C-w>j', { noremap = true })
+keymap('n', '<C-Up>', '<C-w>k', { noremap = true })
+keymap('n', '<C-Down>', '<C-w>j', { noremap = true })
+keymap('n', '<C-h>', '<C-w>h', { noremap = true })
+keymap('n', '<C-l>', '<C-w>l', { noremap = true })
+keymap('n', '<C-k>', '<C-w>k', { noremap = true })
+keymap('n', '<C-j>', '<C-w>j', { noremap = true })
 -- convenience mapping for CTRL_W
 keymap('n', '`', '<C-w>', { noremap = true })
 keymap('n', '§', '<C-w>', { noremap = true })
@@ -88,25 +105,27 @@ keymap('n', '<Leader><Leader>', '<C-^>', { noremap = true })
 -- " nnoremap <silent> <Leader><S-q> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
 -- " nnoremap <silent> <Leader><S-e> :execute 'silent! tabmove ' . (tabpagenr()+1)<CR>
 
--- Highlight column
-opt.colorcolumn = '+1'
-vim.cmd([[highlight ColorColumn ctermbg=Black]])
-
--- Always show sign column
-opt.signcolumn = 'yes'
-
 -- mappings for quickfix list apart from tab
-keymap('n', '<leader>qn', ':cnext<CR>',  { noremap = true })
-keymap('n', '<leader>qp', ':cprev<CR>',  { noremap = true })
+keymap('n', '<leader>qn', ':cnext<CR>', { noremap = true })
+keymap('n', '<leader>qp', ':cprev<CR>', { noremap = true })
 keymap('n', '<leader>qf', ':cfirst<CR>', { noremap = true })
-keymap('n', '<leader>ql', ':clast<CR>',  { noremap = true })
+keymap('n', '<leader>ql', ':clast<CR>', { noremap = true })
 keymap('n', '<leader>qc', ':cclose<CR>', { noremap = true })
-keymap('n', '<leader>qo', ':copen<CR>',  { noremap = true })
+keymap('n', '<leader>qo', ':copen<CR>', { noremap = true })
 
 -- mappings for location list apart from tab
-keymap('n', '<leader>ln', ':lnext<CR>',  { noremap = true })
-keymap('n', '<leader>lp', ':lprev<CR>',  { noremap = true })
+keymap('n', '<leader>ln', ':lnext<CR>', { noremap = true })
+keymap('n', '<leader>lp', ':lprev<CR>', { noremap = true })
 keymap('n', '<leader>lf', ':lfirst<CR>', { noremap = true })
-keymap('n', '<leader>ll', ':llast<CR>',  { noremap = true })
+keymap('n', '<leader>ll', ':llast<CR>', { noremap = true })
 keymap('n', '<leader>lc', ':lclose<CR>', { noremap = true })
-keymap('n', '<leader>lo', ':lopen<CR>',  { noremap = true })
+keymap('n', '<leader>lo', ':lopen<CR>', { noremap = true })
+
+-- command line editing
+keymap('c', '<C-a>', '<Home>', { noremap = true }) -- start of line
+keymap('c', '<C-e>', '<End>', { noremap = true }) -- end of line
+keymap('c', '<C-f>', '<Right>', { noremap = true }) -- forward one character
+keymap('c', '<C-b>', '<Left>', { noremap = true }) -- back one character
+keymap('c', '<C-d>', '<Del>', { noremap = true }) -- delete character under cursor
+keymap('c', '<A-b>', '<S-Left>', { noremap = true }) -- back one word
+keymap('c', '<A-f>', '<S-Right>', { noremap = true }) -- forward one word

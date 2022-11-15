@@ -22,13 +22,6 @@ return packer.startup({
         -- vim-fugitive for git integration
         use 'tpope/vim-fugitive'
 
-        -- ack.vim for ag and ack integration
-        use {
-            'mileszs/ack.vim',
-            disable = vimrc.disable_ack,
-            config = setup('ack')
-        }
-
         -- nerdcomment for easy commenting
         use { 'scrooloose/nerdcommenter', config = setup('nerdcommenter') }
 
@@ -48,7 +41,11 @@ return packer.startup({
         use 'tikhomirov/vim-glsl'
 
         -- latex plugin
-        use { 'lervag/vimtex', config = setup('vimtex') }
+        use { 'lervag/vimtex',
+            config = function()
+                vim.g.vimtex_compiler_latexmk = { callback = 0 }
+            end
+        }
 
         -- for diffing blocks of text
         use 'AndrewRadev/linediff.vim'
@@ -74,16 +71,6 @@ return packer.startup({
         -- vim-cmake
         use { 'vhdirk/vim-cmake', disable = vimrc.disable_vim_cmake }
 
-        -- fzf fuzzy finder
-        use {
-            'junegunn/fzf.vim',
-            disable = vimrc.disable_fzf,
-            config = setup('fzf'),
-            requires = {
-                { 'junegunn/fzf', run = vim.fn['fzf#install'] }
-            }
-        }
-
         -- LSP configurations for neovim
         use {
             'neovim/nvim-lspconfig',
@@ -97,14 +84,21 @@ return packer.startup({
         -- lsp status spinner
         use { 'j-hui/fidget.nvim',
             disable = vimrc.disable_lsp,
-            config = setup('fidget')
+            config = function()
+                require('fidget').setup({ text = { spinner = "dots", } })
+            end
         }
 
         -- live parameter hints
         use {
             'ray-x/lsp_signature.nvim',
             disable = vimrc.disable_lsp or vimrc.disable_lsp_signature,
-            config = setup('lsp_signature')
+            config = function()
+                require 'lsp_signature'.setup({
+                    hint_enable = false,
+                    hint_prefix = "param: "
+                })
+            end
         }
 
         -- nvim-cmp for autocompletion
@@ -112,8 +106,8 @@ return packer.startup({
             'hrsh7th/nvim-cmp', disable = vimrc.disable_nvim_cmp,
             requires = {
                 { 'hrsh7th/cmp-nvim-lsp', disable = vimrc.disable_lsp },
-                { 'hrsh7th/vim-vsnip' }, -- snippet plugin
-                { 'hrsh7th/cmp-vsnip' }, -- snippet source
+                { 'L3MON4D3/LuaSnip' }, -- snippet plugin
+                { 'saadparwaiz1/cmp_luasnip' }, -- snippet source
                 { 'hrsh7th/cmp-buffer' }, -- buffer source
                 { 'hrsh7th/cmp-path' }, -- path source
                 { 'hrsh7th/cmp-nvim-lsp-signature-help' },
@@ -157,7 +151,8 @@ return packer.startup({
         use { 'ellisonleao/gruvbox.nvim', requires = 'rktjmp/lush.nvim' }
 
         -- visualize color codes
-        use { 'norcalli/nvim-colorizer.lua', config = setup('colorizer') }
+        use { 'norcalli/nvim-colorizer.lua',
+            config = function() require 'colorizer'.setup() end }
 
         -- NvimTree alternative to NerdTree
         use {
@@ -198,18 +193,19 @@ return packer.startup({
         -- Debugging
         use { 'mfussenegger/nvim-dap', config = setup('nvim-dap') }
         use { 'rcarriga/nvim-dap-ui', config = setup('nvim-dap-ui') }
-        use { 'nvim-telescope/telescope-dap.nvim', config = function() require 'telescope'.load_extension('dap') end }
-        use { 'theHamsta/nvim-dap-virtual-text', config = setup('nvim-dap-virtual-text') }
-        use { 'mfussenegger/nvim-dap-python', config = setup('nvim-dap-python') }
+        use { 'nvim-telescope/telescope-dap.nvim',
+            config = function() require 'telescope'.load_extension('dap') end }
+        use { 'theHamsta/nvim-dap-virtual-text',
+            config = function() require('nvim-dap-virtual-text').setup({}) end }
+        use { 'mfussenegger/nvim-dap-python',
+            config = function()
+                require('dap-python').setup(vim.g.utils.python_interpreter())
+            end
+        }
 
     end,
 
     config = {
-        -- display = {
-        --     open_fn = function()
-        --         return putil.float({ border = 'single' })
-        --     end
-        -- },
         profile = {
             enable = true,
             threshold = 1,

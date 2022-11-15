@@ -6,11 +6,7 @@ function U.python_interpreter()
         return vim.g.vimrc.python3_host_prog
     end
 
-    if vim.fn.empty(vim.fn.glob("/usr/bin/python3")) then
-        return vim.fn.system("which python3")
-    end
-
-    return "/usr/bin/python3"
+    return "/usr/bin/python"
 end
 
 local function setup()

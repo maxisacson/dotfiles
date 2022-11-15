@@ -1,0 +1,61 @@
+configuration {
+	font: "Fantasque Sans Mono 12";
+}
+
+@import "colors.rasi"
+
+* {
+    background-color: @bg-soft;
+    text-color: @fg;
+    border-color: @bg-soft;
+}
+
+window {
+    border: 1px;
+    border-color: @light4;
+	width: 200px;
+    location: center;
+    x-offset: 0;
+    y-offset: 0;
+}
+
+prompt {
+	padding: 10px 10px 6px 10px; // top right bottom left
+	font: "Fantasque Sans Mono 10";
+}
+
+inputbar {
+	children: [ prompt ];
+}
+
+listview {
+    padding: 0px 10px 10px 10px;
+    columns: 1;
+    lines: 2;
+    spacing: 5px;
+    cycle: true;
+}
+
+mainbox {
+    children: [ inputbar, listview ];
+}
+
+element {
+	border: 4px 10px 4px 10px; // top right bottom left
+}
+
+element-icon {
+}
+
+element-text {
+}
+
+element-text selected {
+    background-color: @yellow;
+    text-color: @bg;
+}
+
+element selected {
+    border-color: @yellow;
+    text-color: @bg;
+}

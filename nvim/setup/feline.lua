@@ -57,8 +57,8 @@ local colors = {
     faded_aqua = '#427b58',
     faded_orange = '#af3a03',
 }
-colors.fg=colors.light1
-colors.bg=colors.dark1
+colors.fg = colors.light1
+colors.bg = colors.dark1
 
 local vi_mode_colors = {
     NORMAL = colors.light4,
@@ -112,13 +112,13 @@ table.insert(components.active[1], {
         return val
     end,
     left_sep = function()
-        local val = {hl = {fg = 'NONE', bg = ''}}
+        local val = { hl = { fg = 'NONE', bg = '' } }
         val.str = ' '
         val.hl.bg = vi_mode_utils.get_mode_color()
         return val
     end,
     right_sep = function()
-        local val = {hl = {fg = 'NONE', bg = ''}}
+        local val = { hl = { fg = 'NONE', bg = '' } }
         val.str = ' '
         val.hl.bg = vi_mode_utils.get_mode_color()
         return val
@@ -150,7 +150,6 @@ table.insert(components.active[1], {
 table.insert(components.active[1], {
     provider = 'git_diff_removed',
     hl = { fg = colors.bright_red, bg = colors.dark2 },
-    right_sep = { str = ' ', hl = { bg = colors.dark2 } },
     icon = '-',
     right_sep = { str = ' ', hl = { fg = colors.light4, bg = colors.dark2 } },
 })
@@ -173,8 +172,8 @@ table.insert(components.active[3], {
     provider = function()
         local enc = (vim.bo.fenc ~= '' and vim.bo.fenc) or vim.o.enc
         local ff = (vim.bo.ff ~= '' and vim.bo.ff) or vim.o.ff
-        ff = (ff ~= '' and '['..ff..']') or ''
-        return enc..ff
+        ff = (ff ~= '' and '[' .. ff .. ']') or ''
+        return enc .. ff
     end,
     hl = { fg = colors.light4, bg = colors.dark2 },
     left_sep = { str = ' ', hl = { bg = colors.dark2 } },
@@ -209,44 +208,40 @@ table.insert(components.active[3], {
         return string.format(':%d', vim.fn.col('.'))
     end,
     hl = { fg = colors.dark0, bg = colors.light4 },
-    left_sep = { str ='', hl = { fg = colors.dark0, bg = colors.light4 } },
-    right_sep = { str =' ', hl = { bg = colors.light4 } }
+    left_sep = { str = '', hl = { fg = colors.dark0, bg = colors.light4 } },
+    right_sep = { str = ' ', hl = { bg = colors.light4 } }
 })
 
 table.insert(components.active[3], {
-   provider = 'diagnostic_hints',
-   enabled = function() return lsp.diagnostics_exist('Hint') end,
-   hl = { fg = colors.dark0, bg = colors.light4 },
+    provider = 'diagnostic_hints',
+    enabled = function() return lsp.diagnostics_exist('Hint') end,
+    hl = { fg = colors.dark0, bg = colors.light4 },
+    left_sep = { str = '', hl = { fg = colors.dark0, bg = colors.light4 } },
+    right_sep = { str = ' ', hl = { bg = colors.light4 } }
 })
 
 table.insert(components.active[3], {
-   provider = 'diagnostic_info',
-   enabled = function() return lsp.diagnostics_exist('Info') end,
-   hl = { fg = colors.dark0, bg = colors.light4 },
+    provider = 'diagnostic_info',
+    enabled = function() return lsp.diagnostics_exist('Info') end,
+    hl = { fg = colors.dark0, bg = colors.light4 },
+    left_sep = { str = '', hl = { fg = colors.dark0, bg = colors.light4 } },
+    right_sep = { str = ' ', hl = { bg = colors.light4 } }
 })
 
 table.insert(components.active[3], {
-   provider = function(component)
-       if lsp.diagnostics_exist('Warn') then
-           return lsp.diagnostic_warnings(component)
-       end
-       return ''
-   end,
-   hl = { fg = colors.dark0, bg = colors.bright_orange },
-   left_sep = { str = '', hl = { fg = colors.dark0, bg = colors.bright_orange } },
-   right_sep = { str = ' ', hl = { bg = colors.bright_orange } }
+    provider = 'diagnostic_warnings',
+    enabled = function() return lsp.diagnostics_exist('Warn') end,
+    hl = { fg = colors.dark0, bg = colors.bright_orange },
+    left_sep = { str = '', hl = { fg = colors.dark0, bg = colors.bright_orange } },
+    right_sep = { str = ' ', hl = { bg = colors.bright_orange } }
 })
 
 table.insert(components.active[3], {
-   provider = function(component)
-       if lsp.diagnostics_exist('Error') then
-           return lsp.diagnostic_errors(component)
-       end
-       return ''
-   end,
-   hl = { fg = colors.dark0, bg = colors.bright_red },
-   left_sep = { str ='', hl = { fg = colors.dark0, bg = colors.bright_red } },
-   right_sep = { str =' ', hl = { bg = colors.bright_red } }
+    provider = 'diagnostic_errors',
+    enabled = function() return lsp.diagnostics_exist('Error') end,
+    hl = { fg = colors.dark0, bg = colors.bright_red },
+    left_sep = { str = '', hl = { fg = colors.dark0, bg = colors.bright_red } },
+    right_sep = { str = ' ', hl = { bg = colors.bright_red } }
 })
 
 table.insert(components.inactive[1], {
@@ -257,11 +252,10 @@ table.insert(components.inactive[1], {
 })
 
 require('feline').setup({
-    components=components,
-    separators=separators,
-    properties=properties,
-    vi_mode_colors=vi_mode_colors,
-    theme=colors,
+    components = components,
+    separators = separators,
+    vi_mode_colors = vi_mode_colors,
+    theme = colors,
 
     force_inactive = {
         filetypes = {

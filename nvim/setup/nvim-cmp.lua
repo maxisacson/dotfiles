@@ -1,9 +1,8 @@
 local lspkind = require'lspkind'
 local cmp = require'cmp'
+local luasnip = require'luasnip'
 
-local feedkey = function(key, mode)
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-end
+require('luasnip.loaders.from_vscode').lazy_load()
 
 vim.o.completeopt = 'menu,menuone,noselect'
 
@@ -11,21 +10,21 @@ cmp.setup({
     preselect = false,
     snippet = {
         expand = function(args)
-            vim.fn["vsnip#anonymous"](args.body)
+            require('luasnip').lsp_expand(args.body)
         end
     },
     mapping = cmp.mapping.preset.insert({
         ['<C-d>'] = cmp.mapping.scroll_docs(4),
         ['<C-u>'] = cmp.mapping.scroll_docs(-4),
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-Space>'] = cmp.mapping.complete({}),
         ['<CR>'] = cmp.mapping.confirm({ select = false }),
 
         ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
-            elseif vim.fn["vsnip#available"](1) == 1 then
-                feedkey("<Plug>(vsnip-expand-or-jump)", "")
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
             else
                 fallback()
             end
@@ -34,8 +33,8 @@ cmp.setup({
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
-            elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-                feedkey("<Plug>(vsnip-jump-prev)", "")
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
             else
                 fallback()
             end
@@ -47,7 +46,7 @@ cmp.setup({
         { name = 'nvim_lsp_signature_help' },
         { name = 'orgmode' },
         { name = 'neorg' },
-        { name = 'vsnip' },
+        { name = 'luasnip' },
         { name = 'buffer' },
         { name = 'path' }
     }),
@@ -58,7 +57,7 @@ cmp.setup({
             menu = ({
                 nvim_lsp = "[LSP]",
                 nvim_lsp_signature_help = "[Signature]",
-                vsnip = "[VSnip]",
+                luasnip = "[LuaSnip]",
                 orgmode = "[Orgmode]",
                 neorg = "[Neorg]",
                 buffer = "[Buffer]",
