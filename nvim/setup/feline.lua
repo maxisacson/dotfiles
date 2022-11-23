@@ -143,7 +143,7 @@ table.insert(components.active[1], {
 table.insert(components.active[1], {
     provider = 'git_diff_changed',
     hl = { fg = colors.bright_yellow, bg = colors.dark2 },
-    icon = ':',
+    icon = '~',
     right_sep = { str = ' ', hl = { fg = colors.light4, bg = colors.dark2 } },
 })
 
@@ -166,6 +166,13 @@ table.insert(components.active[3], {
     hl = { fg = colors.light4 },
     left_sep = '',
     right_sep = ' '
+})
+
+table.insert(components.active[3], {
+    provider = 'lsp_client_names',
+    hl = { fg = colors.light4 },
+    left_set = '',
+    right_sep = ' ',
 })
 
 table.insert(components.active[3], {
