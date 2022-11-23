@@ -10,5 +10,5 @@ map('t', '<C-l>', '<C-\\><C-n><C-w>l', {})
 map('n', '<Leader>ts', '<Cmd>split | terminal<CR>', {})
 
 local g = vim.api.nvim_create_augroup('TermOpenConfig', { clear=true })
-vim.api.nvim_create_autocmd('TermOpen', { group=g, pattern='*', command='set nobuflisted | setlocal scrolloff=0 | setlocal sidescrolloff=0 | setlocal nonumber | setlocal signcolumn=auto | startinsert' })
+vim.api.nvim_create_autocmd('TermOpen', { group=g, pattern='*', command='set nobuflisted | setlocal scrolloff=0 | setlocal sidescrolloff=0 | setlocal nonumber | setlocal norelativenumber | setlocal signcolumn=auto | startinsert' })
 vim.api.nvim_create_autocmd('BufEnter', { group=g, pattern='term://*', command='setlocal scrolloff=0 | setlocal sidescrolloff=0 | startinsert' })
