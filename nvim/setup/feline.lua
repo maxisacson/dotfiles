@@ -1,4 +1,3 @@
-local lsp = require('feline.providers.lsp')
 local vi_mode_utils = require('feline.providers.vi_mode')
 
 local components = {
@@ -221,7 +220,6 @@ table.insert(components.active[3], {
 
 table.insert(components.active[3], {
     provider = 'diagnostic_hints',
-    enabled = function() return lsp.diagnostics_exist('Hint') end,
     hl = { fg = colors.dark0, bg = colors.light4 },
     left_sep = { str = '', hl = { fg = colors.dark0, bg = colors.light4 } },
     right_sep = { str = ' ', hl = { bg = colors.light4 } }
@@ -229,7 +227,6 @@ table.insert(components.active[3], {
 
 table.insert(components.active[3], {
     provider = 'diagnostic_info',
-    enabled = function() return lsp.diagnostics_exist('Info') end,
     hl = { fg = colors.dark0, bg = colors.light4 },
     left_sep = { str = '', hl = { fg = colors.dark0, bg = colors.light4 } },
     right_sep = { str = ' ', hl = { bg = colors.light4 } }
@@ -237,7 +234,6 @@ table.insert(components.active[3], {
 
 table.insert(components.active[3], {
     provider = 'diagnostic_warnings',
-    enabled = function() return lsp.diagnostics_exist('Warn') end,
     hl = { fg = colors.dark0, bg = colors.bright_orange },
     left_sep = { str = '', hl = { fg = colors.dark0, bg = colors.bright_orange } },
     right_sep = { str = ' ', hl = { bg = colors.bright_orange } }
@@ -245,7 +241,6 @@ table.insert(components.active[3], {
 
 table.insert(components.active[3], {
     provider = 'diagnostic_errors',
-    enabled = function() return lsp.diagnostics_exist('Error') end,
     hl = { fg = colors.dark0, bg = colors.bright_red },
     left_sep = { str = '', hl = { fg = colors.dark0, bg = colors.bright_red } },
     right_sep = { str = ' ', hl = { bg = colors.bright_red } }
