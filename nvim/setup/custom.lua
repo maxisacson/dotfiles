@@ -81,7 +81,16 @@ local lua_exec_and_append_current_line = function()
     end
     vim.api.nvim_buf_set_text(0, row, col, row, col, { ' ' .. result })
 end
-vim.keymap.set('n', '<Leader>x', lua_exec_and_append_current_line, { desc = 'Execute current line in Lua' })
+vim.keymap.set('n', '<Leader>x', lua_exec_and_append_current_line, { desc = 'Execute current line in Lua and append result' })
+
+-- execute current line as lua code and append insert below
+local lua_exec_and_insert_line = function()
+    local line = vim.api.nvim_get_current_line()
+    local row = vim.fn.line('.')
+    local result = vim.fn.split(vim.fn.execute('lua =' .. line), '\n')
+    vim.api.nvim_buf_set_lines(0, row, row, true, result)
+end
+vim.keymap.set('n', '<Leader>X', lua_exec_and_insert_line, { desc = 'Execute current line in Lua and insert result below)' })
 
 vim.cmd([[
     " Use tab and shift-tab to move in quickfix and location lists
