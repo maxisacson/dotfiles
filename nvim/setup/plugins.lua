@@ -171,6 +171,11 @@ return packer.startup({
             },
             config = setup('telescope')
         }
+        use { 'nvim-telescope/telescope-ui-select.nvim',
+            config = function()
+                require('telescope').load_extension('ui-select')
+            end
+        }
 
         -- Neorg note taking plugin
         use {
