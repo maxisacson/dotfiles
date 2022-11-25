@@ -111,7 +111,8 @@ return packer.startup({
                 { 'hrsh7th/cmp-buffer' }, -- buffer source
                 { 'hrsh7th/cmp-path' }, -- path source
                 { 'hrsh7th/cmp-nvim-lsp-signature-help' },
-                { 'hrsh7th/nvim-cmp' },
+                { 'hrsh7th/cmp-cmdline' },
+                { 'dmitmel/cmp-cmdline-history' }
             },
             config = setup('nvim-cmp')
         }

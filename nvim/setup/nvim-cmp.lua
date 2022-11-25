@@ -1,6 +1,6 @@
-local lspkind = require'lspkind'
-local cmp = require'cmp'
-local luasnip = require'luasnip'
+local lspkind = require 'lspkind'
+local cmp = require 'cmp'
+local luasnip = require 'luasnip'
 
 require('luasnip.loaders.from_vscode').lazy_load()
 
@@ -41,15 +41,19 @@ cmp.setup({
         end, { "i", "s" }),
 
     }),
-    sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-        { name = 'nvim_lsp_signature_help' },
-        { name = 'orgmode' },
-        { name = 'neorg' },
-        { name = 'luasnip' },
-        { name = 'buffer' },
-        { name = 'path' }
-    }),
+    sources = cmp.config.sources(
+        {
+            { name = 'nvim_lsp' },
+            { name = 'nvim_lsp_signature_help' },
+            { name = 'orgmode' },
+            { name = 'neorg' },
+            { name = 'path' },
+            { name = 'luasnip' },
+        },
+        {
+            { name = 'buffer' },
+        }
+    ),
     formatting = {
         format = lspkind.cmp_format({
             with_text = true,
@@ -62,7 +66,29 @@ cmp.setup({
                 neorg = "[Neorg]",
                 buffer = "[Buffer]",
                 path = "[Path]",
+                cmdline = "[CmdLine]",
+                cmdline_history = "[CmdHist]",
             })
         })
     },
+})
+
+-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline({ '/', '?' }, {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+        { name = 'cmdline_history' },
+        { name = 'buffer' },
+    })
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+        { name = 'path' }
+    }, {
+        { name = 'cmdline' },
+        { name = 'cmdline_history' }
+    })
 })
