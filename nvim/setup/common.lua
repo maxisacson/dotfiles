@@ -74,24 +74,6 @@ opt.mouse = 'a'
 opt.list = true
 opt.listchars = { tab = '└─', trail = '∙', nbsp = '␣' }
 
-local ag_whitespace = vim.api.nvim_create_augroup("InsertModeListChars", { clear = true })
-vim.api.nvim_create_autocmd("InsertEnter", {
-    group = ag_whitespace,
-    pattern = "*",
-    callback = function()
-        local spaces = opt.tabstop:get()
-        opt.listchars:append({ leadmultispace = '┆' .. string.rep(' ', spaces-1)})
-    end,
-    desc = 'Show whitespace when entering insert mode'
-})
-vim.api.nvim_create_autocmd("InsertLeave", {
-    group = ag_whitespace,
-    pattern = "*",
-    callback = function()
-        opt.listchars:remove('leadmultispace')
-    end,
-    desc = 'Hide whitespace when entering insert mode'
-})
 
 
 local function map(...) vim.keymap.set(...) end

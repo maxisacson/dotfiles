@@ -92,6 +92,26 @@ local lua_exec_and_insert_line = function()
 end
 vim.keymap.set('n', '<Leader>X', lua_exec_and_insert_line, { desc = 'Execute current line in Lua and insert result below)' })
 
+-- show whitespace in insert mode
+local ag_whitespace = vim.api.nvim_create_augroup("InsertModeListChars", { clear = true })
+vim.api.nvim_create_autocmd("InsertEnter", {
+    group = ag_whitespace,
+    pattern = "*",
+    callback = function()
+        local spaces = vim.opt.tabstop:get()
+        vim.opt.listchars:append({ leadmultispace = '┆' .. string.rep(' ', spaces-1)})
+    end,
+    desc = 'Show whitespace when entering insert mode'
+})
+vim.api.nvim_create_autocmd("InsertLeave", {
+    group = ag_whitespace,
+    pattern = "*",
+    callback = function()
+        vim.opt.listchars:remove('leadmultispace')
+    end,
+    desc = 'Hide whitespace when entering insert mode'
+})
+
 vim.cmd([[
     " Use tab and shift-tab to move in quickfix and location lists
     " function! SmartTab(shifttab)
