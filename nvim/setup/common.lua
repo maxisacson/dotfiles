@@ -74,6 +74,10 @@ opt.mouse = 'a'
 opt.list = true
 opt.listchars = { tab = '└─', trail = '∙', nbsp = '␣' }
 
+-- swapfile, undo, and backup
+opt.swapfile = false
+opt.backup = false
+opt.undofile = true
 
 
 local function map(...) vim.keymap.set(...) end
