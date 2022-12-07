@@ -1,4 +1,5 @@
 local opt = vim.opt
+local g = vim.g
 
 -- Set indenting stuff
 opt.tabstop = 4 -- number of spaces in a <Tab>
@@ -47,10 +48,10 @@ opt.spelllang = 'en_gb'
 opt.title = true
 
 -- Always use ft=tex as default for .tex-files
-vim.g.tex_flavor = 'latex'
+g.tex_flavor = 'latex'
 
 -- Map , to <Leader>
-vim.g.mapleader = ','
+g.mapleader = ','
 
 -- always split the screen to the right or below
 opt.splitright = true
@@ -60,11 +61,37 @@ opt.splitbelow = true
 opt.signcolumn = 'yes'
 
 -- Highlight the current line
-vim.opt.cursorline = true
+opt.cursorline = true
 
 -- Highlight column
 opt.colorcolumn = '+1'
 vim.cmd([[highlight ColorColumn ctermbg=Black]])
+
+-- Enable mouse
+opt.mouse = 'a'
+
+-- show list chars
+opt.list = true
+opt.listchars = { tab = '└─', trail = '∙', nbsp = '␣' }
+
+local ag_whitespace = vim.api.nvim_create_augroup("InsertModeListChars", { clear = true })
+vim.api.nvim_create_autocmd("InsertEnter", {
+    group = ag_whitespace,
+    pattern = "*",
+    callback = function()
+        local spaces = opt.tabstop:get()
+        opt.listchars:append({ leadmultispace = '┆' .. string.rep(' ', spaces-1)})
+    end,
+    desc = 'Show whitespace when entering insert mode'
+})
+vim.api.nvim_create_autocmd("InsertLeave", {
+    group = ag_whitespace,
+    pattern = "*",
+    callback = function()
+        opt.listchars:remove('leadmultispace')
+    end,
+    desc = 'Hide whitespace when entering insert mode'
+})
 
 
 local function map(...) vim.keymap.set(...) end
@@ -90,7 +117,7 @@ map('n', '<Leader>>', '<C-w>>')
 map('n', '<Leader><', '<C-w><')
 
 -- Buffer management
-vim.opt.hidden = true -- allow buffers to be open in the background
+opt.hidden = true -- allow buffers to be open in the background
 map('n', '<Leader><Leader>', '<C-^>')
 -- " if !g:vimrc.enable_barbar
 -- "     nnoremap <Leader>w :bprev<CR>
