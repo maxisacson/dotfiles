@@ -20,7 +20,7 @@ cmp.setup({
         ['<C-Space>'] = cmp.mapping.complete({}),
         ['<CR>'] = cmp.mapping.confirm({ select = false }),
 
-        ["<Tab>"] = cmp.mapping(function(fallback)
+        ['<Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_next_item()
             elseif luasnip.expand_or_jumpable() then
@@ -28,9 +28,9 @@ cmp.setup({
             else
                 fallback()
             end
-        end, { "i", "s" }),
+        end, { 'i', 's' }),
 
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
+        ['<S-Tab>'] = cmp.mapping(function(fallback)
             if cmp.visible() then
                 cmp.select_prev_item()
             elseif luasnip.jumpable(-1) then
@@ -38,7 +38,7 @@ cmp.setup({
             else
                 fallback()
             end
-        end, { "i", "s" }),
+        end, { 'i', 's' }),
 
     }),
     sources = cmp.config.sources(
@@ -75,7 +75,22 @@ cmp.setup({
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline({ '/', '?' }, {
-    mapping = cmp.mapping.preset.cmdline(),
+    completion = { autocomplete = false },
+    mapping = cmp.mapping.preset.cmdline({
+        ['<Tab>'] = cmp.mapping(function()
+            if cmp.visible() then
+                cmp.select_next_item()
+            else
+                cmp.complete({})
+            end
+        end, { 'c' }),
+
+        ['<S-Tab>'] = cmp.mapping(function()
+            if cmp.visible() then
+                cmp.select_prev_item()
+            end
+        end, { 'c' }),
+    }),
     sources = cmp.config.sources({
         { name = 'cmdline_history' },
         { name = 'buffer' },
@@ -84,7 +99,22 @@ cmp.setup.cmdline({ '/', '?' }, {
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
+    completion = { autocomplete = false },
+    mapping = cmp.mapping.preset.cmdline({
+        ['<Tab>'] = cmp.mapping(function()
+            if cmp.visible() then
+                cmp.select_next_item()
+            else
+                cmp.complete({})
+            end
+        end, { 'c' }),
+
+        ['<S-Tab>'] = cmp.mapping(function()
+            if cmp.visible() then
+                cmp.select_prev_item()
+            end
+        end, { 'c' }),
+    }),
     sources = cmp.config.sources({
         { name = 'path' }
     }, {
