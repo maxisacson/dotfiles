@@ -95,15 +95,12 @@ vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
         signs = false,
         update_in_insert = true,
-        virtual_text = {
-            prefix = '',
-        }
     })
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Servers that don't require special setup
-local servers = { 'cmake', 'tsserver', 'gopls' }
+local servers = { 'cmake', 'tsserver', 'gopls', 'marksman' }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup {
         on_attach = on_attach,
