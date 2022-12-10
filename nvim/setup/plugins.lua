@@ -66,7 +66,11 @@ return packer.startup({
         use 'maxisacson/vim-rs-experimental-syntax'
 
         -- clang-format intergration for vim
-        use { 'rhysd/vim-clang-format', config = setup('clang-format') }
+        use {
+            'rhysd/vim-clang-format',
+            disable = vimrc.disable_clang_format,
+            config = setup('clang-format')
+        }
 
         -- vim-cmake
         use { 'vhdirk/vim-cmake', disable = vimrc.disable_vim_cmake }

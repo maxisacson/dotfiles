@@ -10,6 +10,7 @@ function M.build_config(opt)
         disable_neorg = true,
         disable_orgmode = true,
         disable_lsp_signature = true,
+        disable_clang_format = true,
 
         colorscheme = "gruvbox",
         override_python3_host_prog = false,

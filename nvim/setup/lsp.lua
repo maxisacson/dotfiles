@@ -2,6 +2,8 @@ local nvim_lsp = require('lspconfig')
 
 local ok, telescope = pcall(require, 'telescope.builtin')
 
+local ag_autoformat = vim.api.nvim_create_augroup('AutoFormatGoFile', { clear = true })
+
 local on_attach = function(client, bufnr)
     vim.bo.omnifunc = 'v:lua.vim.lsp.omnifunc'
 
@@ -15,7 +17,7 @@ local on_attach = function(client, bufnr)
     map('n', '<space>sh', vim.lsp.buf.signature_help, 'Signature help')
     map('n', '<space>wa', vim.lsp.buf.add_workspace_folder, 'Add workspace folder')
     map('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, 'Remove workspace folder')
-    map('n', '<space>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, 'List workspace folders' )
+    map('n', '<space>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, 'List workspace folders')
     map('n', '<space>rn', vim.lsp.buf.rename, 'Rename symbol')
     map('n', '<space>e', vim.diagnostic.open_float, 'Open diagnostics under cursor')
     map('n', '[d', vim.diagnostic.goto_prev, 'Goto prev diagnostic')
@@ -42,11 +44,20 @@ local on_attach = function(client, bufnr)
 
     -- Set some keybinds conditional on server capabilities
     if client.server_capabilities.documentFormattingProvider then
-        map('n', '<space>f', function() vim.lsp.buf.format({ async = true }) end, 'Format document' )
+        map('n', '<space>f', function() vim.lsp.buf.format({ async = true }) end, 'Format document')
+
+        if vim.bo.filetype == 'go' then
+            vim.api.nvim_create_autocmd('BufWrite', {
+                group = ag_autoformat,
+                buffer = bufnr,
+                callback = function() vim.lsp.buf.format({ async = true }) end
+            })
+        end
+
     end
 
     if client.server_capabilities.documentRangeFormattingProvider then
-        map('v', '<space>f', function() vim.lsp.buf.format({ async = true }) end, 'Format selection' )
+        map('v', '<space>f', function() vim.lsp.buf.format({ async = true }) end, 'Format selection')
     end
 
     local hi = function(...)
