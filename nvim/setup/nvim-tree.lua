@@ -3,6 +3,7 @@
 require 'nvim-tree'.setup {}
 
 vim.keymap.set('n', '<Leader>nt', ':NvimTreeToggle<CR>', { silent = true })
+vim.keymap.set('n', '<Leader>nf', ':NvimTreeFindFile!<CR>', { silent = true })
 
 if vim.g.vimrc.colorscheme == 'gruvbox' then
     vim.api.nvim_set_hl(0, 'NvimTreeFolderName', { link = 'GruvboxBlueBold' })
