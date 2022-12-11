@@ -112,6 +112,16 @@ vim.api.nvim_create_autocmd("InsertLeave", {
     desc = 'Hide whitespace when entering insert mode'
 })
 
+local ag_filetype = vim.api.nvim_create_augroup("FiletypeAutoGroup", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+    group = ag_filetype,
+    pattern = "go",
+    callback = function()
+        vim.opt.expandtab = false
+    end,
+    desc = "Use tabs instead of spaces for Go-files"
+})
+
 vim.cmd([[
     " Use tab and shift-tab to move in quickfix and location lists
     " function! SmartTab(shifttab)
