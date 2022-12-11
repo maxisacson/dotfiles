@@ -23,7 +23,18 @@ return packer.startup({
         use 'tpope/vim-fugitive'
 
         -- nerdcomment for easy commenting
-        use { 'scrooloose/nerdcommenter', config = setup('nerdcommenter') }
+        use {
+            'scrooloose/nerdcommenter',
+            disable = vimrc.disable_nerdcommenter,
+            config = setup('nerdcommenter')
+        }
+
+        -- Comment.nvim -- like nerdcommenter but in Lua
+        use {
+            'numToStr/Comment.nvim',
+            disable = vimrc.disable_commentnvim,
+            config = setup('comment')
+        }
 
         -- vim-easy-align for easy alignment
         use { 'junegunn/vim-easy-align', config = setup('easyalign') }

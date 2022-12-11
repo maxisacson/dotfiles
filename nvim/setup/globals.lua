@@ -11,6 +11,8 @@ function M.build_config(opt)
         disable_orgmode = true,
         disable_lsp_signature = true,
         disable_clang_format = true,
+        disable_nerdcommenter = true,
+        disable_commentnvim = false,
 
         colorscheme = "gruvbox",
         override_python3_host_prog = false,
