@@ -45,9 +45,6 @@ return packer.startup({
         -- vim-repeat
         use 'tpope/vim-repeat'
 
-        -- vim-markdown
-        use 'tpope/vim-markdown'
-
         -- GLSL syntax
         use 'tikhomirov/vim-glsl'
 
