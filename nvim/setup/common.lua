@@ -142,3 +142,9 @@ map('c', '<C-b>', '<Left>') -- back one character
 map('c', '<C-d>', '<Del>') -- delete character under cursor
 map('c', '<A-b>', '<S-Left>') -- back one word
 map('c', '<A-f>', '<S-Right>') -- forward one word
+
+-- move selected line/block down/up/right/left
+map('v', '<C-j>', ":m '>+1<CR>gv")
+map('v', '<C-k>', ":m '<-2<CR>gv")
+map('v', '<C-l>', ">gv")
+map('v', '<C-h>', "<gv")
