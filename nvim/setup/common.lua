@@ -144,7 +144,7 @@ map('c', '<A-b>', '<S-Left>') -- back one word
 map('c', '<A-f>', '<S-Right>') -- forward one word
 
 -- move selected line/block down/up/right/left
-map('v', '<C-j>', ":m '>+1<CR>gv")
-map('v', '<C-k>', ":m '<-2<CR>gv")
-map('v', '<C-l>', ">gv")
-map('v', '<C-h>', "<gv")
+map('v', 'J', ":m '>+1<CR>gv=gv")
+map('v', 'K', ":m '<-2<CR>gv=gv")
+map('v', '>', ">gv")
+map('v', '<', "<gv")
