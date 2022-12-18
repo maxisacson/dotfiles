@@ -87,7 +87,11 @@ return packer.startup({
         use {
             'neovim/nvim-lspconfig',
             disable = vimrc.disable_lsp,
-            config = setup('lsp')
+            config = setup('lsp'),
+            requires = {
+                'williamboman/mason.nvim',
+                'williamboman/mason-lspconfig.nvim'
+            }
         }
 
         -- better support for lsp colors

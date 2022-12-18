@@ -1,4 +1,11 @@
-local nvim_lsp = require('lspconfig')
+require('mason').setup()
+require('mason-lspconfig').setup({
+    ensure_installed = {
+        'clangd', 'pylsp', 'cmake', 'tsserver', 'gopls', 'arduino_language_server', 'sumneko_lua', 'marksman'
+    }
+})
+
+local lspconfig = require('lspconfig')
 
 local ok, telescope = pcall(require, 'telescope.builtin')
 
@@ -17,7 +24,8 @@ local on_attach = function(client, bufnr)
     map('n', '<space>sh', vim.lsp.buf.signature_help, 'Signature help')
     map('n', '<space>wa', vim.lsp.buf.add_workspace_folder, 'Add workspace folder')
     map('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, 'Remove workspace folder')
-    map('n', '<space>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, 'List workspace folders')
+    map('n', '<space>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
+        'List workspace folders')
     map('n', '<space>rn', vim.lsp.buf.rename, 'Rename symbol')
     map('n', '<space>e', vim.diagnostic.open_float, 'Open diagnostics under cursor')
     map('n', '[d', vim.diagnostic.goto_prev, 'Goto prev diagnostic')
@@ -93,26 +101,26 @@ end
 
 vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
-        signs = false,
-        update_in_insert = true,
-    })
+    signs = false,
+    update_in_insert = true,
+})
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Servers that don't require special setup
 local servers = { 'cmake', 'tsserver', 'gopls', 'marksman' }
 for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
+    lspconfig[lsp].setup {
         on_attach = on_attach,
         capabilities = capabilities
     }
 end
 
 -- Servers that do require special setup
-nvim_lsp.pylsp.setup {
+lspconfig.pylsp.setup {
     on_attach = on_attach,
     capabilities = capabilities,
-    cmd = { vim.g.vimrc.pylsp_cmd },
+    -- cmd = { vim.g.vimrc.pylsp_cmd },
     settings = {
         pylsp = {
             plugins = {
@@ -129,7 +137,7 @@ require('rust-tools').setup {
     }
 }
 
-nvim_lsp.clangd.setup {
+lspconfig.clangd.setup {
     on_attach = on_attach,
     capabilities = capabilities,
 
@@ -164,7 +172,7 @@ local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
-nvim_lsp.sumneko_lua.setup {
+lspconfig.sumneko_lua.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = { vim.g.vimrc.lualsp_cmd },
@@ -187,7 +195,7 @@ nvim_lsp.sumneko_lua.setup {
     }
 }
 
-nvim_lsp.arduino_language_server.setup {
+lspconfig.arduino_language_server.setup {
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = {
