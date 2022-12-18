@@ -190,6 +190,9 @@ return packer.startup({
             end
         }
 
+        -- Visualize the undo tree
+        use { 'mbbill/undotree', config = setup('undotree') }
+
         -- Neorg note taking plugin
         use {
             'nvim-neorg/neorg',
