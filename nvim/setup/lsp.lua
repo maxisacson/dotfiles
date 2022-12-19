@@ -1,7 +1,7 @@
 require('mason').setup()
 require('mason-lspconfig').setup({
     ensure_installed = {
-        'clangd', 'pylsp', 'cmake', 'tsserver', 'gopls', 'arduino_language_server', 'sumneko_lua', 'marksman'
+        'clangd', 'pylsp', 'cmake', 'tsserver', 'sumneko_lua', 'marksman'
     }
 })
 
