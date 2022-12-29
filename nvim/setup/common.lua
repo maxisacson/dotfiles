@@ -29,6 +29,9 @@ opt.guicursor = ""
 -- Set incremental search
 opt.incsearch = true
 
+-- Disable hlsearch
+opt.hlsearch = false
+
 -- Always keep 2 line above and below cursor,
 -- and 5 columns to the right and left
 opt.scrolloff = 2
