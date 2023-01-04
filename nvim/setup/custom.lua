@@ -117,7 +117,7 @@ vim.api.nvim_create_autocmd("FileType", {
     group = ag_filetype,
     pattern = "go",
     callback = function()
-        vim.opt.expandtab = false
+        vim.bo.expandtab = false
     end,
     desc = "Use tabs instead of spaces for Go-files"
 })
