@@ -197,21 +197,6 @@ return packer.startup({
         -- Visualize the undo tree
         use { 'mbbill/undotree', config = setup('undotree') }
 
-        -- Neorg note taking plugin
-        use {
-            'nvim-neorg/neorg',
-            disable = vimrc.disable_neorg,
-            requires = 'nvim-lua/plenary.nvim',
-            config = setup('neorg')
-        }
-
-        -- orgmode for nvim
-        use {
-            'nvim-orgmode/orgmode',
-            disable = vimrc.disable_orgmode,
-            config = setup('orgmode')
-        }
-
         -- To enable more features from rust-analyzer
         use { 'simrat39/rust-tools.nvim', requires = 'nvim-lua/popup.nvim' }
 

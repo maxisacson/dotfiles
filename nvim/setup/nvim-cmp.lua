@@ -45,8 +45,6 @@ cmp.setup({
         {
             { name = 'nvim_lsp' },
             { name = 'nvim_lsp_signature_help' },
-            { name = 'orgmode' },
-            { name = 'neorg' },
             { name = 'path' },
             { name = 'luasnip' },
         },
@@ -62,8 +60,6 @@ cmp.setup({
                 nvim_lsp = "[LSP]",
                 nvim_lsp_signature_help = "[Signature]",
                 luasnip = "[LuaSnip]",
-                orgmode = "[Orgmode]",
-                neorg = "[Neorg]",
                 buffer = "[Buffer]",
                 path = "[Path]",
                 cmdline = "[CmdLine]",
