@@ -66,7 +66,7 @@ function __prompt_command {
     PS1+="\n"
     PS1+="${chr}\u@\h"
     if [[ -n $VIRTUAL_ENV ]]; then
-        venv=$(basename $VIRTUAL_ENV)
+        venv="$(basename "$VIRTUAL_ENV")"
         PS1+=" ${FG_LIGHTGREEN}(${venv})${RESET}"
     fi
     if [ $EXIT != 0 ]; then
