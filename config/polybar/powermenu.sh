@@ -1,10 +1,10 @@
 #!/bin/bash
 
 function confirm() {
-    echo -e "Yes\nNo" | rofi -theme ~/git/dotfiles/polybar/confirm.rasi -dmenu -p "$1" -selected-row 1
+    echo -e "Yes\nNo" | rofi -theme ~/.config/polybar/confirm.rasi -dmenu -p "$1" -selected-row 1
 }
 
-theme="~/git/dotfiles/polybar/powermenu.rasi"
+theme="~/.config/polybar/powermenu.rasi"
 # lock=" Lock"
 # suspend=" Sleep"
 # logout=" Logout"
@@ -22,7 +22,7 @@ case $choice in
     $lock)
         ans=$(confirm "$choice ?" &)
         if [[ $ans == "Yes" ]]; then
-            . ~/git/dotfiles/polybar/lock.sh
+            . ~/.config/polybar/lock.sh
         else
             exit 0
         fi
