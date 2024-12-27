@@ -1,0 +1,10 @@
+source "$HOME/.config/bash/utils"
+source "$HOME/.config/bash/promptrc"
+
+export EDITOR=nvim
+export GOPATH=$HOME/.go
+
+prepend_path_if "$HOME/.local/go/bin"
+prepend_path_if "$GOPATH/bin"
+
+prepend_path_if "$HOME/.local/zig"

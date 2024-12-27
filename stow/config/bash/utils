@@ -1,0 +1,19 @@
+# vim: ft=sh
+
+function prepend_path() {
+    local p="$1"
+    case ":$PATH:" in
+        *:"$p":*)
+            ;;
+        *)
+            export PATH="$p:$PATH"
+            ;;
+    esac
+}
+
+function prepend_path_if() {
+    local p="$1"
+    if [ -d "$p" ]; then
+        prepend_path "$p"
+    fi
+}
