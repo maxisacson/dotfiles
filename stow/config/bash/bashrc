@@ -8,3 +8,6 @@ prepend_path_if "$HOME/.local/go/bin"
 prepend_path_if "$GOPATH/bin"
 
 prepend_path_if "$HOME/.local/zig"
+
+alias cp='cp -i'
+alias mv='mv -i'
