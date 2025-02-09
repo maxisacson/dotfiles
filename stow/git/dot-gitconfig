@@ -1,0 +1,9 @@
+[user]
+	email = 5937020+maxisacson@users.noreply.github.com
+	name = Max Isacson
+[init]
+	defaultBranch = master
+[commit]
+	template = ~/.gitmessage
+[core]
+	pager = less -F -X
