@@ -1,4 +1,4 @@
-#!/usr/bash
+#!/bin/bash
 
 cp="$(echo -n "$1" | python -c "import sys;  print(f'{ord(sys.stdin.readline()):x}')")"
 
