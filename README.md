@@ -5,5 +5,5 @@ nvim config moved to [maxisacson/nvim-config](https://github.com/maxisacson/nvim
 ## stow
 ```shell
 $ cd stow/
-$ stow config
+$ stow bash tmux git [etc...]
 ```
