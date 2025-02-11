@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cp="$(echo -n "$1" | python -c "import sys;  print(f'{ord(sys.stdin.readline()):x}')")"
+cp="$(echo -n "$1" | python -c "import sys;  print(f'{ord(sys.stdin.readline()):X}')")"
 
 fc-list ":charset=$cp" | awk -F: '{print $2}' | sort | uniq | awk '{sub(/\s+/,""); printf "%-3d %s\n",NR,$0}'
 

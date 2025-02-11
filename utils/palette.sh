@@ -1,3 +1,5 @@
+#!/bin/bash
+
 cols=$(tput cols)
 half_cols=$((cols/2))
 for i in {0..7}; do
