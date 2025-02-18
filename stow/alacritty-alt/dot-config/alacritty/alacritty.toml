@@ -68,7 +68,7 @@ style = "Bold Italic"
 style = "Italic"
 
 [font.normal]
-family = "DejaVuSansM Nerd Font Mono"
+family = "DejaVuSansM Nerd Font"
 
 [mouse]
 hide_when_typing = true
