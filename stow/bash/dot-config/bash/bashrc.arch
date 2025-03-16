@@ -1,0 +1,15 @@
+# vim: ft=bash
+# special config for Arch Linux
+
+export HISTCONTROL=ignoreboth
+export HISTSIZE=1000
+export HISTFILESIZE=2000
+shopt -s histappend
+
+alias diff='diff --color=auto'
+alias ip='ip -color=auto'
+
+eval "$(dircolors -b)"
+
+source /usr/share/git/completion/git-completion.bash
+source /usr/share/git/completion/git-prompt.sh
