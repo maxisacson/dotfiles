@@ -3,8 +3,9 @@ source "$HOME/.config/bash/promptrc"
 
 export EDITOR=nvim
 export GOPATH=$HOME/.go
-export LESS='-R --use-color -Dd+r$Du+b'
-export MANPAGER='less -R --use-color -Dd+r -Du+b'
+export LESS='-R --use-color -Dd+y$Du+b$'
+export MANPAGER='less -R --use-color -Dd+y -Du+b'
+export MANROFFOPT='-P -c'
 
 prepend_path_if "$HOME/.local/go/bin"
 prepend_path_if "$GOPATH/bin"
