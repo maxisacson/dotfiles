@@ -1,0 +1,6 @@
+theme = GruvboxDark
+font-family = "DejaVuSansM Nerd Font"
+font-size = 12
+shell-integration-features = no-cursor
+cursor-style = block
+mouse-hide-while-typing = true
