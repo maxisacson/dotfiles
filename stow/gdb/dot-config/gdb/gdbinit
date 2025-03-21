@@ -5,7 +5,7 @@ set history remove-duplicates unlimited
 
 python
 import sys, os
-sys.path.insert(0, os.path.join(os.environ['HOME'], ".local/share/eigen3/gdb"))
+sys.path.insert(0, "/home/max/work/xcs/dependencies/thirdparty/eigen-3.4.0/debug/gdb")
 from printers import register_eigen_printers
 register_eigen_printers(None)
 end
