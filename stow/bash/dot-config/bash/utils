@@ -17,3 +17,39 @@ function prepend_path_if() {
         prepend_path "$p"
     fi
 }
+
+
+function find_venv() {
+    check_venv_() {
+        local p
+        for p in ${1}/{.*env,*env}/bin/activate; do
+            [[ -f $p ]] && { echo ${p#./} ; return 0 ; }
+        done
+        return 1
+    }
+
+    local uid base
+    uid=$(id -u)
+    base=.
+
+    [[ $(stat -c %u /) == $uid ]] && return
+
+    while [[ $(stat -c %u ${base}) == $uid ]]; do
+        check_venv_ ${base} && return
+        [[ -d ${base}/.git ]] && break
+        base="${base}/.."
+    done
+
+    check_venv_ $HOME
+}
+
+function venv() {
+    local v
+    v=$(find_venv)
+    if [[ -f $v ]]; then
+        echo "found: $v"
+        source "$v"
+    else
+        return 1
+    fi
+}
