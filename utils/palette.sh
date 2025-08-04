@@ -54,7 +54,7 @@ done
 echo
 
 for c in {90..97}; do
-    echo -en "\033[1;${c}m 0;$c \033[0m"
+    echo -en "\033[1;${c}m 1;$c \033[0m"
 done
 echo
 
