@@ -81,7 +81,8 @@ title = "Alacritty"
 
 [keyboard]
 bindings = [
-    { key = "F11", action = "ToggleFullscreen" }
+    { key = "F11", action = "ToggleFullscreen" },
+    { key = "Enter", mods = "Control", action = "ToggleFullscreen" },
 ]
 
 [general]
