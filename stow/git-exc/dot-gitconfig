@@ -1,0 +1,27 @@
+[user]
+	name = Max Isacson
+	email = max.isacson@excillum.com
+[color]
+	ui = auto
+[core]
+	excludesfile = ~/.gitignore
+[alias]
+	last = log -1 HEAD
+	tidy = clean -e .devcontainer/ -e .cache/ -e .vscode/ -e compile_commands.json -dfx
+	zf = !git switch $(git branch --sort=-committerdate --format='%(refname:short)' | fzf --preview='git log {}')
+	l = log --oneline -n 10
+	lg = log --oneline
+	gpush = push origin HEAD:refs/for/master
+	unstage-but-keep-commit-msg = !git reset --soft HEAD^ && git restore --staged . && git commit --allow-empty -C ORIG_HEAD
+	compare = !git log --oneline --graph ${1:-master} ${2:-HEAD} ^$(git merge-base ${1:-master} ${2:-HEAD})^
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[diff]
+	algorithm = histogram
+	renames = true
+[rerere]
+	enabled = true
+[init]
+	defaultBranch = master

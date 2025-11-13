@@ -1,0 +1,128 @@
+# vim: ft=sh
+
+alias mv='mv -i'
+alias cp='cp -i'
+alias nm-restart='systemctl restart NetworkManager'
+alias gzf='git zf'
+alias diff='diff --color=auto'
+alias bat='batcat --theme=gruvbox-dark'
+alias vi='NVIM_APPNAME=nvim-minimal nvim'
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export SYSROOTS="$HOME/sysroots"
+export EDITOR=nvim
+export VISUAL=$EDITOR
+export GOPATH=$HOME/.go
+export GIT_PAGER="less -F"
+
+export LESS='-R --use-color -Dd+y$Du+B$'
+export MANPAGER='less -R --use-color -Dd+y -Du+B'
+export MANROFFOPT='-P -c'
+
+[[ ! $(xhost) =~ "SI:localuser:${USER}" ]] && xhost +SI:localuser:${USER} >/dev/null
+
+function sourceif() {
+  if [ -f "$1" ]; then
+    source "$1"
+  fi
+}
+
+function addpath() {
+    case ":${PATH}:" in
+        *:"${1}":*)
+            ;;
+        *)
+            export PATH="${1}:$PATH"
+            ;;
+    esac
+}
+
+sourceif ~/.config/bash/promptrc
+sourceif /usr/share/doc/fzf/examples/key-bindings.bash
+
+function dockip() {
+    local id="$1"
+    docker inspect "$id" -f '{{.NetworkSettings.IPAddress}}'
+}
+
+function dockls() {
+    docker ps --format 'table {{.ID}}\t{{.Image}}\t{{.Names}}'
+}
+
+function dockapi() {
+    local id="$1"
+    rlwrap nc "$(dockip "$id")" 4944
+}
+
+function dockshell() {
+    local id="$1"
+    local here=$(pwd)
+    docker exec -it "$id" bash -c \
+        "export PATH=${HOME}/work/scripts/bin:\$PATH; [[ -d ${here} ]] && cd \"${here}\"; /bin/bash"
+}
+
+function dockroot() {
+    local id="$1"
+    docker exec -it -u root "$id" /bin/bash
+}
+
+function _dshell_completions() {
+    local ids="$(docker ps -q | tr '\n' ' ')"
+    COMPREPLY=( $(compgen -W "$ids" -- "$2") )
+}
+
+complete -F _dshell_completions dockshell
+complete -F _dshell_completions dockroot
+complete -F _dshell_completions dockip
+complete -F _dshell_completions dockapi
+
+sourceif "$HOME/work/scripts/etc/systest_completion.sh"
+
+sourceif "$HOME/.cargo/env"
+
+addpath "$GOPATH/bin"
+addpath "$HOME/work/scripts/bin"
+addpath "$HOME/.local/go/bin"
+addpath "$HOME/.local/zig"
+
+function plot_log() {
+    if [ "$1" == "-h" ] || [ -z "$1" ]; then
+        printf "Usage:\n"
+        printf "    parse_log <log file> <column name>\n"
+        return 1
+    fi
+    awk -f ~/.local/parse_log.awk -v key=$2 $1 | tail -n+2 | gnuplot -p -e "plot '-' with lines"
+}
+
+function gquery() {
+    ssh -p 29418 maxisa@eris gerrit query $@
+}
+
+function _devenv_completions() {
+    case "$3" in
+        *a)
+            COMPREPLY=( $(compgen -W "$(devenv -l)" -- "$2") )
+            ;;
+        *d)
+            COMPREPLY=( $(compgen -o dirnames -- "$2") )
+            ;;
+        *)
+            COMPREPLY=( $(compgen -W "$(devenv -C)" -- "$2") )
+            ;;
+    esac
+}
+
+function venv() {
+    local path=$(sourceif ${HOME}/work/scripts/find_venv.sh)
+    if [[ -n $path ]]; then
+        echo "found: $path" >&2
+        source $path
+    else
+        echo "no virtual envs found" >&2
+        return 1
+    fi
+}
+
+complete -o filenames -F _devenv_completions devenv
+
+. ~/.config/exc.env
