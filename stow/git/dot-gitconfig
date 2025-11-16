@@ -7,3 +7,10 @@
 	template = ~/.gitmessage
 [core]
 	pager = less -F -X
+[alias]
+	last = log -1 HEAD
+	zf = !git switch $(git branch --sort=-committerdate --format='%(refname:short)' | fzf --preview='git log {}')
+	l = log --oneline -n 10
+	lg = log --oneline
+	unstage-but-keep-commit-msg = !git reset --soft HEAD^ && git restore --staged . && git commit --allow-empty -C ORIG_HEAD
+	compare = !git log --oneline --graph ${1:-master} ${2:-HEAD} ^$(git merge-base ${1:-master} ${2:-HEAD})^
