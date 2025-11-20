@@ -14,3 +14,5 @@ prepend_path_if "$HOME/.local/zig"
 
 alias cp='cp -i'
 alias mv='mv -i'
+
+[[ -d ~/.config/nvim-minimal ]] && alias vi='NVIM_APPNAME=nvim-minimal nvim'
