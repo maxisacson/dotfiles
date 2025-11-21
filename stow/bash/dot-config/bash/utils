@@ -18,6 +18,9 @@ function prepend_path_if() {
     fi
 }
 
+function source_if() {
+    [[ -f $1 ]] && source "$1"
+}
 
 function find_venv() {
     check_venv_() {
