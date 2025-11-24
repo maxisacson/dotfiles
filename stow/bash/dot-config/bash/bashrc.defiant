@@ -1,6 +1,7 @@
 # vim: ft=bash
 
 export LANG=${LANG:-en_US.UTF-8}
+unset MANROFFOPT
 
 if ! pgrep -u $USER ssh-agent > /dev/null; then
     ssh-agent -t 8h > "${XDG_RUNTIME_DIR:-/run/user/${UID}}/ssh-agent.env"
