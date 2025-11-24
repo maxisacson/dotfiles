@@ -16,4 +16,4 @@ alias cp='cp -i'
 alias mv='mv -i'
 
 [[ -d ~/.config/nvim-minimal ]] && alias vi='NVIM_APPNAME=nvim-minimal nvim'
-source_if "~/.config/bash/bashrc.${HOSTNAME}"
+source_if ~/.config/bash/"bashrc.${HOSTNAME}"
