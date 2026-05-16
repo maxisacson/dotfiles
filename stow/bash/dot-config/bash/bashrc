@@ -16,4 +16,12 @@ alias cp='cp -i'
 alias mv='mv -i'
 
 [[ -d ~/.config/nvim-minimal ]] && alias vi='NVIM_APPNAME=nvim-minimal nvim'
+
+if [[ -f /etc/os-release ]]; then
+    source /etc/os-release
+elif [[ -f /usr/lib/os-release ]]; then
+    source /usr/lib/os-release
+fi
+
+source_if ~/.config/bash/"bashrc.${ID:-linux}"
 source_if ~/.config/bash/"bashrc.${HOSTNAME}"
