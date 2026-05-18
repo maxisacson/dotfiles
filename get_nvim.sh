@@ -18,6 +18,11 @@ get_tag() {
     curl -s -L https://api.github.com/repos/neovim/neovim/releases/"$id" | jq -r '.tag_name'
 }
 
+get_id() {
+    local tag="$1"
+    curl -s -L https://api.github.com/repos/neovim/neovim/releases/tags/"$tag" | jq -r '.id'
+}
+
 get_release() {
     local id="$1"
     local platform="$2"
@@ -81,18 +86,26 @@ update_path() {
     esac
 }
 
-main() {
-    check_dep curl
-    check_dep jq
-    check_dep uname
-    check_dep readlink
+install_release() {
+    local tag="${1:-latest}"
 
-    local id=$(get_latest_id)
-    local tag=$(get_tag "$id")
+    local id
+    if [[ $tag == "latest" ]]; then
+        id=$(get_latest_id)
+        tag=$(get_tag "$id")
 
-    echo "Latest neovim release: $tag"
+        echo "Latest neovim release: $tag"
+    else
+        id=$(get_id "$tag")
+        if [[ -z $id || $id == "null" ]]; then
+            echo "No such tag: $tag"
+            exit 1
+        fi
+        echo "Selected neovim release: $tag"
+    fi
 
     local loc=$(get_local_release)
+    echo "Current neovim release: $loc"
 
     local platform=$(get_platform)
     local arch=$(uname -m)
@@ -106,8 +119,8 @@ main() {
             mkdir -p "$NVIM_PATH/$tag" || exit 1
             cd "$NVIM_PATH/$tag" || exit 1
 
-            get_release "$id" "$platform" "$arch"
-            tar xf nvim.tar.gz && rm nvim.tar.gz
+            get_release "$id" "$platform" "$arch" || exit 1
+            tar xf nvim.tar.gz && rm nvim.tar.gz || exit 1
         else
             echo "$tag already present, skipping download."
             cd "$NVIM_PATH/$tag" || exit 1
@@ -122,4 +135,54 @@ main() {
     check_path "$platform" "$arch" || update_path "$platform" "$arch"
 }
 
-main
+list_releases() {
+    local current release p
+    current=$(get_local_release)
+
+    for p in "$NVIM_PATH"/*; do
+        [[ -d $p && ! -h $p ]] || continue
+        release="${p##*/}"
+        [[ $release == $current ]] && echo -n "*" || echo -n " "
+        echo "$release"
+    done
+}
+
+usage() {
+    cat <<EOF
+Usage: get_nvim [options] [tag]
+
+Options:
+    -h      Show this message and exit
+    -l      List installed releases
+EOF
+}
+
+main() {
+    check_dep curl
+    check_dep jq
+    check_dep uname
+    check_dep readlink
+
+    local opt
+    while getopts "hl" opt; do
+        case "$opt" in
+            h)
+                usage
+                exit
+                ;;
+            l)
+                list_releases
+                exit;
+                ;;
+            *)
+                usage
+                exit 1
+                ;;
+        esac
+    done
+    shift $((OPTIND - 1))
+
+    install_release "$@"
+}
+
+main "$@"
