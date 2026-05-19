@@ -147,6 +147,19 @@ list_releases() {
     done
 }
 
+check_for_updates() {
+    local id=$(get_latest_id)
+    local tag=$(get_tag "$id")
+    local loc=$(get_local_release)
+
+    echo "Latest neovim release: $tag"
+    if [[ $loc == $tag ]]; then
+        echo "Local release is up to date."
+    else
+        echo "Update available: $loc -> $tag "
+    fi
+}
+
 usage() {
     cat <<EOF
 Usage: get_nvim [options] [tag]
@@ -154,6 +167,7 @@ Usage: get_nvim [options] [tag]
 Options:
     -h      Show this message and exit
     -l      List installed releases
+    -c      Check for updates
 EOF
 }
 
@@ -164,7 +178,7 @@ main() {
     check_dep readlink
 
     local opt
-    while getopts "hl" opt; do
+    while getopts "hlc" opt; do
         case "$opt" in
             h)
                 usage
@@ -172,7 +186,11 @@ main() {
                 ;;
             l)
                 list_releases
-                exit;
+                exit
+                ;;
+            c)
+                check_for_updates
+                exit
                 ;;
             *)
                 usage
