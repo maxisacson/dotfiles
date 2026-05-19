@@ -34,12 +34,21 @@ get_release() {
 }
 
 get_platform() {
-    local kernel=$(uname)
-    if [[ $kernel == "Linux" ]]; then
-        echo "linux"
-    elif [[ $kernel == "Darwin" ]]; then
-        echo "macos"
-    fi
+    local kernel
+    kernel=$(uname)
+
+    case "$kernel" in
+        Linux)
+            echo "linux"
+            ;;
+        Darwin)
+            echo "macos"
+            ;;
+        *)
+            echo "unknown kernel: $kernel" >&2
+            exit 1
+            ;;
+    esac
 }
 
 get_arch() {
@@ -49,9 +58,12 @@ get_arch() {
 get_local_release() {
     local basepath=$HOME/.local/opt/nvim
     local latest=$basepath/current
-    local path=$(readlink -f "$latest")
+    local path
+
+    path=$(readlink -f "$latest")
     local tag=${path##*/}
-    echo $tag
+
+    echo "$tag"
 }
 
 check_path() {
@@ -79,7 +91,7 @@ update_path() {
     case "$ans" in
         [yY]*)
             echo "$txt" >> ~/.bashrc
-            echo "~/.bashrc updated"
+            echo ".bashrc updated"
             ;;
         *)
             ;;
@@ -104,16 +116,17 @@ install_release() {
         echo "Selected neovim release: $tag"
     fi
 
-    local loc=$(get_local_release)
+    local loc platform arch
+    loc=$(get_local_release)
+    platform=$(get_platform)
+    arch=$(uname -m)
+
     echo "Current neovim release: $loc"
 
-    local platform=$(get_platform)
-    local arch=$(uname -m)
-
-    if [[ $loc == $tag ]]; then
+    if [[ $loc == "$tag" ]]; then
         echo "$tag already in use. Nothing to do."
     else
-        cd "$NVIM_PATH"
+        cd "$NVIM_PATH" || exit 1
 
         if [[ ! -d $tag ]]; then
             mkdir -p "$NVIM_PATH/$tag" || exit 1
@@ -126,7 +139,7 @@ install_release() {
             cd "$NVIM_PATH/$tag" || exit 1
         fi
 
-        cd "$NVIM_PATH"
+        cd "$NVIM_PATH" || exit 1
         ln -sfn "$tag" current
 
         echo "neovim $tag installed"
@@ -139,21 +152,26 @@ list_releases() {
     local current release p
     current=$(get_local_release)
 
+    echo "Installed releases in: $NVIM_PATH"
     for p in "$NVIM_PATH"/*; do
         [[ -d $p && ! -h $p ]] || continue
         release="${p##*/}"
-        [[ $release == $current ]] && echo -n "*" || echo -n " "
-        echo "$release"
+        if [[ $release == "$current" ]]; then
+            echo -e "* \e[32m$release\e[0m"
+        else
+            echo "  $release"
+        fi
     done
 }
 
 check_for_updates() {
-    local id=$(get_latest_id)
-    local tag=$(get_tag "$id")
-    local loc=$(get_local_release)
+    local id tag loc
+    id=$(get_latest_id)
+    tag=$(get_tag "$id")
+    loc=$(get_local_release)
 
     echo "Latest neovim release: $tag"
-    if [[ $loc == $tag ]]; then
+    if [[ $loc == "$tag" ]]; then
         echo "Local release is up to date."
     else
         echo "Update available: $loc -> $tag "
