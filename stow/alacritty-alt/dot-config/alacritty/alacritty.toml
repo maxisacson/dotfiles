@@ -1,10 +1,6 @@
 [colors]
 draw_bold_text_with_bright_colors = false
 
-[colors.cursor]
-cursor = "CellForeground"
-text = "CellBackground"
-
 [colors.normal]
 black = "#282828"
 red = "#cc241d"
@@ -41,10 +37,6 @@ foreground = "#ebdbb2"
 bright_foreground = "#fbf1c7"
 dim_foreground = "#d5c4a1"
 
-[colors.vi_mode_cursor]
-cursor = "CellForeground"
-text = "CellBackground"
-
 [cursor]
 blink_interval = 750
 unfocused_hollow = true
@@ -55,15 +47,6 @@ shape = "Block"
 
 [font]
 size = 12.0
-
-[font.bold]
-style = "Bold"
-
-[font.bold_italic]
-style = "Bold Italic"
-
-[font.italic]
-style = "Italic"
 
 [font.normal]
 family = "DejaVuSansM Nerd Font"
