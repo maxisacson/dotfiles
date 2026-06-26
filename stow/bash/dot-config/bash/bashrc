@@ -1,5 +1,5 @@
 source "$HOME/.config/bash/utils"
-source "$HOME/.config/bash/promptrc"
+[[ -z $NOPROMPT ]] && source "$HOME/.config/bash/promptrc"
 
 export EDITOR=nvim
 export GOPATH=$HOME/.go
