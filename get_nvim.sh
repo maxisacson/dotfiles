@@ -52,7 +52,16 @@ get_platform() {
 }
 
 get_arch() {
-    uname -m
+    local arch
+    arch=$(uname -m)
+    case "$arch" in
+        aarch64)
+            echo "arm64"
+            ;;
+        *)
+            echo "$arch"
+            ;;
+    esac
 }
 
 get_local_release() {
@@ -119,13 +128,14 @@ install_release() {
     local loc platform arch
     loc=$(get_local_release)
     platform=$(get_platform)
-    arch=$(uname -m)
+    arch=$(get_arch)
 
     echo "Current neovim release: $loc"
 
     if [[ $loc == "$tag" ]]; then
         echo "$tag already in use. Nothing to do."
     else
+        mkdir -p "$NVIM_PATH"
         cd "$NVIM_PATH" || exit 1
 
         if [[ ! -d $tag ]]; then
